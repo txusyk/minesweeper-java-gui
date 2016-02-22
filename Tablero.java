@@ -1,0 +1,113 @@
+import java.util.Random;
+
+/**
+ * Created by jalva on 21/02/2016.
+ */
+public class Tablero {
+
+    private Casilla[][] tablero;
+    private static Tablero miTablero;
+    private int x, y;
+    int numMinas;
+
+    private Tablero() {
+
+    }
+
+    public static Tablero getMiTablero() {
+        if (miTablero == null) {
+            miTablero = new Tablero();
+        }
+        return miTablero;
+    }
+
+    private void anadirCasillaTablero(Casilla pCasilla){
+        this.tablero[pCasilla.getPosX()][pCasilla.getPosY()] = pCasilla;
+    }
+
+    public void crearTablero(int nivel){
+        if (nivel == 1) {
+            this.x = 7;
+            this.y = 10;
+        } else if (nivel == 2) {
+            this.x = 10;
+            this.y = 15;
+        } else if (nivel == 3) {
+            this.x = 12;
+            this.y = 25;
+        }
+        this.numMinas = y * nivel;
+
+        this.tablero = new CasillaVacia[x][y]; //Creamos un tablero con el tamaño definido por la dificultad
+
+        /*for (int i=0; i<x;i++) { //rellenamos todas las casillas con espacios vacios
+            for (int j=0;j<y;j++){
+                this.anadirCasillaTablero(new CasillaVacia(i,j));
+            }
+        }*/
+
+        for (int i=1; i<= numMinas; i++){ //primero generamos las minas de forma aleatoria en el mapa
+            Random rand = new Random();
+            int auxX= rand.nextInt(this.x-1); //la clase random devuelve un numero entre 0 y el numero
+            int auxY= rand.nextInt(this.y-1); // indicado por el usuario
+            this.anadirCasillaTablero(new CasillaMina(auxX,auxY));
+            if (auxX != 0){
+                if (auxY != 0){
+                    if (this.tablero[auxX-1][auxY-1] instanceof CasillaVacia){               //miramos la casilla superior izq
+                        this.anadirCasillaTablero(new CasillaNumerica(auxX-1,auxY-1));
+                    }
+                    else if (this.tablero[auxX-1][auxY-1] instanceof  CasillaNumerica){     //mmiramos la casilla superior izq
+                        this.tablero[auxX-1][auxY-1].aumentarValor();
+                    }
+
+                    if(this.tablero[auxX][auxY-1] instanceof CasillaVacia){  //miramos la casilla superior
+                        this.anadirCasillaTablero(new CasillaNumerica(auxX,auxY-1));
+                    }
+                    else if(this.tablero[auxX][auxY-1] instanceof CasillaNumerica){  //miramos la casilla superior
+                        this.tablero[auxX][auxY-1].aumentarValor();
+                    }
+
+                    if (auxX != this.x-1){
+
+                    }
+                }
+            }
+        }
+
+        for (int i=0; i<x;i++) { //rellenamos todas las casillas con minas
+            for (int j=0;j<y;j++){
+                int auxContMinas = 0;
+                if (this.tablero[i][j] instanceof CasillaVacia){
+                    if (i != 0){
+                        if (this.tablero[i-1][j] instanceof CasillaMina) {
+                            auxContMinas++;
+                        }
+                        if (j != 0){
+                            if (this.tablero[i][j-1] instanceof  CasillaMina){
+                                auxContMinas++;
+                            }
+                        }
+                    }
+                    if (i != x-1){
+                        if (this.tablero[i+1][j] instanceof CasillaMina) {
+                            auxContMinas++;
+                        }
+                        if (j !)
+                    }
+            }
+        }
+
+
+    }
+
+
+
+
+
+
+
+}
+
+
+
+}
