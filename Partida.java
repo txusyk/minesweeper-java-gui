@@ -1,3 +1,5 @@
+import javafx.scene.control.Tab;
+
 /**
  * Created by jalva on 21/02/2016.
  */
@@ -5,9 +7,10 @@ public class Partida {
 
     public String nombreJugador;
     public int puntuacion;
-    public Dificultad nivelDif;
+    public int nivelDif;
     public int tiempo;
     public int contadorMinas;
+    private static Partida miPartida;
 
     /**
      * Constructora
@@ -24,7 +27,6 @@ public class Partida {
         this.puntuacion = puntuacion;
         this.nombreJugador = nombreJugador;
     }
-
     /**
      * Llama a la clase tablero y construye un objeto de ese tipo
      * cuyo tamaño esta definido por la dificultad

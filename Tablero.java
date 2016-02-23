@@ -8,10 +8,21 @@ public class Tablero {
     private Casilla[][] tablero;
     private static Tablero miTablero;
     private int x, y;
-    int numMinas;
+    private int numMinas, nivel;
 
     private Tablero() {
-
+        if (nivel == 1) {
+            this.x = 7;
+            this.y = 10;
+        } else if (nivel == 2) {
+            this.x = 10;
+            this.y = 15;
+        } else if (nivel == 3) {
+            this.x = 12;
+            this.y = 25;
+        }
+        this.numMinas = y * nivel;
+        this.tablero = new Casilla[x][y];
     }
 
     public static Tablero getMiTablero() {
@@ -25,18 +36,7 @@ public class Tablero {
         this.tablero[pCasilla.getPosX()][pCasilla.getPosY()] = pCasilla;
     }
 
-    public void crearTablero(int nivel) {
-        if (nivel == 1) {
-            this.x = 7;
-            this.y = 10;
-        } else if (nivel == 2) {
-            this.x = 10;
-            this.y = 15;
-        } else if (nivel == 3) {
-            this.x = 12;
-            this.y = 25;
-        }
-        this.numMinas = y * nivel;
+    public void crearTablero() {
 
         this.tablero = new CasillaVacia[x][y]; //Creamos un tablero con el tamaño definido por la dificultad
 
