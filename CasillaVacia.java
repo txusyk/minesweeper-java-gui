@@ -13,7 +13,7 @@ public class CasillaVacia extends Casilla {
 
     /**
      * @param posX
-     * @param posY En caso de clickar sobre esta casilla no  ocurrirá nada
+     * @param posY En caso de clickar sobre esta casilla no  ocurrirá nada. Solo se descubrira una casilla vacia.
      */
     public void descubrirCasilla(int posX, int posY) {
         Casilla auxCasilla = null;
