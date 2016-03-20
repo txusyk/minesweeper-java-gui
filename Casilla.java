@@ -36,14 +36,11 @@ public abstract class Casilla {
      * @param posY
      * Se encarga de accionar la casilla oportuna
      */
-    protected abstract void descubrirCasilla(int posX, int posY);
+    abstract void descubrirCasilla(int posX, int posY);
 
     /**
      * Pone una marca en la casilla
      */
-
-    protected abstract void aumentarValor();
-
     public void marcarCasilla(){
 
     }

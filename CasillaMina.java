@@ -20,8 +20,7 @@ public class CasillaMina extends Casilla {
      * @param posY
      * En caso de descubrir una mina dara por finalizado el juego
      */
-    @Override
-    protected void descubrirCasilla(int posX, int posY) {
-
+    public void descubrirCasilla(int posX, int posY) {
+        Partida.getMiPartida().setBomba();
     }
 }

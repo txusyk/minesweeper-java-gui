@@ -25,6 +25,18 @@ public class Tablero {
         this.tablero = new Casilla[x][y];
     }
 
+    public void setNivel(int pNivel) {
+        this.nivel = pNivel;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
     public static Tablero getMiTablero() {
         if (miTablero == null) {
             miTablero = new Tablero();
@@ -34,6 +46,10 @@ public class Tablero {
 
     private void anadirCasillaTablero(Casilla pCasilla) {
         this.tablero[pCasilla.getPosX()][pCasilla.getPosY()] = pCasilla;
+    }
+
+    public Casilla getCasilla(int posX, int posY) {
+        return this.tablero[posX][posY];
     }
 
     public void crearTablero() {
@@ -57,7 +73,8 @@ public class Tablero {
                 if (this.tablero[auxX - 1][auxY - 1] instanceof CasillaVacia) {
                     this.anadirCasillaTablero(new CasillaNumerica(auxX - 1, auxY - 1));
                 } else if (this.tablero[auxX - 1][auxY - 1] instanceof CasillaNumerica) {
-                    this.tablero[auxX - 1][auxY - 1].aumentarValor();
+                    Tablero.getMiTablero().getCasilla(auxX - 1, auxY - 1).aumentarValor();
+
                 }
             }
             if (auxY != 0) {//miramos la casilla superior

@@ -3,7 +3,6 @@
  */
 public class CasillaNumerica extends Casilla {
 
-    public boolean descubierta;
     public int valor = 1;
 
     /**
@@ -20,12 +19,12 @@ public class CasillaNumerica extends Casilla {
      * @param posY
      * En caso de descubrir la casilla
      */
-    @Override
-    protected void descubrirCasilla(int posX, int posY) {
+
+    public void descubrirCasilla(int posX, int posY) {
 
     }
 
-    protected void aumentarValor(){
+    public void aumentarValor() {
         this.valor++;
     }
 }
