@@ -21,7 +21,7 @@ public class CasillaNumerica extends Casilla {
      */
 
     public void descubrirCasilla(int posX, int posY) {
-
+        //mostrara el valor de la casilla
     }
 
     public void aumentarValor() {

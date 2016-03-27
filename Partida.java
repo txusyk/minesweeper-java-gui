@@ -10,6 +10,7 @@ public class Partida {
     public int nivelDif;
     public int tiempo;
     public int contadorMinas;
+    public int minasRestantes;
     private static Partida miPartida;
     private boolean bomba = false;
 
@@ -27,6 +28,7 @@ public class Partida {
         this.nivelDif = nivelDif;
         this.puntuacion = puntuacion;
         this.nombreJugador = nombreJugador;
+        this.minasRestantes = this.contadorMinas;
     }
 
     public static Partida getMiPartida() {
@@ -44,6 +46,14 @@ public class Partida {
         Tablero.getMiTablero().crearTablero();
     }
 
+    public void modificarMinasRestantes(boolean pFlag) {
+        if (pFlag) {
+            this.minasRestantes++;
+        } else if (!pFlag) {
+            this.minasRestantes--;
+        }
+    }
+
     /**
      * Cambia el valor del booleano bomba
      */
@@ -57,14 +67,19 @@ public class Partida {
      */
     public void jugarPartida(){
         int auxLvl;
+        String auxNombre;
+        Jugador auxJugador = null;
 
-        System.out.println("Introduzca el nivel del tablero deseado: ");
-        auxLvl = Teclado.getMiTeclado().regogerInt();
-        Tablero.getMiTablero().crearTablero()
+        System.out.println("Introduzca su nombre: ");
+        auxNombre = Teclado.getMiTeclado().recogerString();
+        auxJugador = new Jugador(auxNombre);
+        System.out.println("Introduzca el nivel de tablero deseado (1-3): ");
+        auxLvl = Teclado.getMiTeclado().recogerInt();
+        Tablero.getMiTablero().setNivel(auxLvl);
+        Tablero.getMiTablero().crearTablero();
         while (!bomba) {
 
         }
-        do
     }
 
     /**
