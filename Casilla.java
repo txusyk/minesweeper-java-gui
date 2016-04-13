@@ -31,6 +31,8 @@ public abstract class Casilla {
     protected int estado = 0; //0 cubierta; 1 descubierta; 2 marcadaa
 
 
+
+
     /**
      * @param pPosX
      * @param pPosY
