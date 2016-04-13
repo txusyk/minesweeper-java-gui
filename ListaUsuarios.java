@@ -22,17 +22,45 @@
  * THE SOFTWARE.
  */
 
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.text.Keymap;
+
 /**
- * Created by david on 26/03/2016.
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
-public class Jugador {
+public class ListaUsuarios {
 
-    private String nombre;
+    private Map<String, char[]> lUsuarios;
+    private static ListaUsuarios miListaUsuarios;
 
-    public Jugador(String pNombre) {
-        this.nombre = pNombre;
+    private ListaUsuarios() {
+        lUsuarios = new HashMap<>();
     }
 
+    public static ListaUsuarios getMiListaUsuarios() {
+        if (miListaUsuarios == null) {
+            miListaUsuarios = new ListaUsuarios();
+        }
+        return miListaUsuarios;
+    }
 
+    public boolean esta(Usuario u) {
+        boolean flag = false;
+        if (this.lUsuarios.containsKey(u.getNombre())) {
+            if (u.comprobarContraseña(this.lUsuarios.get(u.getNombre()))) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    public void anadirUsuario(Usuario u) {
+        if (this.esta(u)) {
+            //mostramos error por pantalla
+        } else {
+            ListaUsuarios.getMiListaUsuarios().lUsuarios.put(u.getNombre(), u.getContrasena());
+        }
+    }
 }
 

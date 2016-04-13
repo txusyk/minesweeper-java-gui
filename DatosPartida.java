@@ -23,16 +23,18 @@
  */
 
 /**
- * Created by david on 26/03/2016.
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
-public class Jugador {
+public class DatosPartida {
+    String dificultad;
+    int numCasillasRestantes;
 
-    private String nombre;
-
-    public Jugador(String pNombre) {
-        this.nombre = pNombre;
+    public DatosPartida(String pDificultad, int pNumCasillas) {
+        this.dificultad = pDificultad;
+        this.numCasillasRestantes = pNumCasillas;
     }
 
+    public void imprimirDatosPartida() {
 
+    }
 }
-

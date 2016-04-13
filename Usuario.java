@@ -22,17 +22,40 @@
  * THE SOFTWARE.
  */
 
+import java.util.Arrays;
+
 /**
- * Created by david on 26/03/2016.
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
-public class Jugador {
+public class Usuario {
 
-    private String nombre;
+    private String nomUser;
+    private char[] contraseña;
 
-    public Jugador(String pNombre) {
-        this.nombre = pNombre;
+    public Usuario(String pNomUser, char[] pContraseña) {
+        this.nomUser = pNomUser;
+        this.contraseña = pContraseña;
     }
 
+    public String getNombre() {
+        return this.nomUser;
+    }
+
+    public char[] getContrasena() {
+        return this.contraseña;
+    }
+
+    public boolean comprobarContraseña(char[] pContraseña) {
+
+        boolean esCorrecta;
+
+        if (pContraseña.length != this.contraseña.length) {
+            esCorrecta = false;
+        } else {
+            esCorrecta = Arrays.equals(pContraseña, this.contraseña);
+        }
+
+        return esCorrecta;
+    }
 
 }
-
