@@ -1,115 +1,60 @@
 /*
- * The MIT License
+ * Copyright [2016] [Josu]
  *
- * Copyright 2016 Josu Alvarez <jalvarez041.ehu.eus>.
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ *        http://www.apache.org/licenses/LICENSE-2.0
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
  */
 
 /**
- * Created by jalva on 21/02/2016.
+ * Created by portatil on 18/04/16.
  */
 public class Partida {
+    //puntuacion = [(numCasillasTablero * factor de correccion)/tiempo] * 1000
+    //                                      f:1 m: d:1
+    private int segundos;
+    private String dificultad;
+    private int puntuacion;
 
-    public String nombreJugador;
-    public int puntuacion;
-    public int nivelDif;
-    public int tiempo;
-    public int contadorMinas;
-    public int minasRestantes;
-    private static Partida miPartida;
-    private boolean bomba = false;
-
-    /**
-     * Constructora
-     * @param contadorMinas
-     * @param tiempo
-     * @param nivelDif
-     * @param puntuacion
-     * @param nombreJugador
-     */
-    public Partida(int contadorMinas, int tiempo, int nivelDif, int puntuacion, String nombreJugador) {
-        this.contadorMinas = contadorMinas;
-        this.tiempo = tiempo;
-        this.nivelDif = nivelDif;
-        this.puntuacion = puntuacion;
-        this.nombreJugador = nombreJugador;
-        this.minasRestantes = this.contadorMinas;
+    public Partida(int pSegundos, String pDificultad){
+        this.segundos=pSegundos;
+        this.dificultad=pDificultad;
+        this.setPuntuacion();
     }
 
-    public static Partida getMiPartida() {
-        return Partida.miPartida;
+    public int getSegundos(){
+        return segundos;
     }
 
-    /**
-     * Llama a la clase tablero y construye un objeto de ese tipo
-     * cuyo tamaño esta definido por la dificultad
-     */
-    private void crearTablero(){
-        System.out.println("Introduzca el nivel de tablero que desea: ");
-        int auxN = Teclado.getMiTeclado().recogerInt();
-        Tablero.getMiTablero().setNivel(auxN);
-        Tablero.getMiTablero().crearTablero();
+    public String getDificultad(){
+        return this.dificultad;
     }
 
-    public void modificarMinasRestantes(boolean pFlag) {
-        if (pFlag) {
-            this.minasRestantes++;
-        } else if (!pFlag) {
-            this.minasRestantes--;
+    public int getPuntuacion(){
+        return this.puntuacion;
+    }
+
+    private void setPuntuacion(){
+        if(dificultad.equalsIgnoreCase("facil")){
+            double auxPuntuacion = (70.0*0.3)/(double)(segundos)*1000;
+            this.puntuacion=(int)auxPuntuacion;
+        }
+        else if(dificultad.equalsIgnoreCase("medio")){
+            double auxPuntuacion = (150*0.5)/(double)(segundos)*1000;
+            this.puntuacion=(int)auxPuntuacion;
+        }
+        else{
+            double auxPuntuacion = (300)/(double)(segundos)*1000;
+            this.puntuacion=(int)auxPuntuacion;
         }
     }
-
-    /**
-     * Cambia el valor del booleano bomba
-     */
-    public void setBomba() {
-        this.bomba = false;
-    }
-
-
-    /**
-     * Comienza a jugar la partida hasta que este resuelta o bien se haya encontrado una mina
-     */
-    public void jugarPartida(){
-        int auxLvl;
-        String auxNombre;
-        Jugador auxJugador = null;
-
-        System.out.println("Introduzca su nombre: ");
-        auxNombre = Teclado.getMiTeclado().recogerString();
-        auxJugador = new Jugador(auxNombre);
-        System.out.println("Introduzca el nivel de tablero deseado (1-3): ");
-        auxLvl = Teclado.getMiTeclado().recogerInt();
-        Tablero.getMiTablero().setNivel(auxLvl);
-        Tablero.getMiTablero().crearTablero();
-        while (!bomba) {
-
-        }
-    }
-
-    /**
-     * Imprime la informacion de la partida
-     */
-    public void imprimirInfo(){
-
-    }
-
 
 }
