@@ -107,7 +107,7 @@ public class ModeloCasilla extends Observable{
                 this.setChanged();
                 this.notifyObservers();
             }
-            else if( this.estaRevelada == false){
+            else if(!this.getSiEstaRevelada()){
                 this.tablero.aniadirAreveladas();
                 this.estaRevelada = true;
                 if (this.id == 0){
@@ -124,12 +124,13 @@ public class ModeloCasilla extends Observable{
      * Post: Hemos marcado/desmarcado una casilla que vacia/marcada
      */
     public void marcarCasilla(){
-        if (!this.estaMarcada && !this.getEstaRevelada() && this.tablero.getEstado().equals("jugando"){
+        if (!this.estaMarcada && !this.getEstaRevelada() && this.tablero.getEstado().equals("jugando")){
             this.estaMarcada = true;
             this.tablero.reducirMarcadorMinas();
             this.setChanged();
             this.notifyObservers();
-        } else if(!this.getEstaRevelada() && this.tablero.getEstado().equals("jugando")){
+        }
+        else if(!this.getEstaRevelada() && this.tablero.getEstado().equals("jugando")){
             this.estaMarcada = false;
             this.tablero.aumentarMarcadorMinas();
             this.setChanged();

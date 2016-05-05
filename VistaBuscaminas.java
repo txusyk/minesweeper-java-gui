@@ -15,6 +15,7 @@
  */
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,13 +23,112 @@ import java.util.Observer;
  * Created by josu on 4/18/16.
  */
 public class VistaBuscaminas extends JFrame implements Observer {
-
+    /**
+     * Declaracion de variables
+     */
     private JPanel panelJuego;
-    private JLabel numBombas, tiempo;
-    private ButtonView[][]
+    private JLabel numBombas, estadoJuego, reloj;
+    private VistaCasillas[][] casillas;
+    private ModeloTablero tablero;
 
+    private JMenuBar barra_menu;
+    private JMenu menu_archivo;
+    private JMenuItem ranking;
+    private JMenuItem salir;
+    private JMenuItem reiniciar;
+    private JMenu menu_ayuda;
+    private JMenuItem FAQ;
+    private JMenuItem acercaDe;
+    private JMenuItem problemasFrecuentes;
+
+    /**
+     * Constructora
+     *
+     * @param pTablero
+     */
+    public VistaBuscaminas(ModeloTablero pTablero) {
+        this.tablero = pTablero;
+        this.setLayout(new BorderLayout());
+        this.panelJuego = new JPanel();
+        this.barra_menu = new JMenuBar();
+        this.numBombas = new JLabel("Minas restantes :" + Integer.toString(tablero.getNumMinasRestantes()));
+        this.estadoJuego = new JLabel("Estado de juego: " + tablero.getEstado());
+
+        this.ranking = new JMenuItem("Reiniciar");
+        Controlador controlador = new Controlador(this.tablero);
+        this.ranking.addMouseListener(controlador);
+
+        this.menu_archivo.add(this.ranking);
+        this.menu_archivo.add(this.reiniciar);
+        this.menu_archivo.add(this.salir);
+
+        this.menu_ayuda.add(this.acercaDe);
+        this.menu_ayuda.add(this.FAQ);
+        this.menu_ayuda.add(this.problemasFrecuentes);
+
+        this.barra_menu.add(menu_archivo);
+        this.barra_menu.add(menu_ayuda);
+
+        this.add(this.numBombas, BorderLayout.WEST);
+        this.add(this.estadoJuego, BorderLayout.EAST);
+        //faltaria añadir en el centro el boton del ttemporizador
+        this.add(this.barra_menu, BorderLayout.NORTH);
+        this.casillas = new VistaCasillas[tablero.getX()][tablero.getY()];
+        this.tablero.addObserver(this);
+
+        this.panelJuego.setLayout(new GridLayout(tablero.getX(), tablero.getY()));
+        costruirBotonesTableroJuego();
+        this.add(panelJuego, BorderLayout.SOUTH);
+    }
+
+    /**
+     * @return devuelve la vista del panel de juego
+     */
+    public JPanel getPanelJuego() {
+        return this.panelJuego;
+    }
+
+    /**
+     * actualizamos los botones
+     */
+    public void actualizarBotones() {
+        this.restablecerBotones();
+        costruirBotonesTableroJuego();
+    }
+
+    /**
+     * Elimina todos los botones
+     */
+    private void restablecerBotones() {
+        for (int i = 0; i < this.tablero.getX(); i++) {
+            for (int j = 0; j < this.tablero.getY(); j++) {
+                this.panelJuego.remove(casillas[i][j].getBoton_casilla());
+            }
+        }
+    }
+
+    private void costruirBotonesTableroJuego() {
+        for (int i = 0; i < this.tablero.getX(); i++) {
+            for (int j = 0; j < this.tablero.getY(); j++) {
+                VistaCasillas botonAux = new VistaCasillas(this.tablero.getCasilla(i, j));
+                casillas[i][j] = botonAux;
+                this.panelJuego.add(botonAux.getBoton_casilla());
+            }
+        }
+    }
+
+    /**
+     * Sera el encargado de actualizar la vista
+     *
+     * @param o
+     * @param arg
+     */
     @Override
     public void update(Observable o, Object arg) {
-
+        if (o != null) {
+            actualizarBotones();
+        }
+        this.numBombas = new JLabel("Minas restantes :" + Integer.toString(tablero.getNumMinasRestantes()));
+        this.estadoJuego = new JLabel("Estado de juego: " + tablero.getEstado());
     }
 }

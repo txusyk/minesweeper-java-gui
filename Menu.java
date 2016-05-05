@@ -127,7 +127,7 @@ public class Menu extends JFrame{
         frame1.setBounds(400,300,400,300);
         frame1.setVisible(false);
 
-        Frame frame2 = new Ranking();
+        Frame frame2 = new  Ranking();
         frame.setLocation(400,300);
         frame2.setPreferredSize(new Dimension(300,300));
         frame2.setBounds(350,150,600,450);
