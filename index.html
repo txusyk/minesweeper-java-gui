@@ -28,34 +28,100 @@
 
     <div class="container">
       <section id="main_content">
-        <h2>
-<a id="bienvenidos" class="anchor" href="#bienvenidos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bienvenidos</h2>
+        <h1>
+<a id="is" class="anchor" href="#is" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>IS</h1>
 
-<p>Esta web es una introduccion al proyecto de 'Buscaminas' de la asignatura de IS (Ingenieria del Software del año 2015/1016.</p>
+<p>Contiene todos los trabajos, apuntes y el proyecto de asignatura del curso 2015/2016</p>
 
-<h2>
-<a id="desarrollo" class="anchor" href="#desarrollo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Desarrollo</h2>
-
-<h3>
-<a id="repositorio" class="anchor" href="#repositorio" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Repositorio</h3>
-
-<p>El repositorio es cerrado y para acceder ha de solicitarse el acceso a los responsables del proyecto. No obstante, en todo momento esta disponible la descarga del codigo desde el enlace en la parte superior de la web.</p>
-
-<h3>
-<a id="primer-sprint" class="anchor" href="#primer-sprint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Primer Sprint</h3>
-
-<p>Actualmente el proyecto ha pasado la primera fase de desarrollo. Hemos finalizado el Primer Sprint. Actualmente estamos completando los diagramas de secuencia y los UML del sistema al completo. Proximamente podremos aportar mas informacion sobre el desarrolo</p>
+<h1>
+<a id="primer-sprint" class="anchor" href="#primer-sprint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Primer Sprint</h1>
 
 <h2>
-<a id="autores" class="anchor" href="#autores" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Autores</h2>
+<a id="contenido-que-enviamos" class="anchor" href="#contenido-que-enviamos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contenido que enviamos</h2>
 
-<p>Josu Alvarez (<a href="https://github.com/txusyk" class="user-mention">@txusyk</a>)
-David Max (<a href="https://github.com/damax1995" class="user-mention">@damax1995</a>)</p>
+<ul>
+<li>Adjuntamos los archivos .java correspondientes a las historias de usuario requeridas. 
+
+<ul>
+<li>Hemos generado los ficheros de test, en este caso hemos decidido usar "testNG" en favor de JUnit4. Aun no los hemos implementado al no disponer aun de una solucion de codigo estable.</li>
+<li>Hemos generado un primer tablero, alineando todas las casillas. Hemos realizado diferentes pruebas de diseño.</li>
+</ul>
+</li>
+<li>Disponemos de un diagrama UML que relaciona todo el contenido que actualmente tenemos.</li>
+<li>Aun no hemos finalizado los diseños de los diagramas de secuencia. Sera nuestro siguiente paso una vez finalizado este Sprint.</li>
+</ul>
 
 <h2>
-<a id="soporte" class="anchor" href="#soporte" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Soporte</h2>
+<a id="patrones-de-diseño-escogidos" class="anchor" href="#patrones-de-dise%C3%B1o-escogidos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Patrones de diseño escogidos</h2>
 
-<p>Tienes problemas, echa un ojo a nuestra <a href="https://help.github.com/pages">documentacion</a> o <a href="https://github.com/contact">al contacto de soporte</a> y sereis ayudados en un breve espacio de tiempo.</p>
+<ul>
+<li>Hemos decidido utilizar (aun no implementados) los siguientes patrones para diseñar el proyecto competo:
+
+<ul>
+<li>
+<strong>Observer/Observator</strong> para la relacion con la GUI (Modelo Vista Controlador)</li>
+<li>Al generar el tablero utilizaremos <strong>Factory</strong>
+</li>
+<li>Para decubrir el tablero, decidimos utilizar <strong>Strategy</strong>
+</li>
+</ul>
+</li>
+</ul>
+
+<h2>
+<a id="otros-aspectos" class="anchor" href="#otros-aspectos" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Otros aspectos</h2>
+
+<ul>
+<li>Disponemos de una pagina web desde la cual se puede acceder a todo el codigo del proyecto y nuestro repositorio en github. El enlace es: <a href="http://txusyk.github.io/IS/">www.txusyk.github.io/IS</a>
+</li>
+<li>
+</ul>
+
+<h1>
+<a id="segundo-sprint" class="anchor" href="#segundo-sprint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Segundo Sprint</h1>
+
+<h2>
+<a id="contenido-que-enviamos-1" class="anchor" href="#contenido-que-enviamos-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contenido que enviamos</h2>
+
+<ul>
+<li>Adjuntamos los archivos .java correspondientes a las historias de usuario requeridas. 
+
+<ul>
+<li>Hemos generado los ficheros de test, en este caso hemos decidido usar "testNG" en favor de JUnit4. Aun no los hemos implementado al no disponer aun de una solucion de codigo estable.</li>
+<li>Hemos generado tablero casi definitivo, en una malla de <strong>n*m</strong>. Aun nos falta cambiar los numeros y el color <strong>ROJO</strong> de la casilla cuando es mina por iconos.</li>
+</ul>
+</li>
+<li>Disponemos de un diagrama UML que relaciona todo el contenido que actualmente tenemos.</li>
+<li>Estamos finalizando el diseño de los diagramas de secuancia en el momento actual de desarrollo.</li>
+</ul>
+
+<h2>
+<a id="patrones-de-diseño-escogidos-1" class="anchor" href="#patrones-de-dise%C3%B1o-escogidos-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Patrones de diseño escogidos</h2>
+
+<ul>
+<li>Hemos decidido utilizar (e implementado) los siguientes patrones para diseñar el proyecto competo:
+
+<ul>
+<li>
+<strong>Observer/Observator</strong> para la relacion con la GUI (Modelo Vista Controlador)</li>
+<li>Al generar el tablero utilizaremos <strong>Factory</strong>
+</li>
+</ul>
+</li>
+<li>Definitivamente no vamos a utilizar el siguiente patron:
+
+<ul>
+<li>Para decubrir el tablero, decidimos utilizar <strong>Strategy</strong>
+</li>
+</ul>
+</li>
+<li>Por ultimo, vamos a utilizar un nuevo patron para el control del tablero
+
+<ul>
+<li>Como hemos dicho, <strong>State</strong> es el patron que utilizaremos para la gestion del tablero </li>
+</ul>
+</li>
+</ul>
       </section>
     </div>
 
