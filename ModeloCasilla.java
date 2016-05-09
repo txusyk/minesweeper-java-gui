@@ -110,7 +110,7 @@ public class ModeloCasilla extends Observable{
             else if(!this.getSiEstaRevelada()){
                 this.tablero.aniadirAreveladas();
                 this.estaRevelada = true;
-                if (this.id == 0){
+                if (thifs.id == 0){
                     this.tablero.revelarCasillasDesdeCero(this);
                 }
                 this.setChanged();
@@ -128,7 +128,7 @@ public class ModeloCasilla extends Observable{
             this.estaMarcada = true;
             this.tablero.reducirMarcadorMinas();
             this.setChanged();
-            this.notifyObservers();
+            this.notifyObserver s();
         }
         else if(!this.getEstaRevelada() && this.tablero.getEstado().equals("jugando")){
             this.estaMarcada = false;

@@ -6,7 +6,7 @@ import java.util.Map.*;
  */
 public class ListaPartidas {
 
-    private ArrayList<Partida> listaPartidas;
+   /* private ArrayList<Partida> listaPartidas;
 
     public ListaPartidas(){
         this.listaPartidas=new ArrayList<Partida>();
@@ -50,7 +50,7 @@ public class ListaPartidas {
             Partida auxPartida;
             while (it.hasNext()){
                 auxPartida = it.next();
-                hashOrdenado.put()
+                hashOrdenado.put();
             }
             hashOrdenado = new TreeMap("",this.listaPartidas);
             Partida auxP=null;
@@ -58,7 +58,7 @@ public class ListaPartidas {
             listaOrdenada= new ArrayList<Partida>(hashOrdenado.values());
 
             return listaOrdenada;
-    }
+    }*/
 
 
 }

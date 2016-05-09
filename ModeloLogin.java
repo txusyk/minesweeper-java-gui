@@ -31,7 +31,6 @@ public class ModeloLogin extends Observable {
         this.nombreJug = pNombreJug;
         this.passwd = pPasswd;
         this.setDificultadPorDefecto();
-
     }
 
     /**

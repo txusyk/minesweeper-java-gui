@@ -48,7 +48,7 @@ public class ModeloTablero extends Observable {
         this.numCasillasReveladas = 0;
         this.estadoActual = "jugando";
 
-        this.costruirTablero();
+        this.construir();
     }
 
     public ModeloCasilla getCasilla(int pX,int pY){
@@ -102,7 +102,7 @@ public class ModeloTablero extends Observable {
 
     private void generarTablero() {
         //fijamos todas las casillas
-        this.fijarTodasLasCasillas();
+        this.resetearCasillas();
 
         //añadimos las casillas de minas
         this.ponerMinas();
@@ -202,7 +202,7 @@ public class ModeloTablero extends Observable {
     public void fallo() {
         for (ModeloCasilla[] a : casillas) {
             for (ModeloCasilla b : a) {
-                b.revelar();
+                b.revelarCasilla();
             }
         }
     }

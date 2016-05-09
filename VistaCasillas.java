@@ -24,6 +24,7 @@ import java.util.Observer;
  */
 public class VistaCasillas extends JButton implements Observer {
 
+    private static final long serialVersionUID = 1L;
     private JButton boton_casilla;
     private ModeloCasilla casilla;
     private Controlador controlador;

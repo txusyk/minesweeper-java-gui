@@ -22,11 +22,12 @@ import java.util.Observer;
 /**
  * Created by josu on 4/18/16.
  */
-public class VistaBuscaminas extends JFrame implements Observer {
+public class VistaBuscaminas extends JPanel implements Observer {
     /**
      * Declaracion de variables
      */
-    private JPanel panelJuego;
+    private static final long serialVersionUID = 1L;
+    private JPanel panelJuego = new JPanel();
     private JLabel numBombas, estadoJuego, reloj;
     private VistaCasillas[][] casillas;
     private ModeloTablero tablero;
@@ -50,29 +51,32 @@ public class VistaBuscaminas extends JFrame implements Observer {
         this.tablero = pTablero;
         this.setLayout(new BorderLayout());
         this.panelJuego = new JPanel();
-        this.barra_menu = new JMenuBar();
-        this.numBombas = new JLabel("Minas restantes :" + Integer.toString(tablero.getNumMinasRestantes()));
-        this.estadoJuego = new JLabel("Estado de juego: " + tablero.getEstado());
+        //this.barra_menu = new JMenuBar();
+        //this.numBombas = new JLabel("Minas restantes :" + Integer.toString(tablero.getNumMinasRestantes()));
+        //this.estadoJuego = new JLabel("Estado de juego: " + tablero.getEstado());
 
-        this.ranking = new JMenuItem("Reiniciar");
-        Controlador controlador = new Controlador(this.tablero);
-        this.ranking.addMouseListener(controlador);
+        //this.ranking = new JMenuItem("Reiniciar");
+        //Controlador controlador = new Controlador(this.tablero);
+        //this.ranking.addMouseListener(controlador);
 
+        /*this.menu_archivo = new JMenu();
         this.menu_archivo.add(this.ranking);
         this.menu_archivo.add(this.reiniciar);
         this.menu_archivo.add(this.salir);
 
+        this.menu_ayuda = new JMenu();
         this.menu_ayuda.add(this.acercaDe);
         this.menu_ayuda.add(this.FAQ);
         this.menu_ayuda.add(this.problemasFrecuentes);
 
         this.barra_menu.add(menu_archivo);
-        this.barra_menu.add(menu_ayuda);
+        this.barra_menu.add(menu_ayuda);*/
 
-        this.add(this.numBombas, BorderLayout.WEST);
-        this.add(this.estadoJuego, BorderLayout.EAST);
+        //this.add(this.numBombas, BorderLayout.WEST);
+        //this.add(this.estadoJuego, BorderLayout.EAST);
+        this.add(restartButton(), BorderLayout.NORTH);
         //faltaria añadir en el centro el boton del ttemporizador
-        this.add(this.barra_menu, BorderLayout.NORTH);
+        //this.add(this.barra_menu, BorderLayout.NORTH);
         this.casillas = new VistaCasillas[tablero.getX()][tablero.getY()];
         this.tablero.addObserver(this);
 
@@ -128,7 +132,16 @@ public class VistaBuscaminas extends JFrame implements Observer {
         if (o != null) {
             actualizarBotones();
         }
-        this.numBombas = new JLabel("Minas restantes :" + Integer.toString(tablero.getNumMinasRestantes()));
-        this.estadoJuego = new JLabel("Estado de juego: " + tablero.getEstado());
+        //this.numBombas = new JLabel("Minas restantes :" + Integer.toString(tablero.getNumMinasRestantes()));
+        //this.estadoJuego = new JLabel("Estado de juego: " + tablero.getEstado());
+    }
+
+    public JButton restartButton() {
+        JButton button = new JButton("Restart");
+        button.setPreferredSize(new Dimension(20, 40));
+        Controlador controller = new Controlador(tablero);
+        button.addMouseListener(controller);
+        return button;
+
     }
 }

@@ -20,7 +20,7 @@ import java.util.*;
  * Created by josu on 4/19/16.
  */
 public class Puntuacion {
-
+/*
     String nombreJug;
     ListaPartidas lPartidas;
     ArrayList<Integer> puntuaciones;
@@ -54,7 +54,7 @@ public class Puntuacion {
                 }
             }
         }
-    }
+    }*/
 
 
 }
