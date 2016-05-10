@@ -37,8 +37,6 @@ Contiene todos los trabajos, apuntes y el proyecto de asignatura del curso 2015/
 + Hemos decidido utilizar (e implementado) los siguientes patrones para diseñar el proyecto competo:
  + **Observer/Observator** para la relacion con la GUI (Modelo Vista Controlador)
  + Al generar el tablero utilizaremos **Factory**
-+ Definitivamente no vamos a utilizar el siguiente patron:
- + Para decubrir el tablero, decidimos utilizar **Strategy**
-+ Por ultimo, vamos a utilizar un nuevo patron para el control del tablero
- + Como hemos dicho, **State** es el patron que utilizaremos para la gestion del tablero 
++ Definitivamente no vamos a utilizar el siguiente patron: **Strategy** para la resolucion del tablero
++ Por ultimo, vamos a utilizar un nuevo patron para el control del tablero: **State** es el patron que utilizaremos para la gestion del tablero 
 
