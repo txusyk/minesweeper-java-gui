@@ -1,3 +1,19 @@
+/*
+ * Copyright [2016] [Josu]
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Observable;
@@ -7,11 +23,10 @@ import javax.swing.*;
 
 /**
  *
- * @author Eneko
+ * @author Josu
  */
 public class VistaCasillas extends JButton implements Observer {
 
-    private static final long serialVersionUID = 1L;
     private JButton boton;
     private ModeloCasilla casilla;
     private Controlador controlador;
@@ -55,7 +70,7 @@ public class VistaCasillas extends JButton implements Observer {
                     switch (this.casilla.getIdCasilla()) {
                         case 1:
                             //this.boton.setForeground(Color.white);
-                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/1.png"));
+                                this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/1.png"));
                             break;
                         case 2:
                             //this.boton.setForeground(Color.blue);
@@ -93,64 +108,14 @@ public class VistaCasillas extends JButton implements Observer {
             }
         }
         if (casilla.isFlag()) {
-            this.boton.setText("P");
-            this.boton.setBackground(Color.yellow);
+            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/bandera.gif"));
+            //this.boton.setText("P");
+            //this.boton.setBackground(Color.yellow);
         }
         if (!casilla.isFlag() && !casilla.getEstaDescubierta()) {
             this.boton.setText("");
             this.boton.setBackground(new JButton().getBackground());
         }
     }
-
 }
-
-        /*if (casilla.getSiEstaRevelada()){
-            if (this.casilla.getId() != -1){
-                this.setBackground(Color.DARK_GRAY);
-                if (this.casilla.getId() != 0) {
-                    switch (this.casilla.getId()) {
-                        case 1:
-                            this.boton_casilla.setForeground(Color.white);
-                            break;
-                        case 2:
-                            this.boton_casilla.setForeground(Color.blue);
-                            break;
-                        case 3:
-                            this.boton_casilla.setForeground(Color.cyan);
-                            break;
-                        case 4:
-                            this.boton_casilla.setForeground(Color.GREEN);
-                            break;
-                        case 5:
-                            this.boton_casilla.setForeground(Color.MAGENTA);
-                            break;
-                        case 6:
-                            this.boton_casilla.setForeground(Color.ORANGE);
-                            break;
-                        case 7:
-                            this.boton_casilla.setForeground(Color.lightGray);
-                            break;
-                        case 8:
-                            this.boton_casilla.setForeground(Color.YELLOW);
-                            break;
-                        default:
-                            break;
-                    }
-                    this.boton_casilla.setText(Integer.toString(this.casilla.getId()));
-                }else{
-                    this.boton_casilla.setText("");
-                }
-            }else{
-                this.boton_casilla.setBackground(Color.RED);
-            }
-        }
-        if (casilla.getSiEstaMarcada()){
-            this.boton_casilla.setText("*");
-            this.boton_casilla.setBackground(Color.BLACK);
-            this.boton_casilla.setForeground(Color.RED);
-        }else if (!casilla.getSiEstaRevelada() && !casilla.getSiEstaMarcada()){
-            this.boton_casilla.setText("");
-            this.boton_casilla.setBackground(new JButton().getBackground());
-        }
-    }*/
 
