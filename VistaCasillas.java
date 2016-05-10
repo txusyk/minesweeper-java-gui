@@ -1,56 +1,110 @@
-/*
- * Copyright [2016] [Josu]
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.*;
+
 /**
- * Created by josu on 5/3/16.
+ *
+ * @author Eneko
  */
 public class VistaCasillas extends JButton implements Observer {
 
     private static final long serialVersionUID = 1L;
-    private JButton boton_casilla;
+    private JButton boton;
     private ModeloCasilla casilla;
     private Controlador controlador;
 
-    public VistaCasillas(ModeloCasilla pCasilla){
-        this.casilla = pCasilla;
-        this.boton_casilla = new JButton(""); //modificar por el icono por deffecto
-        Dimension dimensionCasilla = new Dimension(30,30);
-        this.boton_casilla.setPreferredSize(dimensionCasilla);
-        this.controlador = new Controlador(casilla);
-        this.boton_casilla.addMouseListener(controlador);
+    /**
+     * crea los botones necesarios
+     *
+     * @param field
+     */
+    public VistaCasillas(ModeloCasilla field) {
+        this.casilla = field;
+        this.boton = new JButton("");
+        this.boton.setPreferredSize(new Dimension(30, 30));
+        this.controlador = new Controlador(field);
+        this.boton.addMouseListener(controlador);
         this.casilla.addObserver(this);
     }
 
-    public JButton getBoton_casilla(){
-        return this.boton_casilla;
+    public JButton getBoton() {
+        return this.boton;
     }
 
-    public void ocultarBoton(){
-        this.boton_casilla.setVisible(false);
-        this.casilla.revelarCasilla();
-    }
-
+    /**
+     * actualiza la vista de los botones
+     *
+     * @param obs
+     * @param o
+     */
     @Override
-    public void update(Observable pObs, Object pObjeto){
-        if (casilla.getSiEstaRevelada()){
+    public void update(Observable obs, Object o) {
+        // TODO Auto-generated method stub
+        if (casilla.getEstaDescubierta() == true) {
+
+            if (this.casilla.getIdCasilla() == 9) {
+                this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/bomb.png"));
+            } else {
+                this.boton.setBackground(Color.LIGHT_GRAY);
+                if (this.casilla.getIdCasilla() == 0) {
+                    this.boton.setText("");
+                } else {
+                    switch (this.casilla.getIdCasilla()) {
+                        case 1:
+                            //this.boton.setForeground(Color.white);
+                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/1.png"));
+                            break;
+                        case 2:
+                            //this.boton.setForeground(Color.blue);
+                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/2.png"));
+                            break;
+                        case 3:
+                            //this.boton.setForeground(Color.cyan);
+                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/3.png"));
+                            break;
+                        case 4:
+                            //this.boton.setForeground(Color.GREEN);
+                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/4.png"));
+                            break;
+                        case 5:
+                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/5.jpg"));
+                            //this.boton.setForeground(Color.MAGENTA);
+                            break;
+                        case 6:
+                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/6.gif"));
+                            //this.boton.setForeground(Color.ORANGE);
+                            break;
+                        case 7:
+                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/7.png"));
+                            //this.boton.setForeground(Color.lightGray);
+                            break;
+                        case 8:
+                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/8.png"));
+                            //this.boton.setForeground(Color.YELLOW);
+                            break;
+                        default:
+                            break;
+                    }
+                    //this.boton.setText(Integer.toString(this.casilla.getIdCasilla()));
+                }
+            }
+        }
+        if (casilla.isFlag()) {
+            this.boton.setText("P");
+            this.boton.setBackground(Color.yellow);
+        }
+        if (!casilla.isFlag() && !casilla.getEstaDescubierta()) {
+            this.boton.setText("");
+            this.boton.setBackground(new JButton().getBackground());
+        }
+    }
+
+}
+
+        /*if (casilla.getSiEstaRevelada()){
             if (this.casilla.getId() != -1){
                 this.setBackground(Color.DARK_GRAY);
                 if (this.casilla.getId() != 0) {
@@ -98,5 +152,5 @@ public class VistaCasillas extends JButton implements Observer {
             this.boton_casilla.setText("");
             this.boton_casilla.setBackground(new JButton().getBackground());
         }
-    }
-}
+    }*/
+

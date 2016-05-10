@@ -1,147 +1,145 @@
-/*
- * Copyright [2016] [Josu]
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
-
-import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 /**
- * Created by josu on 4/18/16.
+ * Vista del buscaminas
+ *
+ * @author Eneko
  */
 public class VistaBuscaminas extends JPanel implements Observer {
-    /**
-     * Declaracion de variables
-     */
-    private static final long serialVersionUID = 1L;
-    private JPanel panelJuego = new JPanel();
-    private JLabel numBombas, estadoJuego, reloj;
-    private VistaCasillas[][] casillas;
-    private ModeloTablero tablero;
 
-    private JMenuBar barra_menu;
-    private JMenu menu_archivo;
-    private JMenuItem ranking;
-    private JMenuItem salir;
-    private JMenuItem reiniciar;
-    private JMenu menu_ayuda;
-    private JMenuItem FAQ;
-    private JMenuItem acercaDe;
-    private JMenuItem problemasFrecuentes;
+    private static final long serialVersionUID = 1L;
+    private JPanel vista;
+    private JLabel minas, modo, timer;
+    private VistaCasillas[][] casilla;
+    private ModeloTablero ModeloTablero;
 
     /**
      * Constructora
      *
-     * @param pTablero
+     * @param model establece los parametros estandar para la vista
      */
-    public VistaBuscaminas(ModeloTablero pTablero) {
-        this.tablero = pTablero;
+    public VistaBuscaminas(ModeloTablero model) {
+        this.ModeloTablero = model;
         this.setLayout(new BorderLayout());
-        this.panelJuego = new JPanel();
-        //this.barra_menu = new JMenuBar();
-        //this.numBombas = new JLabel("Minas restantes :" + Integer.toString(tablero.getNumMinasRestantes()));
-        //this.estadoJuego = new JLabel("Estado de juego: " + tablero.getEstado());
+        this.vista = new JPanel();
+        this.minas = setLabel(this.minas, "Minas:  " + Integer.toString(model.minasRestantes()));
+        this.modo = setLabel(this.modo, "Modo:  " + model.getModo());
+        this.timer = setLabel(this.timer, "Tiempo:  " + model.getTimer());
 
-        //this.ranking = new JMenuItem("Reiniciar");
-        //Controlador controlador = new Controlador(this.tablero);
-        //this.ranking.addMouseListener(controlador);
+        this.add(this.minas, BorderLayout.WEST);
+        this.add(this.modo, BorderLayout.EAST);
+        this.add(this.timer, BorderLayout.CENTER);
+        this.add(reiniciarBoton(), BorderLayout.NORTH);
+        this.casilla = new VistaCasillas[model.getAltura()][model.getAncho()];
+        this.ModeloTablero.addObserver(this);
 
-        /*this.menu_archivo = new JMenu();
-        this.menu_archivo.add(this.ranking);
-        this.menu_archivo.add(this.reiniciar);
-        this.menu_archivo.add(this.salir);
+        this.vista.setLayout(new GridLayout(model.getAltura(), model.getAncho()));
+        crearBoton();
+        this.add(vista, BorderLayout.SOUTH);
 
-        this.menu_ayuda = new JMenu();
-        this.menu_ayuda.add(this.acercaDe);
-        this.menu_ayuda.add(this.FAQ);
-        this.menu_ayuda.add(this.problemasFrecuentes);
-
-        this.barra_menu.add(menu_archivo);
-        this.barra_menu.add(menu_ayuda);*/
-
-        //this.add(this.numBombas, BorderLayout.WEST);
-        //this.add(this.estadoJuego, BorderLayout.EAST);
-        this.add(restartButton(), BorderLayout.NORTH);
-        //faltaria añadir en el centro el boton del ttemporizador
-        //this.add(this.barra_menu, BorderLayout.NORTH);
-        this.casillas = new VistaCasillas[tablero.getX()][tablero.getY()];
-        this.tablero.addObserver(this);
-
-        this.panelJuego.setLayout(new GridLayout(tablero.getX(), tablero.getY()));
-        costruirBotonesTableroJuego();
-        this.add(panelJuego, BorderLayout.SOUTH);
     }
 
     /**
-     * @return devuelve la vista del panel de juego
-     */
-    public JPanel getPanelJuego() {
-        return this.panelJuego;
-    }
-
-    /**
-     * actualizamos los botones
-     */
-    public void actualizarBotones() {
-        this.restablecerBotones();
-        costruirBotonesTableroJuego();
-    }
-
-    /**
-     * Elimina todos los botones
-     */
-    private void restablecerBotones() {
-        for (int i = 0; i < this.tablero.getX(); i++) {
-            for (int j = 0; j < this.tablero.getY(); j++) {
-                this.panelJuego.remove(casillas[i][j].getBoton_casilla());
-            }
-        }
-    }
-
-    private void costruirBotonesTableroJuego() {
-        for (int i = 0; i < this.tablero.getX(); i++) {
-            for (int j = 0; j < this.tablero.getY(); j++) {
-                VistaCasillas botonAux = new VistaCasillas(this.tablero.getCasilla(i, j));
-                casillas[i][j] = botonAux;
-                this.panelJuego.add(botonAux.getBoton_casilla());
-            }
-        }
-    }
-
-    /**
-     * Sera el encargado de actualizar la vista
-     *
-     * @param o
-     * @param arg
+     * actualizar la vista
      */
     @Override
-    public void update(Observable o, Object arg) {
+    public void update(Observable obs, Object o) {
+        // TODO Auto-generated method
+
+        // si el objeto es vacio, actualiza todas
         if (o != null) {
             actualizarBotones();
         }
-        //this.numBombas = new JLabel("Minas restantes :" + Integer.toString(tablero.getNumMinasRestantes()));
-        //this.estadoJuego = new JLabel("Estado de juego: " + tablero.getEstado());
+        this.minas = setLabel(this.minas, "Minas:  " + Integer.toString(ModeloTablero.minasRestantes()));
+        this.modo = setLabel(this.modo, "Modo:  " + ModeloTablero.getModo());
+        this.timer = setLabel(this.timer, "Tiempo:  " + this.ModeloTablero.getTimer());
+
     }
 
-    public JButton restartButton() {
-        JButton button = new JButton("Restart");
+    /**
+     *
+     * @param label
+     * @param string establece el texto
+     * @return devuelve label con el string
+     */
+    private JLabel setLabel(JLabel label, String string) {
+        if (!(label instanceof JLabel)) {
+            label = new JLabel("");
+        }
+        label.setText(string);
+        label.setPreferredSize(new Dimension(100, 40));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        return label;
+
+    }
+
+    /**
+     * @return la vista
+     */
+    public JPanel getVista() {
+        return this.vista;
+    }
+
+    /**
+     * boton restart
+     *
+     * @return
+     */
+    public JButton reiniciarBoton() {
+        JButton button = new JButton("Reiniciar Partida");
         button.setPreferredSize(new Dimension(20, 40));
-        Controlador controller = new Controlador(tablero);
+        Controlador controller = new Controlador(ModeloTablero);
         button.addMouseListener(controller);
         return button;
 
+    }
+
+    /**
+     * update botones
+     */
+    public void actualizarBotones() {
+
+        eliminarBoton();
+
+        crearBoton();
+
+    }
+
+    /**
+     * elimina botones
+     */
+    private void eliminarBoton() {
+        for (int i = 0; i < this.ModeloTablero.getAltura(); i++) {
+            for (int j = 0; j < this.ModeloTablero.getAncho(); j++) {
+
+                this.vista.remove(casilla[i][j].getBoton());
+
+            }
+
+        }
+
+    }
+
+    /**
+     * crea botones
+     */
+    private void crearBoton() {
+
+        for (int i = 0; i < this.ModeloTablero.getAltura(); i++) {
+            for (int j = 0; j < this.ModeloTablero.getAncho(); j++) {
+                VistaCasillas button = new VistaCasillas(this.ModeloTablero.getCasilla(i, j));
+                casilla[i][j] = button;
+                this.vista.add(button.getBoton());
+
+            }
+
+        }
     }
 }

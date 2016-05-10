@@ -1,56 +1,61 @@
-/*
- * Copyright [2016] [Josu]
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Created by josu on 5/3/16.
+ *
+ * @author Eneko
  */
 public class Controlador extends MouseAdapter {
 
     private ModeloCasilla casilla;
-    private ModeloTablero tablero;
+    private ModeloTablero ModeloTablero;
 
-    public Controlador(ModeloCasilla pCasilla){
-        this.casilla = pCasilla;
+    /**
+     * Constructora
+     *
+     * @param casilla define las casillas de juego
+     */
+    public Controlador(ModeloCasilla casilla) {
+        this.casilla = casilla;
     }
 
-    public void actualizarCambiosCasilla(ModeloCasilla pCasilla){
-        this.casilla = pCasilla;
+
+
+    /**
+     * Constructora
+     *
+     * @param model
+     */
+    public Controlador(ModeloTablero model) {
+        this.ModeloTablero = model;
     }
 
-    public Controlador(ModeloTablero pTablero){
-        this.tablero = pTablero;
-    }
+    /**
+     * controla los click-s del raton y las clases y metodos del ModeloTablero
+     *
+     * @param e el MouseEvent acaba de activarse
+     */
+    @Override
+    public void mouseClicked(MouseEvent e) {
 
-    public void clickDeRaton(MouseEvent e){
-        if (e.getButton() == MouseEvent.BUTTON1){
-            if (this.tablero == null){
-                if (!this.casilla.getSiEstaMarcada()){
-                    this.casilla.revelarCasilla();
+        switch (e.getButton()) {
+            case MouseEvent.BUTTON1:
+                if (this.ModeloTablero == null) {
+                    if (!casilla.isFlag()) {
+                        casilla.descubreCasilla();
+
+                    }
+                } else {
+                    ModeloTablero.Init();
                 }
-            }else{
-                this.tablero.inicializacion();
-            }
-        }else if (e.getButton() == MouseEvent.BUTTON3){
-            if (this.tablero == null){
-                this.casilla.marcarCasilla();
-            }
+                break;
+            case MouseEvent.BUTTON3:
+                if (this.ModeloTablero == null) {
+                    casilla.cambiaEstado();
+                }
+                break;
+            default:
+                break;
         }
     }
-
 }

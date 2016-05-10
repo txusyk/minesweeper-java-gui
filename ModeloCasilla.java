@@ -1,144 +1,172 @@
-/*
- * Copyright [2016] [Josu]
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
-
 import java.util.Observable;
 
 /**
- * Created by josu on 4/25/16.
+ *
+ * @author Eneko
  */
-public class ModeloCasilla extends Observable{
+public class ModeloCasilla extends Observable {
+
+
+    private int idCasilla;
+    private int posx;
+    private int posy;
+    private ModeloTablero model;
+    private boolean estaDescubierta;        //si la casilla se revela
+    private boolean esBandera;            //si se selecciona una casilla con bandera
 
     /**
-     * Atributos=> Seran unicamente modificables desde la propia clase
-     */
-    private int id;
-    private int x,y;
-    private ModeloTablero tablero;
-    private boolean estaRevelada, estaMarcada;
-
-    /**
-     * Constructora
+     * Constructor
      *
-     * @param pTablero
-     * @param pX
-     * @param pY
-     * @param pIdCasilla
+     * @param model
+     * @param x posicion x en el panel de juego
+     * @param y posicion y en el panel de juego
+     * @param idPanel
      */
-    public ModeloCasilla(ModeloTablero pTablero,int pX,int pY, int pIdCasilla){
-        this.tablero = pTablero;
-        this.x = pX;
-        this.y = pY;
-        this.id= pIdCasilla;
-        this.tablero = pTablero;
+    public ModeloCasilla(ModeloTablero model, int x, int y, int idPanel) {
+        this.idCasilla = idPanel;
+        this.posx = x;
+        this.posy = y;
+        this.model = model;
+        this.estaDescubierta = false;
+        this.esBandera = false;
 
-        this.estaRevelada = false;
-        this.estaMarcada = false;
-    }
-
-    //Getters&Setters
-    /**
-     * getID()
-     * @return Devolvera el ID de la casilla
-     */
-    public int getId(){
-        return this.id;
     }
 
     /**
-     * @return devuelve la posicion X
+     * inicializacion del panel
+     * @param model
+     * @param x
+     * @param y
+     * @param idPanel
      */
-    public int getX(){
-        return this.x;
+    public void Init(ModeloTablero model, int x, int y, int idPanel) {
+        this.idCasilla = idPanel;
+        this.posx = x;
+        this.posy = y;
+        this.model = model;
+        this.estaDescubierta = false;
+        this.esBandera = false;
+
     }
 
     /**
-     * @return devuelve la posicion Y
+     * descubre casilla
      */
-    public int getY(){
-        return this.y;
-    }
+    public void descubreCasilla() {
+        if (model.getModo().equals("En Juego")) {
+            if (!this.model.getThread().isAlive()) {
+                this.model.startThread();
+            }
 
-    /**
-     * @return devuelve si la casilla esta revelada
-     */
-    public boolean getSiEstaRevelada(){
-        return this.estaRevelada;
-    }
+            if (this.idCasilla == 9) {
+                this.model.setModo("Has perdido");
 
-    /**
-     * getEstaRevelada()
-     * @return Devolvera un booleano indicando si la casilla esta revelada
-     */
-    public boolean getEstaRevelada(){ return this.estaRevelada;}
-
-    public boolean getSiEstaMarcada(){ return this.estaMarcada;}
-
-
-    /**
-     * setMina()
-     * Fijara la casilla como una mina
-     */
-    public  void setMina(){
-        this.id = -1;
-    }
-
-    /**
-     * Pre: Tenemos un tablero compuesto por elementos ModeloCasilla
-     * Post: Revelaremos una/variass de dichas casillas
-     */
-    public void revelarCasilla(){
-        if (this.tablero.equals("jugando")){
-            if (this.id == -1){
-                this.tablero.setEstado("perdido");
-                this.estaRevelada = true;
+                this.estaDescubierta = true;
                 this.setChanged();
                 this.notifyObservers();
-            }
-            else if(!this.getSiEstaRevelada()){
-                this.tablero.aniadirAreveladas();
-                this.estaRevelada = true;
-                if (thifs.id == 0){
-                    this.tablero.revelarCasillasDesdeCero(this);
+            } else if (this.estaDescubierta == false) {
+                model.annadirADescubiertas();
+                this.estaDescubierta = true;
+                if (this.idCasilla == 0) {
+                    this.model.descubrirCasillasVacias(this);
                 }
                 this.setChanged();
                 this.notifyObservers();
+
             }
+        }
+
+        //if (!model.getModo().equals("En juego")) {
+        //this.model.stopThread();
+        //}
+
+    }
+
+    /**
+     * Cambio de estado
+     */
+    public void cambiaEstado() {
+        if (!this.esBandera && !this.getEstaDescubierta() && model.getModo().equals("En Juego")) {
+
+            if (!this.model.getThread().isAlive()) {
+                this.model.startThread();
+            }
+            this.esBandera = true;
+            this.model.subMinasRestantes();
+            this.setChanged();
+            this.notifyObservers();
+        } else if (!this.getEstaDescubierta() && model.getModo().equals("En Juego")) {
+            this.esBandera = false;
+            this.model.addMinasRestantes();
+            this.setChanged();
+            this.notifyObservers();
+        }
+
+        if (!model.getModo().equals("En Juego")) {
+            this.model.stopThread();
         }
     }
 
     /**
-     * Pre: Tenemos un tablero compuesto por ModeloCasillas
-     * Post: Hemos marcado/desmarcado una casilla que vacia/marcada
+     *
+     * @return si una casilla es marcada con bandera
      */
-    public void marcarCasilla(){
-        if (!this.estaMarcada && !this.getEstaRevelada() && this.tablero.getEstado().equals("jugando")){
-            this.estaMarcada = true;
-            this.tablero.reducirMarcadorMinas();
-            this.setChanged();
-            this.notifyObserver s();
-        }
-        else if(!this.getEstaRevelada() && this.tablero.getEstado().equals("jugando")){
-            this.estaMarcada = false;
-            this.tablero.aumentarMarcadorMinas();
-            this.setChanged();
-            this.notifyObservers();
-        }
+    public boolean isFlag() {
+        return this.esBandera;
     }
 
-    public void incrementarEnUno(){
-        this.id++;
+    /**
+     *
+     * @return id de casilla
+     */
+    public int getIdCasilla() {
+        return idCasilla;
     }
+
+    /**
+     *
+     * @return posicion x
+     */
+    public int getPosx() {
+        return posx;
+    }
+
+    /**
+     *
+     * @return posicion x
+     */
+    public int getPosy() {
+        return posy;
+    }
+
+    /**
+     *
+     * @return esta descubierta
+     */
+    public boolean getEstaDescubierta() {
+        return this.estaDescubierta;
+    }
+
+    /**
+     * añade 1 al id de casilla
+     */
+    public void add1() {
+        this.idCasilla++;
+    }
+
+    /**
+     * casilla con mina
+     */
+    public void setMina() {
+        this.idCasilla = 9;
+    }
+
+    /**
+     *
+     * @return el ModeloTablero
+     */
+    public ModeloTablero getModelo() {
+        return this.model;
+    }
+
 }
