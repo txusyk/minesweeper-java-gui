@@ -26,7 +26,7 @@ public class ModeloTablero extends Observable {
 
 
     private ModeloCasilla[][] casilla;
-    private int altura;
+    private int y;
     private int x;
     private int numMinas;
     private int minasRestantes;
@@ -40,7 +40,7 @@ public class ModeloTablero extends Observable {
      * Constructor
      *
      * @param x	x del ModeloCasilla de juego
-     * @param y	altura del ModeloCasilla de juego
+     * @param y	y del ModeloCasilla de juego
      * @param numMinas	numero de numMinas
      */
     public ModeloTablero(int x, int y, int numMinas) {
@@ -48,7 +48,7 @@ public class ModeloTablero extends Observable {
         //Crea las casillas como un array
         this.casilla = new ModeloCasilla[y][x];
         this.x = x;
-        this.altura = y;
+        this.y = y;
         this.numMinas = numMinas;
         this.minasRestantes = numMinas;
         this.descubierto = 0;
@@ -137,7 +137,7 @@ public class ModeloTablero extends Observable {
             do {
 
                 x = (int) (Math.random() * (this.x));
-                y = (int) (Math.random() * (this.altura));
+                y = (int) (Math.random() * (this.y));
 
             } while (this.casilla[y][x].getIdCasilla() == 9);
 
@@ -161,12 +161,11 @@ public class ModeloTablero extends Observable {
                 ay = casilla.getPosy() + i;
                 ax = casilla.getPosx() + j;
 
-                if (ay >= 0 && ay < this.altura && ax >= 0 && ax < this.x) {
+                if (ay >= 0 && ay < this.y && ax >= 0 && ax < this.x) {
                     if (this.casilla[ay][ax].getIdCasilla() != 9) {
                         this.casilla[ay][ax].add1();
                     }
                 }
-
             }
         }
     }
@@ -187,32 +186,14 @@ public class ModeloTablero extends Observable {
                 ay = y + i;
                 ax = x + j;
 
-                if (ay >= 0 && ay < this.altura && ax >= 0 && ax < this.x) {
+                if (ay >= 0 && ay < this.y && ax >= 0 && ax < this.x) {
                     if (!this.casilla[ay][ax].isFlag()) {
-                        this.casilla[ay][ax].descubreCasilla();
+                            this.casilla[ay][ax].descubreCasilla();
+                        }
                     }
                 }
 
             }
-        }
-
-    }
-
-    /**
-     * imprime la casilla en consola (para Debug)
-     */
-    public void printArray() {
-
-        System.out.println();
-        for (int i = 0; i < altura; i++) {
-
-            for (int j = 0; j < x; j++) {
-                System.out.print(casilla[i][j].getIdCasilla() + " ");
-            }
-
-            System.out.println();
-
-        }
     }
 
     /**
@@ -230,9 +211,17 @@ public class ModeloTablero extends Observable {
      * set las casillas
      */
     private void setCasillas() {
-        for (int i = 0; i < this.altura; i++) {
+        for (int i = 0; i < this.y; i++) {
             for (int j = 0; j < this.x; j++) {
                 this.casilla[i][j] = new ModeloCasilla(this, j, i, 0);
+            }
+        }
+    }
+    
+    public void descubrirTablero(){
+        for (int i = 0; i < this.y; i++) {
+            for (int j = 0; j < this.x; j++) {
+                this.casilla[i][j].setEstaDescubierta();
             }
         }
     }
@@ -241,7 +230,7 @@ public class ModeloTablero extends Observable {
      * resetea las casillas a 0
      */
     private void resetearCasillas() {
-        for (int i = 0; i < this.altura; i++) {
+        for (int i = 0; i < this.y; i++) {
             for (int j = 0; j < this.x; j++) {
                 this.casilla[i][j].Init(this, j, i, 0);
             }
@@ -254,7 +243,7 @@ public class ModeloTablero extends Observable {
      */
     public void annadirADescubiertas() {
         this.descubierto++;
-        if (this.descubierto >= ((this.x * this.altura) - numMinas)) {
+        if (this.descubierto >= ((this.x * this.y) - numMinas)) {
             setModo("Has ganado");
 
         }
@@ -316,10 +305,10 @@ public class ModeloTablero extends Observable {
 
     /**
      *
-     * @return altura del ModeloCasilla de juego
+     * @return y del ModeloCasilla de juego
      */
     public int getAltura() {
-        return this.altura;
+        return this.y;
     }
 
     /**
@@ -340,28 +329,12 @@ public class ModeloTablero extends Observable {
 
     /**
      *
-     * @param altura
+     * @param y
      * @param x
      * @return
      */
-    public ModeloCasilla getCasilla(int altura, int x) {
-        return this.casilla[altura][x];
-    }
-
-    /**
-     *
-     * @return las casillas como array
-     */
-    public ModeloCasilla[][] getCasillas() {
-        return this.casilla;
-    }
-
-    /**
-     *
-     * @return numero de numMinas
-     */
-    public int getMinas() {
-        return this.numMinas;
+    public ModeloCasilla getCasilla(int y, int x) {
+        return this.casilla[y][x];
     }
 
     /**

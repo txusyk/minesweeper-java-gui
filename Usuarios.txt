@@ -1,0 +1,8 @@
+Jugador
+Josu,1234
+Partida
+Josu,30,Dificil
+Partida
+Josu,35,Medio
+Jugador
+David,1234

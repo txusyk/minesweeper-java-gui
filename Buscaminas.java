@@ -14,11 +14,9 @@
  *    limitations under the License.
  */
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.Scanner;
-
-import javax.swing.JFrame;
 
 public class Buscaminas  {
 
@@ -28,27 +26,33 @@ public class Buscaminas  {
      * @throws IOException
      */
     public static void main(String[] argv) throws IOException {
-        String input = "";
+
+        String input = "facil";
         int x = -1;
         int y = -1;
         int numMinas = -1;
 
-        //Establece la dificultad
-        if (argv.length == 1) {
-            input = argv[0];
-        }
-
-        Scanner scan = new Scanner(System.in);
-
         ModeloTablero model;
+        JFrame frame = new JFrame("Buscaminas"); //creamos una ventana que se llamara buscaminas
 
-        System.out.println("Dificultad: Fácil/Medio/Difícil");
+        MenuLogin login = new MenuLogin();
+        frame.setContentPane(login); //Llamamos al menu de logIn
 
-        //vamos a molestar al usuario hasta que elija dificultad
-        while (!input.equalsIgnoreCase("facil") && !input.equalsIgnoreCase("medio") && !input.equalsIgnoreCase("dificil")){
-            System.out.print("Selecciona dificultad: ");
-            input = scan.nextLine();
-        }
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fijamos que la operacion por defecto al cerrar es salir
+        frame.pack(); //    hacemos que la ventana se ajuste al tamaño del contenido
+        //En dim guardamos el tamaño de la pantalla donde se esta ejecutando el programa
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        //Con setLocation() fijamos donde aparecera la ventana en nuestro programa. Con esta configuracion, la ventana siempre
+        //aparecera en el centro de la pantalla del usuario
+        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+        frame.setVisible(true); //hacemos el frame visible
+        frame.setResizable(false); //definimos que no podra modificar el tamaño de la ventana de nuestro programa
+        frame.setAlwaysOnTop(true); //definimos que mientras este ejcutandose se superponga a cualquier otro programa
+
+        do{
+            input = login.getDificultad_juego();
+        }while (login.isVisible());
+
         //fijamos las medidas y el numero de bombas del tablero en base a la dificultad
         switch (input.toLowerCase()) {
             case "facil":
@@ -73,16 +77,12 @@ public class Buscaminas  {
         model = new ModeloTablero(x, y, numMinas);
 
         VistaBuscaminas view = new VistaBuscaminas(model); //creamos una vista que contendra el modelo del tablero
-
-        JFrame frame = new JFrame("Buscaminas"); //creamos una ventana que se llamara buscaminas
-
+        frame.remove(login);
         frame.setContentPane(view); //metemos como contenedor la vista
+        view.setVisible(true);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fijamos que la operacion por defecto al cerrar es salir
         frame.pack(); //    hacemos que la ventana se ajuste al tamaño del contenido
-        //En dim guardamos el tamaño de la pantalla donde se esta ejecutando el programa
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        //Con setLocation() fijamos donde aparecera la ventana en nuestro programa. Con esta configuracion, la ventana siempre
-        //aparecera en el centro de la pantalla del usuario
         frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
         frame.setVisible(true); //hacemos el frame visible
         frame.setResizable(false); //definimos que no podra modificar el tamaño de la ventana de nuestro programa

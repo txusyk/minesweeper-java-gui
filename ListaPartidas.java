@@ -14,15 +14,15 @@
  *    limitations under the License.
  */
 
-import java.util.*;
-import java.util.Map.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by David on 18/04/16.
  */
 public class ListaPartidas {
 
-   /* private ArrayList<Partida> listaPartidas;
+   private ArrayList<Partida> listaPartidas;
 
     public ListaPartidas(){
         this.listaPartidas=new ArrayList<Partida>();
@@ -59,7 +59,13 @@ public class ListaPartidas {
         return encontrada;
     }
 
-    private ArrayList<Partida> ordenarListaPorPuntuaion(){
+    public void imprimirPartidas(){
+        for (int i=0; i<listaPartidas.size();i++){
+            listaPartidas.get(i).imprimirInfo();
+        }
+    }
+
+    /*private ArrayList<Partida> ordenarListaPorPuntuaion(){
             ArrayList <Partida> listaOrdenada;
             TreeMap hashOrdenado = new TreeMap<String, Partida>();
             Iterator<Partida> it = this.listaPartidas.iterator();

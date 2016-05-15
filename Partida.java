@@ -57,4 +57,8 @@ public class Partida {
         }
     }
 
+    public void imprimirInfo(){
+        System.out.println("La puntuacion fue: "+this.puntuacion+". Tardo "+this.getSegundos()+".La dificultad era: "+this.dificultad);
+    }
+
 }

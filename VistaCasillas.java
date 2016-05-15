@@ -14,15 +14,12 @@
  *    limitations under the License.
  */
 
-import java.awt.Color;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.*;
-
 /**
- *
  * @author Josu
  */
 public class VistaCasillas extends JButton implements Observer {
@@ -39,7 +36,7 @@ public class VistaCasillas extends JButton implements Observer {
     public VistaCasillas(ModeloCasilla field) {
         this.casilla = field;
         this.boton = new JButton("");
-        this.boton.setPreferredSize(new Dimension(30, 30));
+        this.boton.setPreferredSize(new Dimension(25, 25));
         this.controlador = new Controlador(field);
         this.boton.addMouseListener(controlador);
         this.casilla.addObserver(this);
@@ -59,10 +56,6 @@ public class VistaCasillas extends JButton implements Observer {
     public void update(Observable obs, Object o) {
         // TODO Auto-generated method stub
         if (casilla.getEstaDescubierta() == true) {
-
-            if (this.casilla.getIdCasilla() == 9) {
-                this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/bomb.png"));
-            } else {
                 this.boton.setBackground(Color.LIGHT_GRAY);
                 if (this.casilla.getIdCasilla() == 0) {
                     this.boton.setText("");
@@ -100,12 +93,13 @@ public class VistaCasillas extends JButton implements Observer {
                             this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/8.png"));
                             //this.boton.setForeground(Color.YELLOW);
                             break;
+                        case 9:
+                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/bomb.png"));
                         default:
                             break;
                     }
                     //this.boton.setText(Integer.toString(this.casilla.getIdCasilla()));
                 }
-            }
         }
         if (casilla.isFlag()) {
             this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/bandera.gif"));

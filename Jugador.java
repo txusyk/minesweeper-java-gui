@@ -14,8 +14,6 @@
  *    limitations under the License.
  */
 
-import java.util.HashMap;
-
 /**
  * Created by David on 18/04/16.
  */
@@ -33,7 +31,7 @@ public class Jugador {
     public Jugador(String pNombreJugador, String pPasswd){
         this.nombreJugador= pNombreJugador;
         this.passwd = pPasswd;
-        this.listaPartidas=new ListaPartidas();
+        this.listaPartidas= new ListaPartidas();
     }
 
     /**

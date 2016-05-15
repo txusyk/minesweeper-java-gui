@@ -24,7 +24,7 @@ import java.awt.Button;
 /**
  * Created by josu on 4/16/16.
  */
-public class Menu extends JFrame{
+public class Menu extends JFrame{/*
 
     public Menu(){
         //creamos los paneles que seran necesarios
@@ -131,8 +131,8 @@ public class Menu extends JFrame{
         frame.setLocation(400,300);
         frame2.setPreferredSize(new Dimension(300,300));
         frame2.setBounds(350,150,600,450);
-        frame2.setVisible(false);*/
-    }
+        frame2.setVisible(false);
+    }*/
 
 
 }

@@ -30,7 +30,6 @@ import javax.swing.SwingConstants;
  */
 public class VistaBuscaminas extends JPanel implements Observer {
 
-    private static final long serialVersionUID = 1L;
     private JPanel vista;
     private JLabel minas, modo, timer;
     private VistaCasillas[][] casilla;

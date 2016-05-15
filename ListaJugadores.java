@@ -63,10 +63,13 @@ public class ListaJugadores {
      *  post: Habremos añadido el jugador en caso de no existir previamente
      *  @param pJugador
      */
-    public void anadirJugador(Jugador pJugador){
+    public boolean anadirJugador(Jugador pJugador){
+        boolean anadido = false;
         if (!this.esta(pJugador)){
             this.lJugadores.put(pJugador.getNombreJugador(),pJugador);
+            anadido = true;
         }
+        return anadido;
     }
 
     /**

@@ -75,9 +75,8 @@ public class ModeloCasilla extends Observable {
             }
 
             if (this.idCasilla == 9) {
+                this.model.descubrirTablero(); //En caso de ser mina, lanzara una orden de que se descubran todas las minas
                 this.model.setModo("Has perdido");
-
-                this.estaDescubierta = true;
                 this.setChanged();
                 this.notifyObservers();
             } else if (this.estaDescubierta == false) {
@@ -159,8 +158,7 @@ public class ModeloCasilla extends Observable {
      *
      * @return esta descubierta
      */
-    public boolean getEstaDescubierta() {
-        return this.estaDescubierta;
+    public boolean getEstaDescubierta() {return this.estaDescubierta;
     }
 
     /**
@@ -177,12 +175,11 @@ public class ModeloCasilla extends Observable {
         this.idCasilla = 9;
     }
 
-    /**
-     *
-     * @return el ModeloTablero
-     */
-    public ModeloTablero getModelo() {
-        return this.model;
+    public void setEstaDescubierta(){
+        this.estaDescubierta=true;
+        this.setChanged();
+        this.notifyObservers();
     }
+
 
 }

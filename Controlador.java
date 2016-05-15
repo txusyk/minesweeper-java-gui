@@ -59,7 +59,6 @@ public class Controlador extends MouseAdapter {
                 if (this.ModeloTablero == null) {
                     if (!casilla.isFlag()) {
                         casilla.descubreCasilla();
-
                     }
                 } else {
                     ModeloTablero.Init();
