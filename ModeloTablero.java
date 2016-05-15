@@ -17,10 +17,7 @@
 import java.util.Observable;
 
 /**
- * Modelo para buscaminas
- *
- * @author Eneko
- *
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
 public class ModeloTablero extends Observable {
 
@@ -32,16 +29,16 @@ public class ModeloTablero extends Observable {
     private int minasRestantes;
     private String estado;
     private int descubierto;
-    private Thread thread;	//Thread para el temporizador
-    private int timer;		//entero para el timer
-    private boolean enEjecucion;	//booleano que controla la ejecucion del thread
+    private Thread thread;    //Thread para el temporizador
+    private int timer;        //entero para el timer
+    private boolean enEjecucion;    //booleano que controla la ejecucion del thread
 
     /**
      * Constructor
      *
-     * @param x	x del ModeloCasilla de juego
-     * @param y	y del ModeloCasilla de juego
-     * @param numMinas	numero de numMinas
+     * @param x        x del ModeloCasilla de juego
+     * @param y        y del ModeloCasilla de juego
+     * @param numMinas numero de numMinas
      */
     public ModeloTablero(int x, int y, int numMinas) {
 
@@ -147,7 +144,6 @@ public class ModeloTablero extends Observable {
     }
 
 
-
     /**
      * Añade +1 a cada casilla alrededor
      *
@@ -188,23 +184,12 @@ public class ModeloTablero extends Observable {
 
                 if (ay >= 0 && ay < this.y && ax >= 0 && ax < this.x) {
                     if (!this.casilla[ay][ax].isFlag()) {
-                            this.casilla[ay][ax].descubreCasilla();
-                        }
+                        this.casilla[ay][ax].descubreCasilla();
                     }
                 }
-
             }
-    }
 
-    /**
-     * establece el estado
-     *
-     * @param estado estado
-     */
-    public void setModo(String estado) {
-        this.estado = estado;
-        this.setChanged();
-        this.notifyObservers();
+        }
     }
 
     /**
@@ -217,8 +202,8 @@ public class ModeloTablero extends Observable {
             }
         }
     }
-    
-    public void descubrirTablero(){
+
+    public void descubrirTablero() {
         for (int i = 0; i < this.y; i++) {
             for (int j = 0; j < this.x; j++) {
                 this.casilla[i][j].setEstaDescubierta();
@@ -238,7 +223,7 @@ public class ModeloTablero extends Observable {
     }
 
     /**
-     * añade +1 al numero de numMinas descubiertas y cambia el estado a ganado, 
+     * añade +1 al numero de numMinas descubiertas y cambia el estado a ganado,
      * si asi se dan las condiciones
      */
     public void annadirADescubiertas() {
@@ -292,11 +277,9 @@ public class ModeloTablero extends Observable {
      */
     public void stopThread() {
         this.enEjecucion = false;
-
     }
 
     /**
-     *
      * @return el thread del timer
      */
     public Thread getThread() {
@@ -304,7 +287,6 @@ public class ModeloTablero extends Observable {
     }
 
     /**
-     *
      * @return y del ModeloCasilla de juego
      */
     public int getAltura() {
@@ -312,7 +294,6 @@ public class ModeloTablero extends Observable {
     }
 
     /**
-     *
      * @return x del ModeloCasilla del juego
      */
     public int getAncho() {
@@ -320,7 +301,6 @@ public class ModeloTablero extends Observable {
     }
 
     /**
-     *
      * @return estado de juego
      */
     public String getModo() {
@@ -328,7 +308,17 @@ public class ModeloTablero extends Observable {
     }
 
     /**
+     * establece el estado
      *
+     * @param estado estado
+     */
+    public void setModo(String estado) {
+        this.estado = estado;
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    /**
      * @param y
      * @param x
      * @return
@@ -338,7 +328,6 @@ public class ModeloTablero extends Observable {
     }
 
     /**
-     *
      * @return numero de numMinas restantes
      */
     public int minasRestantes() {
@@ -346,7 +335,6 @@ public class ModeloTablero extends Observable {
     }
 
     /**
-     *
      * @return el timer
      */
     public int getTimer() {

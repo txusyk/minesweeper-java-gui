@@ -17,12 +17,12 @@
 import java.util.HashMap;
 
 /**
- * Created by josu on 4/18/16.
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
 public class ListaJugadores {
 
     private static ListaJugadores miListaJugadores;
-    HashMap<String,Jugador> lJugadores;
+    HashMap<String, Jugador> lJugadores;
 
     /**
      * Constructora
@@ -31,42 +31,44 @@ public class ListaJugadores {
         this.lJugadores = new HashMap<>();
     }
 
-    public HashMap<String,Jugador>getLjugadores(){
-        return this.lJugadores;
-    }
-
     /**
      * Inicializa la ListaJugadores en caso de que sea null y la devuelve
+     *
      * @return ListaJugadores
      */
-    public static ListaJugadores getMiListaJugadores(){
-        if (miListaJugadores == null){
+    public static ListaJugadores getMiListaJugadores() {
+        if (miListaJugadores == null) {
             miListaJugadores = new ListaJugadores();
         }
         return miListaJugadores;
+    }
+
+    public HashMap<String, Jugador> getLjugadores() {
+        return this.lJugadores;
     }
 
     /**
      * @param pNombre
      * @return Devuelve el jugador en caso de existir, en caso contrario devuelve null
      */
-    public Jugador getJugador(String pNombre){
+    public Jugador getJugador(String pNombre) {
         Jugador jugAux = null;
-        if (this.lJugadores.get(pNombre) != null){
+        if (this.lJugadores.get(pNombre) != null) {
             jugAux = this.lJugadores.get(pNombre);
         }
         return jugAux;
     }
 
     /**
-     *  pre: Disponemos de una lista de jugadores
-     *  post: Habremos añadido el jugador en caso de no existir previamente
-     *  @param pJugador
+     * pre: Disponemos de una lista de jugadores
+     * post: Habremos añadido el jugador en caso de no existir previamente
+     *
+     * @param pJugador
      */
-    public boolean anadirJugador(Jugador pJugador){
+    public boolean anadirJugador(Jugador pJugador) {
         boolean anadido = false;
-        if (!this.esta(pJugador)){
-            this.lJugadores.put(pJugador.getNombreJugador(),pJugador);
+        if (!this.esta(pJugador)) {
+            this.lJugadores.put(pJugador.getNombreJugador(), pJugador);
             anadido = true;
         }
         return anadido;
@@ -74,10 +76,11 @@ public class ListaJugadores {
 
     /**
      * Elimina al jugador de la lista
+     *
      * @param pJugador
      */
-    public  void eliminarJugador(Jugador pJugador){
-        if (this.esta(pJugador)){
+    public void eliminarJugador(Jugador pJugador) {
+        if (this.esta(pJugador)) {
             this.lJugadores.remove(pJugador.getNombreJugador());
         }
     }
@@ -86,9 +89,9 @@ public class ListaJugadores {
      * @param pJugador
      * @return Devolvera true en caso de encontrar al jugador que recibe como parametro
      */
-    private boolean esta(Jugador pJugador){
+    private boolean esta(Jugador pJugador) {
         boolean enc = false;
-        if (this.lJugadores.get(pJugador.getNombreJugador()) != null){
+        if (this.lJugadores.get(pJugador.getNombreJugador()) != null) {
             enc = true;
         }
         return enc;
@@ -99,9 +102,9 @@ public class ListaJugadores {
      * @param pContrasena
      * @return Devuelve true en caso de que pContraseña coincida con el usuario
      */
-    public boolean comprobarContrasena(String pNombre, String pContrasena){
+    public boolean comprobarContrasena(String pNombre, char[] pContrasena) {
         boolean coinciden = false;
-        if (this.getJugador(pNombre) != null){
+        if (this.getJugador(pNombre) != null) {
             coinciden = this.getJugador(pNombre).comprobarPasswd(pContrasena);
         }
         return coinciden;

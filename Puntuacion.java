@@ -14,10 +14,8 @@
  *    limitations under the License.
  */
 
-import java.util.*;
-
 /**
- * Created by josu on 4/19/16.
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
 public class Puntuacion {
 /*

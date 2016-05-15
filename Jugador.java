@@ -14,24 +14,25 @@
  *    limitations under the License.
  */
 
+import java.util.Arrays;
+
 /**
  * Created by David on 18/04/16.
  */
 public class Jugador {
 
     private String nombreJugador;
-    private String passwd;
+    private char[] passwd;
     private ListaPartidas listaPartidas;
 
     /**
-     *
-     * @param pNombreJugador        nombre del jugador
-     * @param pPasswd               password del jugador
+     * @param pNombreJugador nombre del jugador
+     * @param pPasswd        password del jugador
      */
-    public Jugador(String pNombreJugador, String pPasswd){
-        this.nombreJugador= pNombreJugador;
+    public Jugador(String pNombreJugador, char[] pPasswd) {
+        this.nombreJugador = pNombreJugador;
         this.passwd = pPasswd;
-        this.listaPartidas= new ListaPartidas();
+        this.listaPartidas = new ListaPartidas();
     }
 
     /**
@@ -42,49 +43,57 @@ public class Jugador {
     }
 
     /**
-     *
-      * @param nombreJug        define el nombre del jugador
+     * @param passwd define la contraseña del jugador
      */
-    public void setNombreJugador(String nombreJug){
-        this.nombreJugador=nombreJug;
+    public void setPasswd(char[] passwd) {
+        this.passwd = passwd;
     }
 
     /**
-     *
-     * @param passwd        define la contraseña del jugador
-     */
-    public void setPasswd(String passwd){
-        this.passwd=passwd;
-    }
-
-    /**
-     *
      * @return devuelve el nombre del jugador
      */
-    public String getNombreJugador(){
+    public String getNombreJugador() {
         return this.nombreJugador;
     }
 
     /**
-     *
+     * @param nombreJug define el nombre del jugador
+     */
+    public void setNombreJugador(String nombreJug) {
+        this.nombreJugador = nombreJug;
+    }
+
+    /**
      * @return devuelve la contraseña del jugador
      */
-    public String getContrasena(){
+    public char[] getContrasena() {
         return this.passwd;
     }
 
     /**
-     *
-     * @param contrasena
+     * @param pContrasena
      * @return devuelve true en caso de que las contraseñas coincidan y false en caso contrario.
      */
-    public boolean comprobarPasswd(String contrasena){
-        if(this.passwd.equals(contrasena)){
+    public boolean comprobarPasswd(char[] pContrasena) {
+        if (Arrays.equals(pContrasena, this.getContrasena())) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
+    }
+
+    /**
+     * Se utiliza solo para debug. Dado que no es seguro convertir y/o imprimir una password
+     * Por eso, se guardan en char[]
+     */
+    public String imprimirPassw(){
+        String pass = "";
+
+        for (char output : this.passwd) {
+
+            pass = pass+""+output;
+        }
+        return pass;
     }
 
 }

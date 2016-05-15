@@ -20,7 +20,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * @author Josu
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
 public class VistaCasillas extends JButton implements Observer {
 
@@ -56,50 +56,50 @@ public class VistaCasillas extends JButton implements Observer {
     public void update(Observable obs, Object o) {
         // TODO Auto-generated method stub
         if (casilla.getEstaDescubierta() == true) {
-                this.boton.setBackground(Color.LIGHT_GRAY);
-                if (this.casilla.getIdCasilla() == 0) {
-                    this.boton.setText("");
-                } else {
-                    switch (this.casilla.getIdCasilla()) {
-                        case 1:
-                            //this.boton.setForeground(Color.white);
-                                this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/1.png"));
-                            break;
-                        case 2:
-                            //this.boton.setForeground(Color.blue);
-                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/2.png"));
-                            break;
-                        case 3:
-                            //this.boton.setForeground(Color.cyan);
-                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/3.png"));
-                            break;
-                        case 4:
-                            //this.boton.setForeground(Color.GREEN);
-                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/4.png"));
-                            break;
-                        case 5:
-                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/5.jpg"));
-                            //this.boton.setForeground(Color.MAGENTA);
-                            break;
-                        case 6:
-                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/6.gif"));
-                            //this.boton.setForeground(Color.ORANGE);
-                            break;
-                        case 7:
-                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/7.png"));
-                            //this.boton.setForeground(Color.lightGray);
-                            break;
-                        case 8:
-                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/8.png"));
-                            //this.boton.setForeground(Color.YELLOW);
-                            break;
-                        case 9:
-                            this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/bomb.png"));
-                        default:
-                            break;
-                    }
-                    //this.boton.setText(Integer.toString(this.casilla.getIdCasilla()));
+            this.boton.setBackground(Color.LIGHT_GRAY);
+            if (this.casilla.getIdCasilla() == 0) {
+                this.boton.setText("");
+            } else {
+                switch (this.casilla.getIdCasilla()) {
+                    case 1:
+                        //this.boton.setForeground(Color.white);
+                        this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/1.png"));
+                        break;
+                    case 2:
+                        //this.boton.setForeground(Color.blue);
+                        this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/2.png"));
+                        break;
+                    case 3:
+                        //this.boton.setForeground(Color.cyan);
+                        this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/3.png"));
+                        break;
+                    case 4:
+                        //this.boton.setForeground(Color.GREEN);
+                        this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/4.png"));
+                        break;
+                    case 5:
+                        this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/5.jpg"));
+                        //this.boton.setForeground(Color.MAGENTA);
+                        break;
+                    case 6:
+                        this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/6.gif"));
+                        //this.boton.setForeground(Color.ORANGE);
+                        break;
+                    case 7:
+                        this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/7.png"));
+                        //this.boton.setForeground(Color.lightGray);
+                        break;
+                    case 8:
+                        this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/8.png"));
+                        //this.boton.setForeground(Color.YELLOW);
+                        break;
+                    case 9:
+                        this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/bomb.png"));
+                    default:
+                        break;
                 }
+                //this.boton.setText(Integer.toString(this.casilla.getIdCasilla()));
+            }
         }
         if (casilla.isFlag()) {
             this.boton.setIcon(new ImageIcon("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/bandera.gif"));

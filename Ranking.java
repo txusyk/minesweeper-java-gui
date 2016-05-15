@@ -18,26 +18,26 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by josu on 4/16/16.
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
-public class Ranking extends JFrame{
+public class Ranking extends JFrame {
 
     String nomJug = "JugPrueba";
     String dificultad = "facil";
     int tiempo = 2;
 
-    public Ranking(){
-        JPanel miRanking = new JPanel(new GridLayout(10,3));
-        for (int i=0; i<10; i++){
-            for (int j=0; j<3; j++){
-                if (j==0){
-                    miRanking.add(new JLabel("Nombre: "+nomJug));
+    public Ranking() {
+        JPanel miRanking = new JPanel(new GridLayout(10, 3));
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (j == 0) {
+                    miRanking.add(new JLabel("Nombre: " + nomJug));
                 }
-                if (j==1){
-                    miRanking.add(new JLabel("Dificultad: "+dificultad));
+                if (j == 1) {
+                    miRanking.add(new JLabel("Dificultad: " + dificultad));
                 }
-                if (j==2){
-                    miRanking.add(new JLabel("Tiempo: "+tiempo+" min"));
+                if (j == 2) {
+                    miRanking.add(new JLabel("Tiempo: " + tiempo + " min"));
                 }
             }
         }

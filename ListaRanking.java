@@ -17,36 +17,36 @@
 import java.util.HashMap;
 
 /**
- * Created by josu on 4/19/16.
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
 public class ListaRanking {
 
     private static ListaRanking miListaRanking;
-    private HashMap<String,ListaPartidas> listaR;
+    private HashMap<String, ListaPartidas> listaR;
 
     private ListaRanking() {
-        this.listaR = new HashMap<String,ListaPartidas>();
+        this.listaR = new HashMap<String, ListaPartidas>();
     }
 
-    public static ListaRanking getMiListaRanking(){
-        if (miListaRanking == null){
+    public static ListaRanking getMiListaRanking() {
+        if (miListaRanking == null) {
             miListaRanking = new ListaRanking();
         }
         return miListaRanking;
     }
 
-    private boolean esta (String pNombreJug){
+    private boolean esta(String pNombreJug) {
         boolean esta = false;
-        if (this.listaR.get(pNombreJug) != null){
+        if (this.listaR.get(pNombreJug) != null) {
             esta = true;
         }
         return esta;
     }
 
-    private void anadirOrdenado(String pNombreJug){
+    private void anadirOrdenado(String pNombreJug) {
         Jugador auxJug = ListaJugadores.getMiListaJugadores().getJugador(pNombreJug);
-        if (auxJug.getNombreJugador() == null){
-            this.listaR.put(auxJug.getNombreJugador(),auxJug.getListaPartidas());
+        if (auxJug.getNombreJugador() == null) {
+            this.listaR.put(auxJug.getNombreJugador(), auxJug.getListaPartidas());
         }
     }
 }

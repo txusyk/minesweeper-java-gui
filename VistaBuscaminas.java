@@ -14,19 +14,13 @@
  *    limitations under the License.
  */
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 /**
- * Vista del buscaminas
- *
- * @author Eneko
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
 public class VistaBuscaminas extends JPanel implements Observer {
 
@@ -34,28 +28,29 @@ public class VistaBuscaminas extends JPanel implements Observer {
     private JLabel minas, modo, timer;
     private VistaCasillas[][] casilla;
     private ModeloTablero ModeloTablero;
+    private boolean hasPerdido = false;
 
     /**
      * Constructora
      *
-     * @param model establece los parametros estandar para la vista
+     * @param modeloTablero establece los parametros estandar para la vista
      */
-    public VistaBuscaminas(ModeloTablero model) {
-        this.ModeloTablero = model;
+    public VistaBuscaminas(ModeloTablero modeloTablero) {
+        this.ModeloTablero = modeloTablero;
         this.setLayout(new BorderLayout());
         this.vista = new JPanel();
-        this.minas = setLabel(this.minas, "Minas:  " + Integer.toString(model.minasRestantes()));
-        this.modo = setLabel(this.modo, "Modo:  " + model.getModo());
-        this.timer = setLabel(this.timer, "Tiempo:  " + model.getTimer());
+        this.minas = setLabel(this.minas, "Minas:  " + Integer.toString(modeloTablero.minasRestantes()));
+        this.modo = setLabel(this.modo, "Modo:  " + modeloTablero.getModo());
+        this.timer = setLabel(this.timer, "Tiempo:  " + modeloTablero.getTimer());
 
         this.add(this.minas, BorderLayout.WEST);
         this.add(this.modo, BorderLayout.EAST);
         this.add(this.timer, BorderLayout.CENTER);
         this.add(reiniciarBoton(), BorderLayout.NORTH);
-        this.casilla = new VistaCasillas[model.getAltura()][model.getAncho()];
+        this.casilla = new VistaCasillas[modeloTablero.getAltura()][modeloTablero.getAncho()];
         this.ModeloTablero.addObserver(this);
 
-        this.vista.setLayout(new GridLayout(model.getAltura(), model.getAncho()));
+        this.vista.setLayout(new GridLayout(modeloTablero.getAltura(), modeloTablero.getAncho()));
         crearBoton();
         this.add(vista, BorderLayout.SOUTH);
 
@@ -76,10 +71,13 @@ public class VistaBuscaminas extends JPanel implements Observer {
         this.modo = setLabel(this.modo, "Modo:  " + ModeloTablero.getModo());
         this.timer = setLabel(this.timer, "Tiempo:  " + this.ModeloTablero.getTimer());
 
+        if (this.ModeloTablero.getModo().equalsIgnoreCase("has perdido") && !this.hasPerdido) {
+            this.hasPerdido = true;
+            JOptionPane.showMessageDialog(this, "Has perdido");
+        }
     }
 
     /**
-     *
      * @param label
      * @param string establece el texto
      * @return devuelve label con el string
@@ -93,13 +91,6 @@ public class VistaBuscaminas extends JPanel implements Observer {
         label.setHorizontalAlignment(SwingConstants.CENTER);
         return label;
 
-    }
-
-    /**
-     * @return la vista
-     */
-    public JPanel getVista() {
-        return this.vista;
     }
 
     /**
@@ -124,7 +115,6 @@ public class VistaBuscaminas extends JPanel implements Observer {
         eliminarBoton();
 
         crearBoton();
-
     }
 
     /**
@@ -133,13 +123,9 @@ public class VistaBuscaminas extends JPanel implements Observer {
     private void eliminarBoton() {
         for (int i = 0; i < this.ModeloTablero.getAltura(); i++) {
             for (int j = 0; j < this.ModeloTablero.getAncho(); j++) {
-
                 this.vista.remove(casilla[i][j].getBoton());
-
             }
-
         }
-
     }
 
     /**

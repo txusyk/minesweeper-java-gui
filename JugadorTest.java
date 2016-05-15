@@ -20,18 +20,18 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
- * Created by josu on 5/11/16.
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
-public class JugadorTest{
+public class JugadorTest {
 
-    private Jugador j1,j2;
+    private Jugador j1, j2;
 
     @BeforeClass
     public void setUp() throws Exception {
         System.out.println("@BeforeTest - Se crean dos jugadores, uno con una partida y el otro con ninguna");
-        j1 = new Jugador("Prueba","1234");
-        j1.getListaPartidas().anadirPartida(new Partida(30,"facil"));
-        j2 = new Jugador("Prueba2","4321");
+        j1 = new Jugador("Prueba", new char[1234]);
+        j1.getListaPartidas().anadirPartida(new Partida(30, "facil"));
+        j2 = new Jugador("Prueba2", new char[4321]);
     }
 
     @AfterMethod
@@ -55,34 +55,34 @@ public class JugadorTest{
     public void testSetNombreJugador() throws Exception {
         System.out.println("Probamos a cambiar el nombre al jugador 2. Que se llama Prueba2");
         j2.setNombreJugador("Prueba4");
-        Assert.assertEquals("Prueba4",j2.getNombreJugador());
+        Assert.assertEquals("Prueba4", j2.getNombreJugador());
     }
 
     @Test
     public void testSetPasswd() throws Exception {
         System.out.println("Probamos a cambiar la passwd al jugador 2. Que tiene 4321");
-        j2.setPasswd("4321");
-        Assert.assertEquals("4321",j2.getContrasena());
+        j2.setPasswd(new char[4321]);
+        Assert.assertEquals("4321", j2.getContrasena());
     }
 
     @Test
     public void testGetNombreJugador() throws Exception {
         System.out.println("Probamos el nombre del j1. Deberia de ser Prueba");
-        Assert.assertEquals("Prueba",j1.getNombreJugador());
+        Assert.assertEquals("Prueba", j1.getNombreJugador());
     }
 
     @Test
     public void testGetContrasena() throws Exception {
         System.out.println("Probamos la passwd del j1. Deberia de ser 1234");
-        Assert.assertEquals("1234",j1.getContrasena());
+        Assert.assertEquals("1234", j1.getContrasena());
     }
 
     @Test
     public void testComprobarPasswd() throws Exception {
         System.out.println("Probamos si es capaz de decirnos si la passwd esta bien");
         System.out.println("Probamos pasandole la passwd correcta");
-        Assert.assertTrue(j1.comprobarPasswd("1234"));
+        Assert.assertTrue(j1.comprobarPasswd(new char[1234]));
         System.out.println("Probamos pasandole la passwd incorrecta");
-        Assert.assertTrue(j1.comprobarPasswd("4321"));
+        Assert.assertTrue(j1.comprobarPasswd(new char[4321]));
     }
 }

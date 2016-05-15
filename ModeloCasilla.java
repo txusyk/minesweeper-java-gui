@@ -17,8 +17,7 @@
 import java.util.Observable;
 
 /**
- *
- * @author Eneko
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
 public class ModeloCasilla extends Observable {
 
@@ -34,8 +33,8 @@ public class ModeloCasilla extends Observable {
      * Constructor
      *
      * @param model
-     * @param x posicion x en el panel de juego
-     * @param y posicion y en el panel de juego
+     * @param x       posicion x en el panel de juego
+     * @param y       posicion y en el panel de juego
      * @param idPanel
      */
     public ModeloCasilla(ModeloTablero model, int x, int y, int idPanel) {
@@ -50,6 +49,7 @@ public class ModeloCasilla extends Observable {
 
     /**
      * inicializacion del panel
+     *
      * @param model
      * @param x
      * @param y
@@ -91,9 +91,9 @@ public class ModeloCasilla extends Observable {
             }
         }
 
-        //if (!model.getModo().equals("En juego")) {
-        //this.model.stopThread();
-        //}
+        if (!model.getModo().equals("En juego")) {
+            this.model.stopThread();
+        }
 
     }
 
@@ -123,7 +123,6 @@ public class ModeloCasilla extends Observable {
     }
 
     /**
-     *
      * @return si una casilla es marcada con bandera
      */
     public boolean isFlag() {
@@ -131,7 +130,6 @@ public class ModeloCasilla extends Observable {
     }
 
     /**
-     *
      * @return id de casilla
      */
     public int getIdCasilla() {
@@ -139,7 +137,6 @@ public class ModeloCasilla extends Observable {
     }
 
     /**
-     *
      * @return posicion x
      */
     public int getPosx() {
@@ -147,7 +144,6 @@ public class ModeloCasilla extends Observable {
     }
 
     /**
-     *
      * @return posicion x
      */
     public int getPosy() {
@@ -155,10 +151,10 @@ public class ModeloCasilla extends Observable {
     }
 
     /**
-     *
      * @return esta descubierta
      */
-    public boolean getEstaDescubierta() {return this.estaDescubierta;
+    public boolean getEstaDescubierta() {
+        return this.estaDescubierta;
     }
 
     /**
@@ -175,8 +171,8 @@ public class ModeloCasilla extends Observable {
         this.idCasilla = 9;
     }
 
-    public void setEstaDescubierta(){
-        this.estaDescubierta=true;
+    public void setEstaDescubierta() {
+        this.estaDescubierta = true;
         this.setChanged();
         this.notifyObservers();
     }

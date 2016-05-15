@@ -16,12 +16,17 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileReader;
 import java.io.IOException;
 
-public class Buscaminas  {
+/**
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
+ */
+public class Buscaminas {
 
     /**
      * Starts Buscaminas
+     *
      * @param argv Seleccion de dificultad
      * @throws IOException
      */
@@ -35,6 +40,10 @@ public class Buscaminas  {
         ModeloTablero model;
         JFrame frame = new JFrame("Buscaminas"); //creamos una ventana que se llamara buscaminas
 
+        //Creamos la lista de jugadores desde el fichero
+        FileReader fr = new FileReader("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/Usuarios.txt");
+        GestorFicheros.getMiCargarFicheros().cargarFicheroJug(fr); //cargamos la lista de jugadores y partidas
+
         MenuLogin login = new MenuLogin();
         frame.setContentPane(login); //Llamamos al menu de logIn
 
@@ -44,14 +53,20 @@ public class Buscaminas  {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         //Con setLocation() fijamos donde aparecera la ventana en nuestro programa. Con esta configuracion, la ventana siempre
         //aparecera en el centro de la pantalla del usuario
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
         frame.setVisible(true); //hacemos el frame visible
         frame.setResizable(false); //definimos que no podra modificar el tamaño de la ventana de nuestro programa
         frame.setAlwaysOnTop(true); //definimos que mientras este ejcutandose se superponga a cualquier otro programa
 
-        do{
-            input = login.getDificultad_juego();
-        }while (login.isVisible());
+
+        do {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } while (login.isShowing());
+        input = login.getDificultad_juego();
 
         //fijamos las medidas y el numero de bombas del tablero en base a la dificultad
         switch (input.toLowerCase()) {
@@ -77,15 +92,12 @@ public class Buscaminas  {
         model = new ModeloTablero(x, y, numMinas);
 
         VistaBuscaminas view = new VistaBuscaminas(model); //creamos una vista que contendra el modelo del tablero
-        frame.remove(login);
+
         frame.setContentPane(view); //metemos como contenedor la vista
         view.setVisible(true);
+        frame.repaint();
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fijamos que la operacion por defecto al cerrar es salir
         frame.pack(); //    hacemos que la ventana se ajuste al tamaño del contenido
-        frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-        frame.setVisible(true); //hacemos el frame visible
-        frame.setResizable(false); //definimos que no podra modificar el tamaño de la ventana de nuestro programa
-        frame.setAlwaysOnTop(true); //definimos que mientras este ejcutandose se superponga a cualquier otro programa
+        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
     }
 }

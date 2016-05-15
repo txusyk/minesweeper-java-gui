@@ -22,45 +22,44 @@ import java.util.Iterator;
  */
 public class ListaPartidas {
 
-   private ArrayList<Partida> listaPartidas;
+    private ArrayList<Partida> listaPartidas;
 
-    public ListaPartidas(){
-        this.listaPartidas=new ArrayList<Partida>();
+    public ListaPartidas() {
+        this.listaPartidas = new ArrayList<Partida>();
     }
 
-    public void anadirPartida(Partida partida){
+    public void anadirPartida(Partida partida) {
         listaPartidas.add(partida);
     }
 
-    public void eliminarPartida(Partida partida){
-        if(esta(partida)){
+    public void eliminarPartida(Partida partida) {
+        if (esta(partida)) {
             listaPartidas.remove(partida);
-        }
-        else {
+        } else {
             System.out.println("La partida no existe.");
         }
     }
 
-    public Iterator<Partida> getIterador(){
+    public Iterator<Partida> getIterador() {
         return this.listaPartidas.iterator();
     }
 
-    public boolean esta(Partida partida){
-        Iterator <Partida> itr=this.getIterador();
+    public boolean esta(Partida partida) {
+        Iterator<Partida> itr = this.getIterador();
         Partida auxPartida;
-        boolean encontrada=false;
+        boolean encontrada = false;
 
-        while(itr.hasNext()||!encontrada){
-            auxPartida=itr.next();
-            if(auxPartida.equals(partida)){
-                encontrada=true;
+        while (itr.hasNext() || !encontrada) {
+            auxPartida = itr.next();
+            if (auxPartida.equals(partida)) {
+                encontrada = true;
             }
         }
         return encontrada;
     }
 
-    public void imprimirPartidas(){
-        for (int i=0; i<listaPartidas.size();i++){
+    public void imprimirPartidas() {
+        for (int i = 0; i < listaPartidas.size(); i++) {
             listaPartidas.get(i).imprimirInfo();
         }
     }

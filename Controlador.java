@@ -18,8 +18,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- *
- * @author Eneko
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
 public class Controlador extends MouseAdapter {
 
@@ -34,7 +33,6 @@ public class Controlador extends MouseAdapter {
     public Controlador(ModeloCasilla casilla) {
         this.casilla = casilla;
     }
-
 
 
     /**

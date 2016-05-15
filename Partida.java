@@ -15,7 +15,7 @@
  */
 
 /**
- * Created by portatil on 18/04/16.
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
 public class Partida {
     //puntuacion = [(numCasillasTablero * factor de correccion)/tiempo] * 1000
@@ -24,41 +24,39 @@ public class Partida {
     private String dificultad;
     private int puntuacion;
 
-    public Partida(int pSegundos, String pDificultad){
-        this.segundos=pSegundos;
-        this.dificultad=pDificultad;
+    public Partida(int pSegundos, String pDificultad) {
+        this.segundos = pSegundos;
+        this.dificultad = pDificultad;
         this.setPuntuacion();
     }
 
-    public int getSegundos(){
+    public int getSegundos() {
         return segundos;
     }
 
-    public String getDificultad(){
+    public String getDificultad() {
         return this.dificultad;
     }
 
-    public int getPuntuacion(){
+    public int getPuntuacion() {
         return this.puntuacion;
     }
 
-    private void setPuntuacion(){
-        if(dificultad.equalsIgnoreCase("facil")){
-            double auxPuntuacion = (70.0*0.3)/(double)(segundos)*1000;
-            this.puntuacion=(int)auxPuntuacion;
-        }
-        else if(dificultad.equalsIgnoreCase("medio")){
-            double auxPuntuacion = (150*0.5)/(double)(segundos)*1000;
-            this.puntuacion=(int)auxPuntuacion;
-        }
-        else{
-            double auxPuntuacion = (300)/(double)(segundos)*1000;
-            this.puntuacion=(int)auxPuntuacion;
+    private void setPuntuacion() {
+        if (dificultad.equalsIgnoreCase("facil")) {
+            double auxPuntuacion = ((double) (segundos) / (300 * 0.3)) * 1000;
+            this.puntuacion = (int) auxPuntuacion;
+        } else if (dificultad.equalsIgnoreCase("medio")) {
+            double auxPuntuacion = ((double) (segundos) / (150 * 0.5)) * 1000;
+            this.puntuacion = (int) auxPuntuacion;
+        } else {
+            double auxPuntuacion = ((double) (segundos) / (75 * 0.7)) * 1000;
+            this.puntuacion = (int) auxPuntuacion;
         }
     }
 
-    public void imprimirInfo(){
-        System.out.println("La puntuacion fue: "+this.puntuacion+". Tardo "+this.getSegundos()+".La dificultad era: "+this.dificultad);
+    public void imprimirInfo() {
+        System.out.println("La puntuacion fue: " + this.puntuacion + ". Tardo " + this.getSegundos() + ".La dificultad era: " + this.dificultad);
     }
 
 }

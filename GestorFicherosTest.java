@@ -15,8 +15,6 @@
  */
 
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.FileReader;
@@ -24,19 +22,7 @@ import java.io.FileReader;
 /**
  * Created by josu on 5/15/16.
  */
-public class GestorFicherosTest{
-
-    FileReader fr;
-
-    @BeforeMethod
-    public void setUp() throws Exception {
-        fr = new FileReader("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/Usuarios.txt");
-    }
-
-    @AfterMethod
-    public void tearDown() throws Exception {
-
-    }
+public class GestorFicherosTest {
 
     @Test
     public void testGetMiCargarFicheros() throws Exception {
@@ -44,19 +30,32 @@ public class GestorFicherosTest{
         Assert.assertNotNull(GestorFicheros.getMiCargarFicheros());
     }
 
-    @Test
+   @Test
     public void testCargarFicheroJug() throws Exception {
+        FileReader fr = new FileReader("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/Usuarios.txt");
         System.out.println("Tratamos de cargar un fichero de prueba e imprimir la informacion almacenada");
         GestorFicheros.getMiCargarFicheros().cargarFicheroJug(fr);
-        System.out.println("El nombre del jugador guardado es: "+ListaJugadores.getMiListaJugadores().getJugador("Josu").getNombreJugador());
-        Assert.assertEquals("Josu",ListaJugadores.getMiListaJugadores().getJugador("Josu"));
-        System.out.println("Su contraseña es: "+ListaJugadores.getMiListaJugadores().getJugador("Josu").getContrasena());
-        Assert.assertEquals("1234",ListaJugadores.getMiListaJugadores().getJugador("David"));
-        System.out.println("Probamos a buscar a un jugador inexistente");
-        Assert.assertNull(ListaJugadores.getMiListaJugadores().getJugador("Paco"));
-        System.out.println("Probamos a acceder a las partidas de *Josu*");
-        ListaJugadores.getMiListaJugadores().getJugador("Josu").getListaPartidas().imprimirPartidas();
 
+        System.out.println("Tratamos de cargar los jugadores desde un CSV");
+        GestorFicheros.getMiCargarFicheros().cargarFicheroJug(fr);
+
+        System.out.println("El nombre del jugador guardado es: " + ListaJugadores.getMiListaJugadores().getJugador("Josu").getNombreJugador());
+        System.out.println("Su comtraseña es: "+ListaJugadores.getMiListaJugadores().getJugador("Josu").imprimirPassw());
+        System.out.println("Imprimira la lista de partidas cargada desde el CSV: ");
+        ListaJugadores.getMiListaJugadores().getJugador("Josu").getListaPartidas().imprimirPartidas();
+       System.out.println("------------------------------------------------------");
+    }
+
+    @Test
+    public void testCargarFicheroJugXML() throws Exception{
+        System.out.println("Tratamos de cargar los jugadores desde un XML");
+        System.out.println("------------------------------------------------------");
+        GestorFicheros.getMiCargarFicheros().cargarFichJugXML();
+
+        System.out.println("El nombre del jugador guardado es: " + ListaJugadores.getMiListaJugadores().getJugador("Josu").getNombreJugador());
+        System.out.println("Su comtraseña es: "+ListaJugadores.getMiListaJugadores().getJugador("Josu").imprimirPassw());
+        System.out.println("Imprimira la lista de partidas, las anteriores, mas las añadidas desde el XML: ");
+        ListaJugadores.getMiListaJugadores().getJugador("Josu").getListaPartidas().imprimirPartidas();
     }
 
     @Test
