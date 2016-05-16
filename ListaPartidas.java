@@ -28,6 +28,14 @@ public class ListaPartidas {
         this.listaPartidas = new ArrayList<Partida>();
     }
 
+    public Iterator<Partida> getIterator(){
+        return this.listaPartidas.iterator();
+    }
+
+    public ArrayList<Partida> getlPartidas(){
+        return this.listaPartidas;
+    }
+
     public void anadirPartida(Partida partida) {
         listaPartidas.add(partida);
     }
@@ -40,12 +48,8 @@ public class ListaPartidas {
         }
     }
 
-    public Iterator<Partida> getIterador() {
-        return this.listaPartidas.iterator();
-    }
-
     public boolean esta(Partida partida) {
-        Iterator<Partida> itr = this.getIterador();
+        Iterator<Partida> itr = this.getIterator();
         Partida auxPartida;
         boolean encontrada = false;
 
@@ -64,22 +68,36 @@ public class ListaPartidas {
         }
     }
 
-    /*private ArrayList<Partida> ordenarListaPorPuntuaion(){
-            ArrayList <Partida> listaOrdenada;
-            TreeMap hashOrdenado = new TreeMap<String, Partida>();
-            Iterator<Partida> it = this.listaPartidas.iterator();
-            Partida auxPartida;
-            while (it.hasNext()){
-                auxPartida = it.next();
-                hashOrdenado.put();
+    private void ordenarListaPorPuntuaion(){
+          Iterator<Partida> itr= this.getIterator();
+        ArrayList<Partida> lAux = new ArrayList<Partida>();
+        Partida selec= null;
+        Partida auxP=null;
+        int i=1;
+
+        while(itr.hasNext()&&listaPartidas.size()!=1){
+
+            auxP=this.listaPartidas.get(i);
+            selec=this.listaPartidas.get(0);
+            while(i<listaPartidas.size()) {
+                auxP=this.listaPartidas.get(i);
+                if (selec.getPuntuacion() < auxP.getPuntuacion()) {
+                    selec = auxP;
+                    i++;
+                } else {
+                    i++;
+                }
             }
-            hashOrdenado = new TreeMap("",this.listaPartidas);
-            Partida auxP=null;
+            lAux.add(selec);
+            this.listaPartidas.remove(selec);
+            i=1;
 
-            listaOrdenada= new ArrayList<Partida>(hashOrdenado.values());
+        }
+        selec=listaPartidas.get(0);
+        lAux.add(selec);
+        this.listaPartidas=lAux;
+    }
 
-            return listaOrdenada;
-    }*/
 
 
 }

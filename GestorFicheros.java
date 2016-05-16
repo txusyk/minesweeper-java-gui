@@ -145,7 +145,7 @@ public class GestorFicheros {
                 Jugador auxJug = it.next();
                 pw.println("Jugador");
                 pw.println(auxJug.getNombreJugador() + "," + auxJug.getContrasena());
-                Iterator<Partida> itPartidas = auxJug.getListaPartidas().getIterador();
+                Iterator<Partida> itPartidas = auxJug.getListaPartidas().getIterator();
                 while (itPartidas.hasNext()) {
                     Partida auxPartida = itPartidas.next();
                     pw.println("Partida");

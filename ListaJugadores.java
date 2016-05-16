@@ -14,7 +14,9 @@
  *    limitations under the License.
  */
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * @author Josu Alvarez <jalvarez041.ehu.eus>
@@ -108,5 +110,23 @@ public class ListaJugadores {
             coinciden = this.getJugador(pNombre).comprobarPasswd(pContrasena);
         }
         return coinciden;
+    }
+
+    public Iterator<Jugador> getIterator() {
+        ArrayList<Jugador> list = new ArrayList<>(this.getLjugadores().values());
+        return list.iterator();
+    }
+
+    public ArrayList<Jugador> getListaUsuarios(){
+        return new ArrayList<>(this.getLjugadores().values());
+    }
+
+    public void ordenarPartidasFull() {
+        Iterator<Jugador> itr = this.getIterator();
+        Jugador auxU;
+        while (itr.hasNext()) {
+            auxU = itr.next();
+            //auxU.ordenarJugadas();
+        }
     }
 }

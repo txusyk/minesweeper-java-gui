@@ -17,7 +17,9 @@
 import java.util.Observable;
 
 /**
- * @author Josu Alvarez <jalvarez041.ehu.eus>
+ * Modelo para buscaminas
+ *
+ * @author Eneko
  */
 public class ModeloTablero extends Observable {
 
@@ -27,11 +29,13 @@ public class ModeloTablero extends Observable {
     private int x;
     private int numMinas;
     private int minasRestantes;
-    private String estado;
+    private Estado estado;
     private int descubierto;
     private Thread thread;    //Thread para el temporizador
     private int timer;        //entero para el timer
     private boolean enEjecucion;    //booleano que controla la ejecucion del thread
+
+    private long start = System.currentTimeMillis();
 
     /**
      * Constructor
@@ -50,7 +54,7 @@ public class ModeloTablero extends Observable {
         this.minasRestantes = numMinas;
         this.descubierto = 0;
         this.timer = 0;
-        this.estado = "En Juego";
+        this.estado = new EnJuego();
         this.enEjecucion = false;
         this.thread = new Thread();
 
@@ -62,13 +66,9 @@ public class ModeloTablero extends Observable {
      * Inicializacion
      */
     public void Init() {
-        //inicializacion como perdido
-        this.estado = "Has perdido";
-        this.setChanged();
-        this.notifyObservers();
         //reset a las casillas
         resetearCasillas();
-        this.estado = "En Juego";
+        this.estado = new EnJuego();
         this.minasRestantes = this.numMinas;
         this.descubierto = 0;
 
@@ -76,7 +76,6 @@ public class ModeloTablero extends Observable {
         panelJuego();
         this.setChanged();
         this.notifyObservers(true);
-
     }
 
     /**
@@ -90,34 +89,27 @@ public class ModeloTablero extends Observable {
             @Override
             public void run() {
                 while (enEjecucion) {
-
                     try {
-
-                        addTimer();
+                        updateTimer();
                         setChanged();
                         notifyObservers();
-                        this.sleep(1000);
+                        this.sleep(500);
 
                     } catch (InterruptedException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-
                 }
-
             }
         };
         this.thread.start();
-
     }
 
     /**
      * establece el timer
      */
-    public void addTimer() {
-        this.timer++;
-        this.setChanged();
-        this.notifyObservers();
+    public void updateTimer() {
+        this.timer = Integer.parseInt(String.valueOf((System.currentTimeMillis()-start)/1000));
     }
 
     /**
@@ -132,10 +124,8 @@ public class ModeloTablero extends Observable {
             int x, y;
 
             do {
-
                 x = (int) (Math.random() * (this.x));
                 y = (int) (Math.random() * (this.y));
-
             } while (this.casilla[y][x].getIdCasilla() == 9);
 
             this.casilla[y][x].setMina();
@@ -229,7 +219,7 @@ public class ModeloTablero extends Observable {
     public void annadirADescubiertas() {
         this.descubierto++;
         if (this.descubierto >= ((this.x * this.y) - numMinas)) {
-            setModo("Has ganado");
+            this.estado = new Ganado();
 
         }
         this.setChanged();
@@ -268,6 +258,7 @@ public class ModeloTablero extends Observable {
     public void resetThread() {
         this.enEjecucion = false;
         this.timer = 0;
+        this.start = System.currentTimeMillis();
         this.setChanged();
         this.notifyObservers();
     }
@@ -304,7 +295,7 @@ public class ModeloTablero extends Observable {
      * @return estado de juego
      */
     public String getModo() {
-        return this.estado;
+        return this.estado.getEstado();
     }
 
     /**
@@ -312,11 +303,11 @@ public class ModeloTablero extends Observable {
      *
      * @param estado estado
      */
-    public void setModo(String estado) {
+    /*public void setModo(String estado) {
         this.estado = estado;
         this.setChanged();
         this.notifyObservers();
-    }
+    }*/
 
     /**
      * @param y
@@ -338,7 +329,14 @@ public class ModeloTablero extends Observable {
      * @return el timer
      */
     public int getTimer() {
+
         return this.timer;
+    }
+
+    public void setEstado(Estado pEstado){
+        this.estado = pEstado;
+        setChanged();
+        notifyObservers();
     }
 
 }

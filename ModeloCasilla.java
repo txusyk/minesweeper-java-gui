@@ -76,7 +76,7 @@ public class ModeloCasilla extends Observable {
 
             if (this.idCasilla == 9) {
                 this.model.descubrirTablero(); //En caso de ser mina, lanzara una orden de que se descubran todas las minas
-                this.model.setModo("Has perdido");
+                this.model.setEstado(new Perdido());
                 this.setChanged();
                 this.notifyObservers();
             } else if (this.estaDescubierta == false) {

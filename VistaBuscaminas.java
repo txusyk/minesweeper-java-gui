@@ -53,7 +53,6 @@ public class VistaBuscaminas extends JPanel implements Observer {
         this.vista.setLayout(new GridLayout(modeloTablero.getAltura(), modeloTablero.getAncho()));
         crearBoton();
         this.add(vista, BorderLayout.SOUTH);
-
     }
 
     /**
@@ -69,7 +68,7 @@ public class VistaBuscaminas extends JPanel implements Observer {
         }
         this.minas = setLabel(this.minas, "Minas:  " + Integer.toString(ModeloTablero.minasRestantes()));
         this.modo = setLabel(this.modo, "Modo:  " + ModeloTablero.getModo());
-        this.timer = setLabel(this.timer, "Tiempo:  " + this.ModeloTablero.getTimer());
+        this.timer = setLabel(this.timer, "Tiempo: " + ModeloTablero.getTimer());
 
         if (this.ModeloTablero.getModo().equalsIgnoreCase("has perdido") && !this.hasPerdido) {
             this.hasPerdido = true;
@@ -96,7 +95,7 @@ public class VistaBuscaminas extends JPanel implements Observer {
     /**
      * boton restart
      *
-     * @return
+     * @return JButton
      */
     public JButton reiniciarBoton() {
         JButton button = new JButton("Reiniciar Partida");
