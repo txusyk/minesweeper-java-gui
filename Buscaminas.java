@@ -22,7 +22,7 @@ import java.io.IOException;
 /**
  * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
-public class Buscaminas {
+public class Buscaminas{
 
     /**
      * Starts Buscaminas
@@ -37,37 +37,37 @@ public class Buscaminas {
         int y = 9;
         int numMinas = 9;
         JMenuBar menuBar;
-       JMenu menuArchivo, menuAyuda, menuJuego;
-        JMenuItem ItemNuevo, ItemSalir, ItemFaq, ItemAcercaDe,ItemTop10,ItemEliminarJugador;
-
+        JMenu menuArchivo, menuAyuda, menuJuego;
+        JMenuItem itemNuevo, itemSalir, itemFaq, itemAcercaDe,itemTop10,itemEliminarJugador;
 
         menuBar = new JMenuBar();
         menuArchivo = new JMenu("Archivo");
         menuAyuda = new JMenu("Ayuda");
         menuJuego = new JMenu("Jugadores");
 
-        ItemNuevo = new JMenuItem("Reiniciar");
-        ItemSalir = new JMenuItem("Salir");
-        ItemFaq = new JMenuItem("FAQ");
-        ItemAcercaDe = new JMenuItem("Acerca de");
-        ItemTop10 = new JMenuItem("Top 10/ Ranking");
-        ItemEliminarJugador = new JMenuItem("Eliminar Jugador");
+        itemNuevo = new JMenuItem("Reiniciar");
+        itemSalir = new JMenuItem("Salir");
+        itemFaq = new JMenuItem("FAQ");
+        itemAcercaDe = new JMenuItem("Acerca de");
+        itemTop10 = new JMenuItem("Top 10/ Ranking");
+        itemEliminarJugador = new JMenuItem("Eliminar Jugador");
 
-        menuJuego.add(ItemTop10);
-        menuJuego.add(ItemEliminarJugador);
-        menuAyuda.add(ItemAcercaDe);
-        menuAyuda.add(ItemFaq);
-        menuArchivo.add(ItemNuevo);
-        menuArchivo.add(ItemSalir);
+        menuJuego.add(itemTop10);
+        menuJuego.add(itemEliminarJugador);
+        menuAyuda.add(itemAcercaDe);
+        menuAyuda.add(itemFaq);
+        menuArchivo.add(itemNuevo);
+        menuArchivo.add(itemSalir);
 
         menuBar.add(menuArchivo);
         menuBar.add(menuAyuda);
         menuBar.add(menuJuego);
 
-        ModeloTablero model;
         JFrame frame = new JFrame("Buscaminas"); //creamos una ventana que se llamara buscaminas
 
         frame.setJMenuBar(menuBar); //fijamos como barra de menu la barra que hemos creado
+
+        ModeloTablero model;
 
         //Creamos la lista de jugadores desde el fichero
         FileReader fr = new FileReader("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/Usuarios.txt");
@@ -83,7 +83,6 @@ public class Buscaminas {
         frame.setVisible(true); //hacemos el frame visible
         frame.setResizable(false); //definimos que no podra modificar el tamaño de la ventana de nuestro programa
         frame.setAlwaysOnTop(true); //definimos que mientras este ejcutandose se superponga a cualquier otro programa
-
 
         do {
             try {

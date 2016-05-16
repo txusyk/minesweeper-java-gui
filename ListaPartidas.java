@@ -25,10 +25,10 @@ public class ListaPartidas {
     private ArrayList<Partida> listaPartidas;
 
     public ListaPartidas() {
-        this.listaPartidas = new ArrayList<Partida>();
+        this.listaPartidas = new ArrayList<>();
     }
 
-    public Iterator<Partida> getIterator(){
+    public   Iterator<Partida> getIterator(){
         return this.listaPartidas.iterator();
     }
 
@@ -36,10 +36,14 @@ public class ListaPartidas {
         return this.listaPartidas;
     }
 
-    public void anadirPartida(Partida partida) {
-        listaPartidas.add(partida);
+    public void anadirPartida(Partida pPartida){
+        if(!this.esta(pPartida)) {
+            this.listaPartidas.add(pPartida);
+        }
+        else{
+            System.out.println("La partida ya existia.");
+        }
     }
-
     public void eliminarPartida(Partida partida) {
         if (esta(partida)) {
             listaPartidas.remove(partida);
@@ -50,34 +54,44 @@ public class ListaPartidas {
 
     public boolean esta(Partida partida) {
         Iterator<Partida> itr = this.getIterator();
-        Partida auxPartida;
+        //Partida auxPartida;
         boolean encontrada = false;
 
-        while (itr.hasNext() || !encontrada) {
-            auxPartida = itr.next();
+        for (Partida auxPartida : listaPartidas){
             if (auxPartida.equals(partida)) {
                 encontrada = true;
             }
         }
         return encontrada;
+
+        /*while (itr.hasNext() && !encontrada) {
+            auxPartida = itr.next();
+            if (auxPartida.equals(partida)) {
+                encontrada = true;
+            }
+        }
+        return encontrada;*/
     }
 
     public void imprimirPartidas() {
-        for (int i = 0; i < listaPartidas.size(); i++) {
+        /*for (int i = 0; i < listaPartidas.size(); i++) {
             listaPartidas.get(i).imprimirInfo();
-        }
+        }*/
+        /*for (Partida auxPartida : listaPartidas){
+            auxPartida.imprimirInfo();
+        }*/
+        listaPartidas.forEach((Partida) -> Partida.imprimirInfo());
     }
 
-    private void ordenarListaPorPuntuaion(){
+    public void ordenarListaPorPuntuaion(){
           Iterator<Partida> itr= this.getIterator();
-        ArrayList<Partida> lAux = new ArrayList<Partida>();
-        Partida selec= null;
-        Partida auxP=null;
+        ArrayList<Partida> lAux = new ArrayList<>();
+        Partida selec;
+        Partida auxP;
         int i=1;
 
         while(itr.hasNext()&&listaPartidas.size()!=1){
 
-            auxP=this.listaPartidas.get(i);
             selec=this.listaPartidas.get(0);
             while(i<listaPartidas.size()) {
                 auxP=this.listaPartidas.get(i);

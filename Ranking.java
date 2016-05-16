@@ -1,49 +1,112 @@
-/*
- * Copyright [2016] [Josu]
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
-
-import javax.swing.*;
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
- * @author Josu Alvarez <jalvarez041.ehu.eus>
+ * Created by portatil on 8/05/16.
  */
-public class Ranking extends JFrame {
+public class Ranking {
 
-    String nomJug = "JugPrueba";
-    String dificultad = "facil";
-    int tiempo = 2;
+    private ArrayList<InfoPartida> listaRanking;
+    private static Ranking miRanking;
 
-    public Ranking() {
-        JPanel miRanking = new JPanel(new GridLayout(10, 3));
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (j == 0) {
-                    miRanking.add(new JLabel("Nombre: " + nomJug));
-                }
-                if (j == 1) {
-                    miRanking.add(new JLabel("Dificultad: " + dificultad));
-                }
-                if (j == 2) {
-                    miRanking.add(new JLabel("Tiempo: " + tiempo + " min"));
-                }
+    private Ranking(){
+        listaRanking = new ArrayList<InfoPartida>();
+    }
+
+    public ArrayList<InfoPartida> getListaRanking(){
+        return this.listaRanking;
+    }
+
+    /**
+     * Crea una lista de todas las partidas jugadas, ordenadas por puntuacion (mayor->menor)
+     */
+    public void crearListaRanking() {
+        InfoPartida auxI = null;
+        int i = 0;    //indice para marcar los loops sobre la lista general de jugadores.
+        int k = 0;    //indice para marcar los loops sobre las puntuaciones de cada partida de cada jugador.
+
+        ListaJugadores.getMiListaJugadores().ordenarPartidasFull();
+        while (i < ListaJugadores.getMiListaJugadores().getListaUsuarios().size()) {
+            while (k < ListaJugadores.getMiListaJugadores().getListaUsuarios().get(i).getListaPartidas().getlPartidas().size()) {
+                auxI = new InfoPartida(ListaJugadores.getMiListaJugadores().getListaUsuarios().get(i).getNombreJugador(), ListaJugadores.getMiListaJugadores().getListaUsuarios().get(i).getListaPartidas().getlPartidas().get(k).getPuntuacion());
+                listaRanking.add(auxI);
+                k++;
+            }
+            i++;
+        }
+    }
+
+    public static Ranking getMiRanking(){
+        if(miRanking==null){
+            miRanking = new Ranking();
+        }
+        return Ranking.miRanking;
+    }
+
+    private Iterator <InfoPartida> getIterator(){
+        return this.listaRanking.iterator();
+    }
+
+    /**
+     * Obtiene una lista de las 10 mejores partidas
+     * @return ArrayList<InfoPartida>Contendra las 10 mejores partidas</InfoPartida>
+     */
+    public ArrayList<InfoPartida> obtenerDiezMejores(){
+        ArrayList<InfoPartida> auxL= new ArrayList<>();
+        InfoPartida auxI;
+        Iterator<InfoPartida> itr=this.getIterator();
+        int i=0;
+        int j=0;
+
+        while(itr.hasNext() && i<10){
+            auxI=itr.next();
+            auxL.add(auxI);
+            i++;
+        }
+
+        while(j<auxL.size()){
+            System.out.println("Jugador: "+auxL.get(j).getNombreJugador()+"\tPuntuacion: "+auxL.get(j).getPuntuacion());
+            j++;
+        }
+
+        return auxL;
+    }
+
+    public void mostrarInfo(){
+        Iterator<InfoPartida> itr=this.getIterator();
+        InfoPartida auxI;
+
+        while (itr.hasNext()){
+            auxI=itr.next();
+            System.out.println("Partida de "+auxI.getNombreJugador()+" con puntuacion: "+auxI.getPuntuacion());
+        }
+
+    }
+    public void añadirInfoPartida(InfoPartida iP){
+        if(!Ranking.getMiRanking().esta(iP)){
+            this.listaRanking.add(iP);
+        }
+        else{
+            System.out.println("La partida ya existia.");
+        }
+    }
+
+    public boolean esta(InfoPartida iP){
+        Iterator<InfoPartida> itr=Ranking.getMiRanking().getIterator();
+        InfoPartida auxI;
+        boolean enc=false;
+
+        while(itr.hasNext() && !enc){
+            auxI=itr.next();
+            if (auxI.getNombreJugador().equals(iP.getNombreJugador()) && auxI.getPuntuacion() == iP.getPuntuacion()){
+                enc=true;
             }
         }
-        this.add(miRanking);
-        //this.paintAll(this.getGraphics());
-        this.setVisible(true);
-        this.pack();
+        return enc;
     }
+
+    public void resetear(){     //Lo utilizamos unicamento en los casos de prueba.
+        Ranking.getMiRanking().listaRanking.clear();
+    }
+
 }

@@ -126,7 +126,7 @@ public class ListaJugadores {
         Jugador auxU;
         while (itr.hasNext()) {
             auxU = itr.next();
-            //auxU.ordenarJugadas();
+            auxU.ordenarJugadas();
         }
     }
 }

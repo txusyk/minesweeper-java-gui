@@ -82,6 +82,10 @@ public class Jugador {
         }
     }
 
+    public void ordenarJugadas(){
+        this.listaPartidas.ordenarListaPorPuntuaion();
+    }
+
     /**
      * Se utiliza solo para debug. Dado que no es seguro convertir y/o imprimir una password
      * Por eso, se guardan en char[]
