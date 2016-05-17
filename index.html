@@ -29,9 +29,13 @@
     <div class="container">
       <section id="main_content">
         <h1>
-<a id="is" class="anchor" href="#is" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>IS</h1>
+<a id="buscaminas" class="anchor" href="#buscaminas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Buscaminas</h1>
 
-<p>Contiene todos los trabajos, apuntes y el proyecto de asignatura del curso 2015/2016</p>
+<p>Este ha sido el proyecto propuesto para la asignatura de <strong>IS</strong> (Ingenieria del Software) para el curso 2015/2016 en la escuela <strong>EUITI</strong> de la universidad <strong>UPV/EHU</strong>.</p>
+
+<p>Las personas encargadas de llevar a cabo el proyecto hemos sido <strong>Josu Alvarez</strong> y <strong>David Max</strong>.</p>
+
+<p>Se nos planteaba hacer un buscaminas basado en el <em>MVC</em> (Modelo Vista Controlador), por lo tanto con el uso de la libreria <em>Swing</em> de <em>Java</em>.</p>
 
 <h1>
 <a id="primer-sprint" class="anchor" href="#primer-sprint" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Primer Sprint</h1>
@@ -120,6 +124,658 @@
 <li>Como hemos dicho, <strong>State</strong> es el patron que utilizaremos para la gestion del tablero </li>
 </ul>
 </li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="introduccion" class="anchor" href="#introduccion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduccion</h2>
+
+<h3>
+<a id="que-se-pedia" class="anchor" href="#que-se-pedia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>¿Que se pedia?</h3>
+
+<p>Para este proyecto, se sugeria el uso de <em>MVC</em>. Asi mismo se pedia que el programa fuera capaz de ejecutarse con diferentes medidas y numero de minas en funcion de la dificultad que el usuario debia seleccionar.
+Una vez tenemos varias partidas de usuario guardadas, debe mostrar (una vez asi lo solictemos) un ranking con el Top10 de los mejores jugadores.</p>
+
+<h3>
+<a id="que-hemos-hecho" class="anchor" href="#que-hemos-hecho" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>¿Que hemos hecho?</h3>
+
+<p>En principio, <strong>se cumplen todos los requisitos establecidos para el proyecto</strong>.</p>
+
+<p>Al arrancar, <strong>el juego cargara todos los datos de los usuarios y sus partidas</strong> desde un <em>XML/CSV</em> (a eleccion del usuario). Una vez realizada dicha carga, <strong>mostrara una ventana de *LogIn</strong><em>, donde se podra seleccionar la dificultad y tendremos la opcion tambien de crear un usuario nuevo (al que se le pedira un nombre distinto de los ya registrados y una contraseña).
+*</em>Cuando el <em>LogIn</em> ha finalizado, se lanza un tablero de juego (Buscaminas)** con las caracteristicas que se definieron en base a su dificultad.</p>
+
+<p>Asi mismo, en estas dos ventanas de juego <strong>se mostrara una barra de menu (JMenuBar) que contendra, entre otras, la opcion de reiniciar una partida y de mostrar el ranking de los 10 mejores jugadores</strong>.</p>
+
+<p><strong>Respecto a los patrones</strong>, finalmente no hemos conseguido implementar el <em>Factory</em>. <strong>Pero si hemos conseguido implementar el <em>State</em>, *Observer/Observator</strong>* (MVC).</p>
+
+<hr>
+
+<h1>
+<a id="implementacion" class="anchor" href="#implementacion" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Implementacion</h1>
+
+<h2>
+<a id="que-hemos-implementado" class="anchor" href="#que-hemos-implementado" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>¿Que hemos implementado?</h2>
+
+<p>Estas son las funcionalidades que bien durante el diseño o el desarollo han sido planteadas como posibles e interesantes a la hora de llevar a cabo:</p>
+
+<h3>
+<a id="buscaminas-1" class="anchor" href="#buscaminas-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Buscaminas</h3>
+
+<ul>
+<li>Sera la main() de nuestro proyecto.</li>
+<li>Unicamene se encargara de las llamadas a los metodos que arrancan el juego.</li>
+</ul>
+
+<h3>
+<a id="gestorventanas" class="anchor" href="#gestorventanas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GestorVentanas</h3>
+
+<ul>
+<li>En caso de que nos de tiempo, nos parece mas que interesante la posibilidad de implementar un gestor que se encargue de la visibilidad de las ventanas y la gestion de los eventos de las mismas.</li>
+<li>Sera el encargado de definir la barra de menu (JMenuBar) de nuestra ventana. En dicha barra de menu mostraremos:
+
+<ul>
+<li>Archivo: Nos dara las opciones de reiniciar la partida (en caso de haber una previamente en juego) y la opcion de salir del mismo.</li>
+<li>Ayuda: Nos dara las opciones de mostrar las preguntas frecuentes  o la opcion 'acerca de' del juego (JOptionPane).</li>
+<li>Juego: Nos permitira mostrar el Ranking de los 10 mejores jugadores y la opcion de eliminar a un jugador (en caso de existir y conocer sus credenciales).</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="menulogin" class="anchor" href="#menulogin" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MenuLogin</h3>
+
+<ul>
+<li>Sera un JPanel que se mostrara en la ventana que hemos creado anteriormente.</li>
+<li>Dicha ventana se redimensionara hasta ocupar perfectamente el JPanel que estamos mostrando.</li>
+<li>Nos dara la opcion de seleccion de un modo de dificultad, a elegir: facil, medio,dificil</li>
+<li>Nos dara las opciones de login:
+
+<ul>
+<li>LogIn: En caso de haber creado anteriormente un usuario, contrastara el nombre y password introducidos con los almacenados en la base de datos. Mostrara un error en caso de nombre y/o contraseña erroneos y arrancara el juego en caso contrario.</li>
+<li>Nuevo usuario: Contrastara la informacion introducida con los almacenados en la base da datos. Mostrara un error en caso de que exista previamente el jugador que tratamos de crear.</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="vistabuscaminas" class="anchor" href="#vistabuscaminas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>VistaBuscaminas</h3>
+
+<ul>
+<li>Ha de ser una de las vistas que gestionara nuestro controlador.</li>
+<li>Sera un JPanel. No una ventana al completo, que mostrara el numero de minas restantes y el tiempo de juego.</li>
+<li>Heredara los componentes que tenga la ventana padre donde la mostremos</li>
+</ul>
+
+<h3>
+<a id="vistacasillas" class="anchor" href="#vistacasillas" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>VistaCasillas</h3>
+
+<ul>
+<li>Ha de ser otra de las vistas que gestionara nuestro controlador.</li>
+<li>En este caso sera un JButton. Lo implementamos asi dado que seran los botones con los que el usuario interactuara sobre la vista.</li>
+<li>Generaremos antos botones como sea necesario para la dificultad que nos viene definida.</li>
+<li>Los botones al descubrirs mostraran iconos.</li>
+<li>Definimos que el tamaño adecuado sea 25x25.</li>
+<li>Todos los recursos deben de ser accesibles desde cualquier PC sin que sea necesario modificar ninguna linea de codigo.</li>
+</ul>
+
+<h3>
+<a id="vistaranking" class="anchor" href="#vistaranking" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>VistaRanking</h3>
+
+<ul>
+<li>A diferencia de las otras vistas, esta si sera un JFrame que sustituira a nuestra ventana de juego cuando el usuario decida mostrarla.</li>
+<li>Dado que saldremos del juego, seria interesante plantearle al usuario dicha situacion para que actue en consecuencia. Seria aun mas interesante el hecho de plantearlo mediante interaccion con un JOptionPane.</li>
+<li>La vista mostrara una ventana centrada en pantalla.</li>
+<li>El tamaño de dicha pantalla sera el necesario para mostrar los 10 mejores resultados.</li>
+<li>En caso de no haber resultados, se mostrara una ventana sin contenido salvo el titulo de la misma. En caso de no haber 10 jugadores en dicha lista, se mostraran los que haya unicamente, mostrando espacios vacios en los que no habia nada.</li>
+</ul>
+
+<h3>
+<a id="modelotablero" class="anchor" href="#modelotablero" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ModeloTablero</h3>
+
+<ul>
+<li>Extendera a un Observable.</li>
+<li>Sera el encargado de gestionar las acciones de la VistaBuscaminas.</li>
+<li>Sera el encargado de gestionar las llamadas al Threat que llamara y controlara el temporizador que se mostrara en la VistaBuscaminas.</li>
+</ul>
+
+<h3>
+<a id="modelocasilla" class="anchor" href="#modelocasilla" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ModeloCasilla</h3>
+
+<ul>
+<li>Extendera a un Observable</li>
+<li>Sera el encargado de gestionar las acciones de la VistaCasillas.</li>
+<li>Sera el encargado de gestionar las acciones de resolucion de las casillas.</li>
+</ul>
+
+<h3>
+<a id="controlador" class="anchor" href="#controlador" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Controlador</h3>
+
+<ul>
+<li>Sera el encargado de comunicar las acciones de la VistaBuscaminas/VistaCasillas con ModeloTablero/ModeloCasillas</li>
+</ul>
+
+<h3>
+<a id="estado" class="anchor" href="#estado" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Estado</h3>
+
+<ul>
+<li>Sera la interfaz que implementara el patron State.</li>
+</ul>
+
+<h3>
+<a id="ganado---enjuego---perdido" class="anchor" href="#ganado---enjuego---perdido" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ganado - EnJuego - Perdido</h3>
+
+<ul>
+<li>Seran los encargado de implementar las llamadas y la gestion de dicho patron.</li>
+</ul>
+
+<h3>
+<a id="gestor-ficheros" class="anchor" href="#gestor-ficheros" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Gestor Ficheros</h3>
+
+<ul>
+<li>Sera el encargado de cargar los ficheros</li>
+<li>La carga de ficheros sera mediante llamadas a gestores de recursos mediante el nombre del archivo a cargar.</li>
+<li>Daremos opciones de carga mediante CSV y XML.</li>
+<li>Daremos opciones de escritura mediante CSV y XML.</li>
+</ul>
+
+<h3>
+<a id="ranking" class="anchor" href="#ranking" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ranking</h3>
+
+<ul>
+<li>Sera el encargado de gestionar la creacion de una lista de los 10 mejores jugadores.</li>
+<li>Dispondra para ello de la posibilidad de ordenar las listas de partidas de todos los jugadores.</li>
+<li>Asi mismo, creara una lista de todas las partidas ordenadas por puntuacion (sin tener en cuenta el limite de 10 partidas del metodo top10).</li>
+</ul>
+
+<h3>
+<a id="infopartida" class="anchor" href="#infopartida" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>InfoPartida</h3>
+
+<ul>
+<li>Este elemento es el que formara el Ranking</li>
+<li>Esta compuesto por un nombre de jugador y una puntuacion (que en caso de ser repetida, no se guardara de nuevo salvo que el jugador sea distinto).</li>
+</ul>
+
+<h3>
+<a id="listapartidas---partida" class="anchor" href="#listapartidas---partida" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ListaPartidas - Partida</h3>
+
+<ul>
+<li>ListaPartidas:
+
+<ul>
+<li>Cada usuario contendra una lista de todas las partidas que ha jugado</li>
+</ul>
+</li>
+<li>Partida
+
+<ul>
+<li>Las partidas recibiran el tiempo de juego y se encargaran de hallar una puntuacion basandose en: <em>((factorCalculoBase x factorDificultad /(segundos)) x 10.7)</em>
+</li>
+</ul>
+</li>
+<li>Ambas clases se inicializan al comienzo del juego desde un XML/CSV (a eleccion del usuario).</li>
+</ul>
+
+<h3>
+<a id="listajugadores---jugadores" class="anchor" href="#listajugadores---jugadores" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ListaJugadores - Jugadores</h3>
+
+<ul>
+<li>ListaJugadores:
+
+<ul>
+<li>La lista de jugadores sera unica. Se inicializara al comenzar el juego, con la carga de ficheros (en caso de existir).</li>
+</ul>
+</li>
+<li>Jugador: Un jugador estara compuesto por su nombre, password y listapartidas
+
+<ul>
+<li>nombre: guardara en formato String el nombre del jugador</li>
+<li>passw : guardara en formato char<a href="respetando%20el%20formato%20original%20de%20la%20contrase%C3%B1a"></a> la contraseña del usuario</li>
+<li>listaPartidas: guardara un objeto de tipo ListaPartidas que contendra todas las partidas del jugador (tanto las cargadas desde fichero como las jugadas en una nueva sesion).</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="usuariostxt---usuariosxml" class="anchor" href="#usuariostxt---usuariosxml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usuarios.txt - Usuarios.xml</h3>
+
+<ul>
+<li>Usuarios.txt: Contendra una lista con toda la informacion de los jugadores y sus partidas en formato CSV</li>
+<li>Usuarios.xml: Contendra una lista con toda la informacion de los jugadores y sus partidas en formato XML
+* * *
+##Analisis de los casos de prueba</li>
+</ul>
+
+<p>En este apartado haremos un resumen de los casos de prueba que se han implementado para las clases que hemos definido.</p>
+
+<p>Hemos utilizado dos frameworks de test para realizar dicho analisis. TestNG y JUnit4.
+Lo hemos decidido hacer asi para ser mas conscientes de las mejoras que nos aporta TestNG.</p>
+
+<p>Por ejemplo, en lugar de definir un setUp() que lleve una etiqueta de tipo @AfterMetod. TestNG, nos permite utilizar una etiqueta de tipo <a href="https://github.com/AfterClass" class="user-mention">@AfterClass</a> que arrancara dicho metodo no en cada llamada a metodos de test, sino que lo hara una unica vez al instanciar la clase de test.</p>
+
+<p>Esta es solo una de las mejoras que hemos encontrado, para mas informacion:</p>
+
+<ul>
+<li><a href="http://www.mkyong.com/unittest/junit-4-vs-testng-comparison/">JUnit 4 Vs TestNG – Comparison</a></li>
+<li><a href="http://stackoverflow.com/questions/14136731/junit-4-vs-testng-update-2013-2014">JUnit 4 vs TestNG - Update 2013 - 2014</a></li>
+<li><a href="http://testng.org/doc/migrating.html">Migrating from JUnit to TestNG</a></li>
+<li><a href="http://blog.javafortesters.com/2014/09/faq-should-i-use-junit-or-testng-which.html">FAQ: Should I use JUnit or TestNG, which is better?</a></li>
+<li><a href="https://dzone.com/articles/testng-or-junit">TestNG or JUnit</a></li>
+</ul>
+
+<h3>
+<a id="que-clases-tienen-un-test" class="anchor" href="#que-clases-tienen-un-test" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>¿Que clases tienen un test?</h3>
+
+<ul>
+<li>ControladorTest</li>
+<li>EnJuegoTest</li>
+<li>GanadoTest</li>
+<li>GestorFicherosTest</li>
+<li>InfoPartidaTest</li>
+<li>JugadorTest</li>
+<li>ListaJugadoresTest</li>
+<li>ListaPartidasTest</li>
+<li>ListaRankingTest</li>
+<li>ModeloCasillaTest</li>
+<li>ModeloTableroTest</li>
+<li>PartidaTest</li>
+<li>PerdidoTest</li>
+<li>PuntuacionTest</li>
+<li>RankingTest</li>
+</ul>
+
+<p>El main (Buscaminas) solo hace 3 llamadas a metodos ya testeados.
+El resto de clases son las vistas del programa y no las probamos mediante JUnits/TestNG si no que lo haremos mediante pruebas de ejecucion para comprobar que todo se visualiza como queremos.</p>
+
+<p>A continuacion, haremos un breve resumen de los casos de prueba que se han tenido en cuenta, para mas informacion aconsejamos ejecutar y/o revisar las clases de prueba que hemos generado.</p>
+
+<hr>
+
+<h4>
+<a id="controladortest" class="anchor" href="#controladortest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ControladorTest</h4>
+
+<ul>
+<li>Se comprobara que se gestiona correctamente el click de raton</li>
+<li>Se comprobara que las constructoras funcionan correctamente</li>
+</ul>
+
+<h4>
+<a id="enjuegotest" class="anchor" href="#enjuegotest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>EnJuegoTest</h4>
+
+<ul>
+<li>se comprueba que se puede acceder y modificar el estado</li>
+</ul>
+
+<h4>
+<a id="ganadotest" class="anchor" href="#ganadotest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GanadoTest</h4>
+
+<ul>
+<li>se comprueba que se puede acceder y modificar el estado</li>
+</ul>
+
+<h4>
+<a id="gestorficheros" class="anchor" href="#gestorficheros" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GestorFicheros</h4>
+
+<ul>
+<li>se comprueba que se carga correctamente la informacion desde xml</li>
+<li>se comprueba que se carga correctamente la informacion desde csv</li>
+</ul>
+
+<h2>
+<a id="--se-comprueba-que-se-exporta-correctamente-la-informacion-desde-csv" class="anchor" href="#--se-comprueba-que-se-exporta-correctamente-la-informacion-desde-csv" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>- se comprueba que se exporta correctamente la informacion desde csv</h2>
+
+<h4>
+<a id="infopartidatest" class="anchor" href="#infopartidatest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>InfoPartidaTest</h4>
+
+<ul>
+<li>comprobamso que el objeto se crea bien</li>
+<li>comprobamos que accedemos correctamente al nombre/puntuacion</li>
+<li>comprobamos que se guarda el nombre/puntuacion correctamente</li>
+</ul>
+
+<h4>
+<a id="jugadortest" class="anchor" href="#jugadortest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JugadorTest</h4>
+
+<ul>
+<li>comprobamos que el objeto se crea bien</li>
+<li>comprobamos que la listaPartidas no se crea nula</li>
+<li>comprobamso que accedemos correctamente a la listaPartidas</li>
+<li>comprobamos que accedemos correctamente al nombre/passwd</li>
+<li>comprobamos que modificamos correctamente el nombre/passwd</li>
+<li>comprobamos que el metodo comprobarPasswd() funciona correctamente</li>
+</ul>
+
+<h4>
+<a id="listajugadorestest" class="anchor" href="#listajugadorestest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ListaJugadoresTest</h4>
+
+<ul>
+<li>comprobbamos que el objeto (MAE) no es nulo tras su creacion</li>
+<li>comprobamos que se accede correctamente a dicho objeto</li>
+<li>comprobamos que se añaden correctamente jugadores</li>
+<li>comprobamos que se eliminan correcctamente jugadores</li>
+<li>comprobamos que se gestionan correctamente las contraseñas</li>
+</ul>
+
+<h4>
+<a id="listapartidastest" class="anchor" href="#listapartidastest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ListaPartidasTest</h4>
+
+<ul>
+<li>comprobamos que el objeto se crea correctamente</li>
+<li>comprobamos que el iterador se genera y funciona OK</li>
+<li>comprobamos los getters&amp;setters</li>
+<li>comprobamos el metodo eliminarPartida()</li>
+<li>comprobamos que se imprime la informacion de las partidas OK</li>
+<li>comprobamos que el metodo esta() funciona correctamente</li>
+<li>comprobamos que la lista de partidas se ordena correctamente en base a la puntuacion del usuario</li>
+</ul>
+
+<h4>
+<a id="listarankingtest" class="anchor" href="#listarankingtest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ListaRankingTest</h4>
+
+<ul>
+<li>se comprueba que el objeto que se genera no es nulo</li>
+<li>se comprueba que el metodo obtener10mejores() funciona correctamente</li>
+<li>asi mismo, debido a la naturaleza del metodo, obtener10mejores() es imperativo probar el funcionamiento de otros metodos.</li>
+</ul>
+
+<h4>
+<a id="modelocasilla-1" class="anchor" href="#modelocasilla-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ModeloCasilla</h4>
+
+<ul>
+<li>se comprueba que el objeto no se crea nulo</li>
+<li>se comprueba que el patron Observable funciona correctamente</li>
+<li>se comprueba que los objetos se resuelven correctamente</li>
+<li>se comprueba que los getters&amp;setters funcionan como es debido</li>
+<li>comprobamos que las casillas se marcan cuando es registrado por el usuario</li>
+</ul>
+
+<h4>
+<a id="modelotablerotest" class="anchor" href="#modelotablerotest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ModeloTableroTest</h4>
+
+<ul>
+<li>comprobamos que el objeto se crea correctamente</li>
+<li>comprobamso que los getters y los setters funcionan correctamente</li>
+<li>comprobamos que la incialziacion una vez una partida ha teminado funciona correctamente</li>
+<li>comprobamos que el threat se crea correctamente y se gestiona tambien de forma OK</li>
+<li>comprobamos que el timer se actualiza de forma correcta</li>
+<li>comprobamso que se configura de forma correctala distribucion de las casillas (es decir, la creacion del array que contendra todas las casillas del tablero de juego)</li>
+<li>comprobamso que el metodo contarMinas() funciona OK</li>
+<li>hacemos lo mismo para el metodo descubrirCasillasVacias()</li>
+</ul>
+
+<h4>
+<a id="partidatest" class="anchor" href="#partidatest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PartidaTest</h4>
+
+<ul>
+<li>comprobamso que el objeto que se crea no es null, se crea correctamente</li>
+<li>comprobamos que los getters&amp;setters funcionan correctamente</li>
+<li>comprobamos que el calculo de la puntuacion de las partidas es correcto</li>
+</ul>
+
+<h4>
+<a id="perdidotest" class="anchor" href="#perdidotest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>PerdidoTest</h4>
+
+<ul>
+<li>se comprueba que se puede acceder y modificar el estado</li>
+</ul>
+
+<h4>
+<a id="rankingtest" class="anchor" href="#rankingtest" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>RankingTest</h4>
+
+<ul>
+<li>comprobamos que el objeto que se crea no es nulo</li>
+<li>comprobamos que se genera correctamente la lista de los 10 mejores jugadores</li>
+<li>comprobamos que se genera correctamente la lista general de las mejores partidas, ordenadas por puntuacion (de mayor a menor)</li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="reparto-de-tareas-y-tiempo-empleado" class="anchor" href="#reparto-de-tareas-y-tiempo-empleado" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reparto de tareas y tiempo empleado</h2>
+
+<p>El reparto inicial de las tareas se tuvo que ver modificado debido a dudas y a problemas con el codigo. Por ello, el reparto final de tareas ha sido:</p>
+
+<h3>
+<a id="clases" class="anchor" href="#clases" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Clases</h3>
+
+<ul>
+<li>Controlador: Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a> / David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>El controlador ha supuesto aproximadamente 45 min de programacion. 20 min para su diseño. Todo ha sido realizado en comun.</li>
+</ul>
+</li>
+<li>EnJuego / EnJuegoTest: David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>Ambas clases han sido implementadas por David. Han supuesto 30 min para su programacion y su diseño (teniendo en cuenta que ha sido diseñada para el uso de un patron)</li>
+</ul>
+</li>
+<li>Ganado / GanadoTest: David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li> Ambas clases han sido implementadas por David. Han supuesto 30 min para su programacion y su diseño.</li>
+</ul>
+</li>
+<li>GestorFicheros : Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a>
+
+<ul>
+<li>Ha supuesto 1h de diseño y aproximadamente 1.30h de programacion. Se ha reutilizado parte de codigo que usaba para otros proyectos.</li>
+</ul>
+</li>
+<li>InfoPartida /InfoPartidaTest: David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>InfoPartida : Ha supuesto 5 min de diseño y aproximadamente 15 de programacion. </li>
+<li>InfoPartidaTest : Ha supuesto 10 min para programarla.</li>
+</ul>
+</li>
+<li>Jugador: Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a>
+
+<ul>
+<li>Ha puesto unos 20 min para diseñarla y unos 30-40 minutos para su implementacion.</li>
+</ul>
+</li>
+<li>JugadorTest: David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>Ha supuesto unos 20 min para su diseño e implementacion.</li>
+</ul>
+</li>
+<li>ListaJugadores: Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a> y David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>Hemos tardo aproximadamente 15 minutos en implementar la clase, su diseño practicamente no nos llevo tiempo.</li>
+</ul>
+</li>
+<li>ListaJugadoresTest: David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>Ha llevado unos 15 minutos implementar los casos de prueba de esta clase.</li>
+</ul>
+</li>
+<li>ListaPartidas / ListaPartidasTest: David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>El diseño de las dos clases llevo unos 30 minutos. Su implementacion aproximadamente 40 min.</li>
+</ul>
+</li>
+<li>ModeloCasilla: Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a>
+
+<ul>
+<li>El modelo supuso pensar bastante, unos 40 minutos para lograr un diseño que nos convenciera. Su implementacion fue relativamente facil y nos llevo 30 min.</li>
+</ul>
+</li>
+<li>ModeloCasillaTest: David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>El test ha supuesto un gran esfuerzo, dado que habia que gestionar muchas llamadas y no entendia el codigo al 100%. He tardado 1h en implementar los casos de prueba.</li>
+</ul>
+</li>
+<li>ModeloTablero: Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a>
+
+<ul>
+<li>Implementar el modelo del tablero ha sido dificil. Quizas la clase mas dificil que he implementado en este proyecto. Al comienzo no entendia el MVC, por lo que, he tenido que reescribir el codigo varias veces. En total, entre diseño y programacion habra supuesto al menos 4h hacer que funcione junto con las vistas y el resto del codigo relacionado al MVC.</li>
+</ul>
+</li>
+<li>ModeloTableroTest : David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>Implementamos los casos de prueba en unos 30 min.</li>
+</ul>
+</li>
+<li>MenuLogin: Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a>
+
+<ul>
+<li>El diseño de esta vista ha sido la mas sencilla puesto que ya teniamos practica con 'Swing' y ha sido la ultima ventana que hemos implementado. Unos 30 minutos para diseñar como la queriamos y otros 40 para ubicar todos los elementos y darles la funcionalidad apropiada.</li>
+</ul>
+</li>
+<li>Partida / PartidaTest: David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>Dado que es una clase auxiliar y relativamente sencilla ha supuesto unos 30 minutos realizar su diseño y otros 30 minutos implementar tanto la clase como los propios casos de prueba.</li>
+</ul>
+</li>
+<li>Perdido / PerdidoTest: David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>Ambas clases han sido implementadas por David. Han supuesto 30 min para su programacion y su diseño (teniendo en cuenta que ha sido diseñada para el uso de un patron)</li>
+</ul>
+</li>
+<li>Puntuacion / PuntuacionTest: David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>Ambas clases han sido implementadas por David. Han supuesto 30 min de diseño y 20 de implementacion.</li>
+</ul>
+</li>
+<li>Ranking: Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a> y David <a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a>
+
+<ul>
+<li>La clase ha sido relativamente facil de diseñar, aproximadamente 20 min. Pero, a la hora de implementarlo hemos tenido distintos problemas que no preeveiamos y no hemos tenido otro remedio que aplicar unas soluciones distintas a las que teniamos pensadas en un comienzo, por ello, la implementacion de este ma clase nos ha llevado al menos el doble de tiempo de lo que teniamos estmado, 1.30h.</li>
+</ul>
+</li>
+<li>VistaBuscaminas: Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a>
+
+<ul>
+<li>Debido a que no sabia utilizar 'Swing' (en el momento de afrontar esta implementacion) ha sido al clase que mas tiempo me ha costado implementar. No la mas dificil, pero si ante la cual mas indefenso me he sentido. Solo su diseño ha ocupado mas de 1.30h y su implementacion ha sido caotica (he tenido que reacer el codigo inumerables veces desde cero). No sabria decir cuanto tiempo ha ocupado su implementacion.</li>
+</ul>
+</li>
+<li>VistaCasillas: Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a>
+
+<ul>
+<li>Debido al mismo problema que el mencionado anteriormente en la clase de VistaBusaminas, hemos tenido probelmas a la hora de afrontar este diseño por que no entendiamos bien como funcionaban y como habia que distribuir los botones de esta vista. Su diseño al menos ocupo unos 30 min de nuestro tiempo y su implementacion nos llevo mas de 2h.</li>
+</ul>
+</li>
+<li>VistaRanking: Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a>
+
+<ul>
+<li>Su diseño supuso apenas 10 min. En el momento en el que decidimos que su implementacion seria en otra ventana sin el JMenuBar de la original, se simplifico muchisimo su diseño. Por ello, tardamos unos 10 min en imaginar su funcionamiento y unos 20 en tener un codigo funcional.</li>
+</ul>
+</li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="funcionalidades-extra-del-programa" class="anchor" href="#funcionalidades-extra-del-programa" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Funcionalidades extra del programa</h2>
+
+<h3>
+<a id="que-mejoras-hemos-implementado" class="anchor" href="#que-mejoras-hemos-implementado" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>¿Que mejoras hemos implementado?</h3>
+
+<ul>
+<li>
+<strong>Gestion de usuarios</strong>: Se pedia disponer de usuarios. Nosotros hemos decidido llevarlo un paso mas adelante implementando tambien su contraseña, como haria cualquier otra aplicacion que gestione usuarios.</li>
+<li>
+<strong>Barra de menu</strong>: Se pedia disponer de un boton para salir, otro para reiniciar y otro mas para mostrar el ranking. Nosotros hemos decidido introducir una barra de menu que aporta lo siguiente:
+
+<ul>
+<li>Archivo
+
+<ul>
+<li>Reiniciar : Da la opcion de reiniciar la partida, solo si ya hay una en juego con una dificultad seleccionada</li>
+<li>Salir: Se cierra la ventana de juego</li>
+</ul>
+</li>
+<li>Ayuda
+
+<ul>
+<li>FAQ: Se mostrara la informacion sobre las preguntas frecuentes del juego</li>
+<li>Acerca de: Se mostrara informacion acerca de los desarrolladores del juego</li>
+</ul>
+</li>
+<li>Juego
+
+<ul>
+<li>Ranking Top 10: Obtiene y muestra en un JFrame a los 10 mejores jugadores y sus respectivas partidas</li>
+<li>Eliminar Jugador: Elimina a un jugador tras confirmar que conocemos sus credenciales</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>Gestion de usuarios y sus partidas</strong>: Hemos implementado varios metodos que se encarguen de crear y guardar (a la apertura y cierre, respectivamente) los datos de la aplicacion en un fichero. 
+
+<ul>
+<li>XML: Dado que teniamos algo de tiempo y nos parecia interesante, hemos implementado un metodo que gestione ficheros XML personalizados del juego</li>
+<li>CSV : Aprovechando codigo de otras aplicaciones, hemos implementado un gestor de ficheros que trabaja bajo el formato CSV.</li>
+</ul>
+</li>
+<li>
+<strong>Uso de lambda y Stream</strong>: Lambda es una funcion que es soportada desde Java 1.7 y Stream es otra soportada desde 1.8. Nos parecio bastante interesante hacer uso intensivo de estos recursos (siempre que fuera posible) para simplificar el codigo lo maximo posible. Tal y como se puede ver, al menos 5-6 clases hacen uso de dichas caracteristicas.</li>
+<li>
+<strong>TestNG</strong>: Como hemos mencionado, hemos incluido algunos test de tipo TestNG</li>
+<li>
+<strong>Uso de GitHub</strong>: Como hemos comentado en otras ocasiones, mientras ha durado el proyecyo hemos hecho uso de GitHub
+
+<ul>
+<li>Notificaciones en el movil: Para estar al dia de otras novedades en nuestro repositorio, creamos un grupo de telegram y añadimos un bot que notificaba de todos los cambios que hubiera en el servidor.</li>
+<li>Mantenimiento de codigo: Revision y mantenimiento con control de versiones.</li>
+<li>Gestion de ramas alternativas de trabajo: Gestion de ramas mediante braches.</li>
+<li>Wiki: Mostramos informacion acerca del juego, no del desarrollo del mismo.</li>
+<li>Issues y Milestones: Hemos hecho un uso intensivo de estos dos, marcando el tipo de 'issue' que teniamos y añadiendolo a nuestra fecha limite de solucion.</li>
+<li>Readme: En nuestro archivo de readme de Github mantenemos un resumen de todos los cambios y de las caracteristicas del programa en los distintos puntos de entrega 'con el cliente'.</li>
+</ul>
+</li>
+<li>
+<p><strong>IDE alternativo, IntelliJ Idea 2016.1</strong>: Conociamos eclipse desde que comenzamos a programar. Hace relativamente poco nos interesamos por NetBeans pero al encontrar (lo que nosotros consideramos) un IDE de Java perfecto decidimos tratar de implementar todo el proyecto haciendo uso exclusivo de dicho IDE. El por que de esta decision tiene inumerables respuestas:</p>
+
+<ul>
+<li>desde una interfaz mas amigable y personalizable</li>
+<li>unos controles mas intuitivos</li>
+<li>frameworks nativos mucho mas variados</li>
+<li>facilidad de moverse mediante atajos de teclado</li>
+<li>un autocompletado que deberia ser la envidia de otros IDEs</li>
+<li>inspeccion de codigo avanzada al alcance de cualquier desarrollador</li>
+</ul>
+</li>
+<li><p><strong>Documentacion unicamente en formato MardkDown</strong>: Debido a la naturaleza de GitHub, disponiendo incluso de un flavor de MarkDown, decidimos hacer toda la documentacion en este formato. Al igual que esta memoria.  </p></li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="conclusiones" class="anchor" href="#conclusiones" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conclusiones</h2>
+
+<ul>
+<li>Josu <a href="mailto:jalvarez041@ikasle.ehu.eus">jalvarez041@ikasle.ehu.eus</a> : Ha sido un proyecto que inicialmente parecia sencillo, tanto en su diseño como en su implementacion. El hecho de haber tenido problemas a la hora de gestionar el MVC ha hecho que el proyecto me haya parecido en ocasiones hasta imposible. Tras horas de lectura y de comprension, he llegado a entender como se comportaba y logrado implementar lo que se pedia. Me ha parecido un proyecto increible para aprender, con una curva de aprendizaje elevada pero necesara a estas alturas. Un proyecto divertido, que sin duda continuare desarrollando y liberaremos el codigo en GitHub para que cualquier persona pueda acceder.</li>
+<li>David<a href="mailto:damax001@ikasle.ehu.eus">damax001@ikasle.ehu.eus</a> : Un proyecto muy completo, que ha exigido tanto tiempo como esfuerzo, pero que una vez finalizado ha resultado muy gratificante.</li>
+</ul>
+
+<hr>
+
+<h2>
+<a id="bibliografia" class="anchor" href="#bibliografia" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bibliografia</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/22028923/java-minesweeper-gui">MineSweeper GUI</a></li>
+<li><a href="http://stackoverflow.com/questions/7006029/minesweeper-action-events/7016492#7016492">Minesweeper Action Events</a></li>
+<li><a href="http://stackoverflow.com/questions/3038631/building-a-monopoly-board-with-gridbaglayout">Building a Monopoly Board with GridBagLayout </a></li>
+<li><a href="https://en.wikipedia.org/wiki/Factory_method_pattern">Factory method pattern</a></li>
+<li><a href="http://crunchify.com/java-simple-way-to-convert-string-to-char-array">Simply way to convert a string to char[]</a></li>
+<li><a href="http://stackoverflow.com/questions/129921/what-is-mvc-model-view-controller">What is MVC (Model View Controller)?</a></li>
+<li><a href="http://stackoverflow.com/questions/7052005/game-programming-in-java">Game Programming in Java</a></li>
+<li><a href="http://www.oracle.com/technetwork/es/articles/java/expresiones-lambda-api-stream-java-2633852-esa.html">Oracle (Oficcial) Lambdas&amp;Streams</a></li>
+<li><a href="http://blog.takipi.com/benchmark-how-java-8-lambdas-and-streams-can-make-your-code-5-times-slower/">How Misusing Streams Can Make Your Code 5 Times Slower</a></li>
 </ul>
       </section>
     </div>
