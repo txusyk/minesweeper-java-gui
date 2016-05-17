@@ -15,7 +15,6 @@
  */
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -24,13 +23,13 @@ import java.util.Iterator;
 public class ListaJugadores {
 
     private static ListaJugadores miListaJugadores;
-    HashMap<String, Jugador> lJugadores;
+    ArrayList<Jugador> lJugadores;
 
     /**
      * Constructora
      */
     public ListaJugadores() {
-        this.lJugadores = new HashMap<>();
+        this.lJugadores = new ArrayList<>();
     }
 
     /**
@@ -45,8 +44,12 @@ public class ListaJugadores {
         return miListaJugadores;
     }
 
-    public HashMap<String, Jugador> getLjugadores() {
+    public ArrayList<Jugador> getLjugadores() {
         return this.lJugadores;
+    }
+
+    public Iterator<Jugador> getIterator() {
+        return this.lJugadores.iterator();
     }
 
     /**
@@ -55,8 +58,16 @@ public class ListaJugadores {
      */
     public Jugador getJugador(String pNombre) {
         Jugador jugAux = null;
-        if (this.lJugadores.get(pNombre) != null) {
-            jugAux = this.lJugadores.get(pNombre);
+        Iterator<Jugador> itr = this.getIterator();
+        boolean enc = false;
+        while (itr.hasNext() && !enc) {
+            jugAux = itr.next();
+            if (jugAux.getNombreJugador().equalsIgnoreCase(pNombre)) {
+                enc = true;
+            }
+        }
+        if (!enc) {
+            jugAux = null;
         }
         return jugAux;
     }
@@ -67,13 +78,10 @@ public class ListaJugadores {
      *
      * @param pJugador
      */
-    public boolean anadirJugador(Jugador pJugador) {
-        boolean anadido = false;
-        if (!this.esta(pJugador)) {
-            this.lJugadores.put(pJugador.getNombreJugador(), pJugador);
-            anadido = true;
+    public void anadirJugador(Jugador pJugador){
+        if(!this.esta(pJugador)) {
+            this.lJugadores.add(pJugador);
         }
-        return anadido;
     }
 
     /**
@@ -82,8 +90,8 @@ public class ListaJugadores {
      * @param pJugador
      */
     public void eliminarJugador(Jugador pJugador) {
-        if (this.esta(pJugador)) {
-            this.lJugadores.remove(pJugador.getNombreJugador());
+        if (esta(pJugador)) {
+            this.lJugadores.remove(pJugador);
         }
     }
 
@@ -91,19 +99,25 @@ public class ListaJugadores {
      * @param pJugador
      * @return Devolvera true en caso de encontrar al jugador que recibe como parametro
      */
-    private boolean esta(Jugador pJugador) {
-        boolean enc = false;
-        if (this.lJugadores.get(pJugador.getNombreJugador()) != null) {
-            enc = true;
+    public boolean esta(Jugador pJugador) {
+        Iterator<Jugador> itr = this.getIterator();
+        //Partida auxPartida;
+        boolean encontrado = false;
+
+        for (Jugador auxJug : lJugadores) {
+            if (auxJug.getNombreJugador().equalsIgnoreCase(pJugador.getNombreJugador())) {
+                encontrado = true;
+            }
         }
-        return enc;
+        return encontrado;
     }
 
-    /**
-     * @param pNombre
-     * @param pContrasena
-     * @return Devuelve true en caso de que pContraseña coincida con el usuario
-     */
+        /**
+         * @param pNombre
+         * @param pContrasena
+         * @return Devuelve true en caso de que pContraseña coincida con el usuario
+         */
+
     public boolean comprobarContrasena(String pNombre, char[] pContrasena) {
         boolean coinciden = false;
         if (this.getJugador(pNombre) != null) {
@@ -112,13 +126,12 @@ public class ListaJugadores {
         return coinciden;
     }
 
-    public Iterator<Jugador> getIterator() {
-        ArrayList<Jugador> list = new ArrayList<>(this.getLjugadores().values());
-        return list.iterator();
-    }
-
-    public ArrayList<Jugador> getListaUsuarios(){
-        return new ArrayList<>(this.getLjugadores().values());
+    public void imprimirJugadores(){
+        for(Jugador auxJug : this.lJugadores){
+            System.out.println("Nombre: "+auxJug.getNombreJugador());
+            System.out.println("Su lista de partidas es->");
+            auxJug.getListaPartidas().imprimirPartidas();
+        }
     }
 
     public void ordenarPartidasFull() {

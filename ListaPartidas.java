@@ -84,9 +84,9 @@ public class ListaPartidas {
     }
 
     public void ordenarListaPorPuntuaion(){
-          Iterator<Partida> itr= this.getIterator();
+        Iterator<Partida> itr= this.getIterator();
         ArrayList<Partida> lAux = new ArrayList<>();
-        Partida selec;
+        Partida selec = null;
         Partida auxP;
         int i=1;
 
@@ -107,7 +107,11 @@ public class ListaPartidas {
             i=1;
 
         }
-        selec=listaPartidas.get(0);
+        try{
+            selec=listaPartidas.get(0);
+        } catch(IndexOutOfBoundsException e){
+                e.getMessage();
+        }
         lAux.add(selec);
         this.listaPartidas=lAux;
     }

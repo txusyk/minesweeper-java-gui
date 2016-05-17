@@ -82,7 +82,7 @@ public class GestorFicheros {
     public void cargarFichJugXML(){
 
         try{
-            File auxXML = new File("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/Usuarios.xml");
+            File auxXML = new File(getClass().getResource("Usuarios.xml").getFile());
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dbBuilder = dbFactory.newDocumentBuilder();
             Document doc = dbBuilder.parse(auxXML);
@@ -129,7 +129,7 @@ public class GestorFicheros {
 
     @SuppressWarnings("rawtypes")
     public void exportarAFichero() {
-        ArrayList<Jugador> auxArray = new ArrayList<Jugador>(ListaJugadores.getMiListaJugadores().getLjugadores().values());
+        ArrayList<Jugador> auxArray = new ArrayList<Jugador>(ListaJugadores.getMiListaJugadores().getLjugadores());
 
         FileWriter fichero = null;
         PrintWriter pw = null;

@@ -19,6 +19,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStream;
 
 /**
  * Created by josu on 5/16/16.
@@ -108,7 +109,8 @@ public class GestorVentanas extends JFrame {
             //Creamos la lista de jugadores desde el fichero
             FileReader fr = null;
             try {
-                fr = new FileReader("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/Usuarios.txt");
+                InputStream in = this.getClass().getResourceAsStream("Usuarios.txt");
+                fr = new FileReader(in.);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -196,6 +198,7 @@ public class GestorVentanas extends JFrame {
             //if (frame.getContentPane() != login) {
             if (JOptionPane.showConfirmDialog(frame.getContentPane(), "Si continuas se mostrara el Ranking y perderas el progreso. ¿Estas seguro?", "Aviso", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
                 frame.setVisible(false);
+                frame.dispose();
                 JFrame frameRanking = VistaRanking.getMiVistaRanking();
                 frameRanking.pack(); //    hacemos que la ventana se ajuste al tamaño del contenido//creamos una vista que contendra el modelo del tablero
                 frameRanking.setVisible(true); //hacemos visible la vistaTablero

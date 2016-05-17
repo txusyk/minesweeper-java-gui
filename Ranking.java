@@ -26,13 +26,12 @@ public class Ranking {
         int k = 0;    //indice para marcar los loops sobre las puntuaciones de cada partida de cada jugador.
 
         ListaJugadores.getMiListaJugadores().ordenarPartidasFull();
-        while (i < ListaJugadores.getMiListaJugadores().getListaUsuarios().size()) {
-            while (k < ListaJugadores.getMiListaJugadores().getListaUsuarios().get(i).getListaPartidas().getlPartidas().size()) {
-                auxI = new InfoPartida(ListaJugadores.getMiListaJugadores().getListaUsuarios().get(i).getNombreJugador(), ListaJugadores.getMiListaJugadores().getListaUsuarios().get(i).getListaPartidas().getlPartidas().get(k).getPuntuacion());
-                this.añadirInfoPartida(auxI);
-                k++;
+
+        for (Jugador auxJ : ListaJugadores.getMiListaJugadores().getLjugadores()){
+            for(Partida auxP : ListaJugadores.getMiListaJugadores().getJugador(auxJ.getNombreJugador()).getListaPartidas().getlPartidas()){
+                auxI = new InfoPartida(auxJ.getNombreJugador(),auxP.getPuntuacion());
+                this.listaRanking.add(auxI);
             }
-            i++;
         }
     }
 

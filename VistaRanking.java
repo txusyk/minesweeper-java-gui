@@ -31,10 +31,10 @@ import java.util.ArrayList;
             initComponents();
 
             Ranking.getMiRanking().crearListaRanking();
+            Ranking.getMiRanking().mostrarInfo();
             ArrayList<InfoPartida> top10 = Ranking.getMiRanking().obtenerDiezMejores();
 
-            System.out.println("el tamaño de la lista es: "+top10.size());
-            ListaJugadores.getMiListaJugadores().getJugador("David").getListaPartidas().imprimirPartidas();
+            ListaJugadores.getMiListaJugadores().imprimirJugadores();
 
             for(int i=0; i<top10.size();i++){
                 switch (i){
