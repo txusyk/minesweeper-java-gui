@@ -49,11 +49,6 @@ Las personas encargadas de llevar a cabo el proyecto hemos sido **Josu Alvarez**
 Se nos planteaba hacer un buscaminas basado en el *MVC* (Modelo Vista Controlador), por lo tanto con el uso de la libreria *Swing* de *Java*.
 
 * * *
-## Indice
-
-[TOC]
-
-* * *
 ## Introduccion
 
 ###¿Que se pedia?
