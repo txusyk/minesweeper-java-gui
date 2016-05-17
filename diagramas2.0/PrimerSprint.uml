@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="388.47142857142853" y="0.0">Casilla</node>
+    <node x="263.1714285714286" y="412.0">Tablero</node>
+    <node x="729.1714285714286" y="0.0">Partida</node>
+    <node x="182.0" y="269.5">CasillaVacia</node>
+    <node x="0.0" y="248.0">CasillaNumerica</node>
+    <node x="402.0" y="258.5">CasillaMina</node>
+    <node x="-127.0" y="472.0">Teclado</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="CasillaNumerica" target="Casilla">
+      <point x="0.0" y="-57.0" />
+      <point x="81.0" y="218.0" />
+      <point x="412.6714285714286" y="218.0" />
+      <point x="-96.80000000000001" y="99.0" />
+    </edge>
+    <edge source="CasillaMina" target="Casilla">
+      <point x="0.0" y="-46.5" />
+      <point x="513.0" y="228.0" />
+      <point x="509.47142857142853" y="228.0" />
+      <point x="0.0" y="99.0" />
+    </edge>
+    <edge source="Tablero" target="CasillaVacia">
+      <point x="-84.19999999999993" y="-162.0" />
+      <point x="389.47142857142865" y="382.0" />
+      <point x="282.0" y="382.0" />
+      <point x="0.0" y="35.5" />
+    </edge>
+    <edge source="Tablero" target="CasillaMina">
+      <point x="0.0" y="-162.0" />
+      <point x="473.6714285714286" y="392.0" />
+      <point x="513.0" y="392.0" />
+      <point x="0.0" y="46.5" />
+    </edge>
+    <edge source="Tablero" target="Casilla">
+      <point x="84.20000000000005" y="-162.0" />
+      <point x="557.8714285714286" y="392.0" />
+      <point x="634.5" y="392.0" />
+      <point x="634.5" y="228.0" />
+      <point x="557.8714285714286" y="228.0" />
+      <point x="48.400000000000034" y="99.0" />
+    </edge>
+    <edge source="CasillaVacia" target="Casilla">
+      <point x="0.0" y="-35.5" />
+      <point x="282.0" y="228.0" />
+      <point x="461.07142857142856" y="228.0" />
+      <point x="-48.39999999999998" y="99.0" />
+    </edge>
+    <edge source="Tablero" target="CasillaNumerica">
+      <point x="-168.39999999999992" y="-162.0" />
+      <point x="305.2714285714287" y="392.0" />
+      <point x="81.0" y="392.0" />
+      <point x="0.0" y="57.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="0.5" y="700.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

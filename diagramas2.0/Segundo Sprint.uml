@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="211.0" y="0.0">Casilla</node>
+    <node x="514.0" y="428.0">Tablero</node>
+    <node x="0.0" y="428.0">Partida</node>
+    <node x="242.0" y="290.5">CasillaVacia</node>
+    <node x="462.0" y="269.0">CasillaNumerica</node>
+    <node x="373.0" y="818.0">Jugador</node>
+    <node x="0.0" y="279.5">CasillaMina</node>
+    <node x="0.0" y="818.0">Teclado</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="CasillaNumerica" target="Casilla">
+      <point x="0.0" y="-57.0" />
+      <point x="543.0" y="244.0" />
+      <point x="429.3333333333333" y="244.0" />
+      <point x="87.33333333333331" y="109.5" />
+    </edge>
+    <edge source="CasillaMina" target="Casilla">
+      <point x="0.0" y="-46.5" />
+      <point x="111.0" y="244.0" />
+      <point x="254.66666666666669" y="244.0" />
+      <point x="-87.33333333333331" y="109.5" />
+    </edge>
+    <edge source="CasillaVacia" target="Casilla">
+      <point x="0.0" y="-35.5" />
+      <point x="0.0" y="109.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5562913907284768" x="467.5" y="518.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
