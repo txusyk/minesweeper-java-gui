@@ -17,9 +17,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.InputStream;
+import java.net.URL;
 
 /**
  * Created by josu on 5/16/16.
@@ -109,8 +110,9 @@ public class GestorVentanas extends JFrame {
             //Creamos la lista de jugadores desde el fichero
             FileReader fr = null;
             try {
-                InputStream in = this.getClass().getResourceAsStream("Usuarios.txt");
-                fr = new FileReader(in.);
+                URL url = getClass().getResource("Usuarios.txt");
+                File file = new File(url.getPath().replaceAll("%20", " "));
+                fr = new FileReader(file);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -120,8 +122,6 @@ public class GestorVentanas extends JFrame {
 
 
     public void lanzarVentanaLogin(){
-        this.cargarFicheros();
-
         login = new MenuLogin();
         frame.setContentPane(login); //Llamamos al menu de logIn
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fijamos que la operacion por defecto al cerrar es salir
@@ -129,7 +129,7 @@ public class GestorVentanas extends JFrame {
         frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);         //Fijamos por defecto que la ventana siempre aparezca en el centro
         frame.setVisible(true); //hacemos el frame visible
         frame.setResizable(false); //definimos que no podra modificar el tamaño de la ventana de nuestro programa
-        frame.setAlwaysOnTop(true); //definimos que mientras este ejcutandose se superponga a cualquier otro programa
+        //frame.setAlwaysOnTop(true); //definimos que mientras este ejcutandose se superponga a cualquier otro programa
     }
 
     private void esperarCierreVentana(JPanel pPanel){
@@ -213,7 +213,26 @@ public class GestorVentanas extends JFrame {
 
     private void itemEliminarJugadorMouseClicked(ActionEvent evt){
         if (evt.getActionCommand().equalsIgnoreCase("eliminar")){
-        }
+            if (JOptionPane.showConfirmDialog(frame.getContentPane(), "Si continuas se le pedira la contraseña y se eliminara al jugador. ¿Estas seguro?", "Aviso", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                String nombre = JOptionPane.showInputDialog("Introduce el nombre de usuario");
+                if (ListaJugadores.getMiListaJugadores().getJugador(nombre) != null){
+                    String passw = JOptionPane.showInputDialog("Introduce la contraseña");
+                    char[] passwd = passw.toCharArray();
+                    if (ListaJugadores.getMiListaJugadores().getJugador(nombre).comprobarPasswd(passwd)){
+                        ListaJugadores.getMiListaJugadores().eliminarJugador(new Jugador(nombre,passwd));
+                        JOptionPane.showConfirmDialog(frame.getContentPane(),"Se ha eliminado correctamente el jugador");
+                    }
+                    else{
+                        JOptionPane.showConfirmDialog(frame.getContentPane(),"Contraseña erronea, pruebe de nuevo");
+                    }
+                }
+                else{
+                    JOptionPane.showConfirmDialog(frame.getContentPane(),"No existe ningun jugador con ese nombre, pruebe de nuevo");
+                }
+            }
+
+
+            }
     }
 
     private void hallarMedidasTablero(){

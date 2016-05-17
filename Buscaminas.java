@@ -27,6 +27,7 @@ public class Buscaminas{
      * @throws IOException
      */
     public static void main(String[] argv) throws IOException {
+        GestorVentanas.getMiGestorVentanas().cargarFicheros();
         GestorVentanas.getMiGestorVentanas().lanzarVentanaLogin();
         GestorVentanas.getMiGestorVentanas().lanzarVentanaBuscaminas();
     }

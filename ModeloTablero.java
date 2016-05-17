@@ -17,9 +17,7 @@
 import java.util.Observable;
 
 /**
- * Modelo para buscaminas
- *
- * @author Eneko
+ * @author Josu Alvarez <jalvarez041.ehu.eus>
  */
 public class ModeloTablero extends Observable {
 

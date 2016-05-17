@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -29,8 +30,10 @@ public class Ranking {
 
         for (Jugador auxJ : ListaJugadores.getMiListaJugadores().getLjugadores()){
             for(Partida auxP : ListaJugadores.getMiListaJugadores().getJugador(auxJ.getNombreJugador()).getListaPartidas().getlPartidas()){
-                auxI = new InfoPartida(auxJ.getNombreJugador(),auxP.getPuntuacion());
-                this.listaRanking.add(auxI);
+                if (auxP != null){
+                    auxI = new InfoPartida(auxJ.getNombreJugador(),auxP.getPuntuacion());
+                    this.listaRanking.add(auxI);
+                }
             }
         }
     }
@@ -52,22 +55,29 @@ public class Ranking {
      */
     public ArrayList<InfoPartida> obtenerDiezMejores(){
         ArrayList<InfoPartida> auxL= new ArrayList<>();
-        InfoPartida auxI;
-        Iterator<InfoPartida> itr=this.getIterator();
-        int i=0;
-        int j=0;
-
-        while(itr.hasNext() && i<10){
-            auxI=itr.next();
-            auxL.add(auxI);
-            i++;
+        int[] test =  null;
+            if(listaRanking.size() > 0){
+                test = new int [listaRanking.size()];
+                for(int i =0; i < listaRanking.size(); i++){
+                    test[i] = listaRanking.get(i).getPuntuacion();
+                }
+            }
+        try{
+            if(test.length > 0){
+                java.util.Arrays.sort(test);
+                for(int i = 0; i < test.length; i ++){
+                    for(int j = 0; j < listaRanking.size(); j++){
+                        if(test[i] == listaRanking.get(j).getPuntuacion()){
+                            auxL.add(new InfoPartida(listaRanking.get(j).getNombreJugador(), listaRanking.get(j).getPuntuacion()));
+                        }
+                    }
+                }
+            }
+        }catch (NullPointerException e){
+            e.getMessage();
         }
 
-        while(j<auxL.size()){
-            System.out.println("Jugador: "+auxL.get(j).getNombreJugador()+"\tPuntuacion: "+auxL.get(j).getPuntuacion());
-            j++;
-        }
-
+        Collections.reverse(auxL);
         return auxL;
     }
 

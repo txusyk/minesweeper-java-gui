@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -82,7 +83,8 @@ public class GestorFicheros {
     public void cargarFichJugXML(){
 
         try{
-            File auxXML = new File(getClass().getResource("Usuarios.xml").getFile());
+            URL url = getClass().getResource("Usuarios.xml");
+            File auxXML = new File(url.getPath().replaceAll("%20", " "));
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dbBuilder = dbFactory.newDocumentBuilder();
             Document doc = dbBuilder.parse(auxXML);

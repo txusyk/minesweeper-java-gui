@@ -44,6 +44,7 @@ public class ListaPartidas {
             System.out.println("La partida ya existia.");
         }
     }
+
     public void eliminarPartida(Partida partida) {
         if (esta(partida)) {
             listaPartidas.remove(partida);
@@ -54,7 +55,6 @@ public class ListaPartidas {
 
     public boolean esta(Partida partida) {
         Iterator<Partida> itr = this.getIterator();
-        //Partida auxPartida;
         boolean encontrada = false;
 
         for (Partida auxPartida : listaPartidas){
@@ -63,24 +63,16 @@ public class ListaPartidas {
             }
         }
         return encontrada;
-
-        /*while (itr.hasNext() && !encontrada) {
-            auxPartida = itr.next();
-            if (auxPartida.equals(partida)) {
-                encontrada = true;
-            }
-        }
-        return encontrada;*/
     }
 
     public void imprimirPartidas() {
-        /*for (int i = 0; i < listaPartidas.size(); i++) {
-            listaPartidas.get(i).imprimirInfo();
-        }*/
-        /*for (Partida auxPartida : listaPartidas){
-            auxPartida.imprimirInfo();
-        }*/
-        listaPartidas.forEach((Partida) -> Partida.imprimirInfo());
+        try{
+            if (listaPartidas.size() > 0){
+                listaPartidas.forEach((Partida) -> Partida.imprimirInfo());
+            }
+        }catch (NullPointerException e){
+            e.getMessage();
+        }
     }
 
     public void ordenarListaPorPuntuaion(){

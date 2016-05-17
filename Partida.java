@@ -43,16 +43,18 @@ public class Partida {
     }
 
     private void setPuntuacion() {
+        int factorCalculoBase = 1000;
+        int factorDificultad;
         if (dificultad.equalsIgnoreCase("facil")) {
-            double auxPuntuacion = ((double) (segundos) / (300 * 0.3)) * 1000;
-            this.puntuacion = (int) auxPuntuacion;
+            factorDificultad = 3;
         } else if (dificultad.equalsIgnoreCase("medio")) {
-            double auxPuntuacion = ((double) (segundos) / (150 * 0.5)) * 1000;
-            this.puntuacion = (int) auxPuntuacion;
+            factorDificultad = 2;
         } else {
-            double auxPuntuacion = ((double) (segundos) / (75 * 0.7)) * 1000;
-            this.puntuacion = (int) auxPuntuacion;
+            factorDificultad = 1;
         }
+        double auxPuntuacion = ((double) factorCalculoBase*factorDificultad /(segundos)) * 10.7;
+        this.puntuacion = (int) auxPuntuacion;
+
     }
 
     public void imprimirInfo() {
