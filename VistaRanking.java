@@ -33,38 +33,53 @@ import java.util.ArrayList;
             Ranking.getMiRanking().crearListaRanking();
             ArrayList<InfoPartida> top10 = Ranking.getMiRanking().obtenerDiezMejores();
 
+            System.out.println("el tamaño de la lista es: "+top10.size());
+            ListaJugadores.getMiListaJugadores().getJugador("David").getListaPartidas().imprimirPartidas();
+
             for(int i=0; i<top10.size();i++){
                 switch (i){
-                    case 1:
+                    case 0:
                         jLabel4.setText(top10.get(i).getNombreJugador());
                         jLabel5.setText(String.valueOf(top10.get(i).getPuntuacion()));
-                    case 2:
+                        break;
+                    case 1:
                         jLabel6.setText(top10.get(i).getNombreJugador());
-                        jLabel7.setText(String.valueOf(top10.get(i).getPuntuacion()));
+                        jLabel11.setText(String.valueOf(top10.get(i).getPuntuacion()));
+                        break;
+                    case 2:
+                        jLabel7.setText(top10.get(i).getNombreJugador());
+                        jLabel12.setText(String.valueOf(top10.get(i).getPuntuacion()));
+                        break;
                     case 3:
                         jLabel8.setText(top10.get(i).getNombreJugador());
-                        jLabel9.setText(String.valueOf(top10.get(i).getPuntuacion()));
-                    case 4:
-                        jLabel10.setText(top10.get(i).getNombreJugador());
-                        jLabel11.setText(String.valueOf(top10.get(i).getPuntuacion()));
-                    case 5:
-                        jLabel12.setText(top10.get(i).getNombreJugador());
                         jLabel13.setText(String.valueOf(top10.get(i).getPuntuacion()));
-                    case 6:
-                        jLabel14.setText(top10.get(i).getNombreJugador());
+                        break;
+                    case 4:
+                        jLabel9.setText(top10.get(i).getNombreJugador());
+                        jLabel14.setText(String.valueOf(top10.get(i).getPuntuacion()));
+                        break;
+                    case 5:
+                        jLabel10.setText(top10.get(i).getNombreJugador());
                         jLabel15.setText(String.valueOf(top10.get(i).getPuntuacion()));
-                    case 7:
+                        break;
+                    case 6:
                         jLabel16.setText(top10.get(i).getNombreJugador());
                         jLabel17.setText(String.valueOf(top10.get(i).getPuntuacion()));
-                    case 8:
+                        break;
+                    case 7:
                         jLabel18.setText(top10.get(i).getNombreJugador());
                         jLabel19.setText(String.valueOf(top10.get(i).getPuntuacion()));
-                    case 9:
+                        break;
+                    case 8:
                         jLabel20.setText(top10.get(i).getNombreJugador());
                         jLabel21.setText(String.valueOf(top10.get(i).getPuntuacion()));
-                    case 10:
+                        break;
+                    case 9:
                         jLabel22.setText(top10.get(i).getNombreJugador());
                         jLabel23.setText(String.valueOf(top10.get(i).getPuntuacion()));
+                        break;
+                    default:
+                        break;
                 }
             }
         }

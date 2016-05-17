@@ -10,7 +10,7 @@ public class Ranking {
     private static Ranking miRanking;
 
     private Ranking(){
-        listaRanking = new ArrayList<InfoPartida>();
+        listaRanking = new ArrayList<>();
     }
 
     public ArrayList<InfoPartida> getListaRanking(){
@@ -21,7 +21,7 @@ public class Ranking {
      * Crea una lista de todas las partidas jugadas, ordenadas por puntuacion (mayor->menor)
      */
     public void crearListaRanking() {
-        InfoPartida auxI = null;
+        InfoPartida auxI;
         int i = 0;    //indice para marcar los loops sobre la lista general de jugadores.
         int k = 0;    //indice para marcar los loops sobre las puntuaciones de cada partida de cada jugador.
 
@@ -29,7 +29,7 @@ public class Ranking {
         while (i < ListaJugadores.getMiListaJugadores().getListaUsuarios().size()) {
             while (k < ListaJugadores.getMiListaJugadores().getListaUsuarios().get(i).getListaPartidas().getlPartidas().size()) {
                 auxI = new InfoPartida(ListaJugadores.getMiListaJugadores().getListaUsuarios().get(i).getNombreJugador(), ListaJugadores.getMiListaJugadores().getListaUsuarios().get(i).getListaPartidas().getlPartidas().get(k).getPuntuacion());
-                listaRanking.add(auxI);
+                this.añadirInfoPartida(auxI);
                 k++;
             }
             i++;

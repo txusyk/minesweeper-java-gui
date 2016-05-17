@@ -13,10 +13,6 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.FileReader;
 import java.io.IOException;
 
 /**
@@ -31,99 +27,7 @@ public class Buscaminas{
      * @throws IOException
      */
     public static void main(String[] argv) throws IOException {
-
-        String dif = "facil";
-        int x = 9;
-        int y = 9;
-        int numMinas = 9;
-        JMenuBar menuBar;
-        JMenu menuArchivo, menuAyuda, menuJuego;
-        JMenuItem itemNuevo, itemSalir, itemFaq, itemAcercaDe,itemTop10,itemEliminarJugador;
-
-        menuBar = new JMenuBar();
-        menuArchivo = new JMenu("Archivo");
-        menuAyuda = new JMenu("Ayuda");
-        menuJuego = new JMenu("Jugadores");
-
-        itemNuevo = new JMenuItem("Reiniciar");
-        itemSalir = new JMenuItem("Salir");
-        itemFaq = new JMenuItem("FAQ");
-        itemAcercaDe = new JMenuItem("Acerca de");
-        itemTop10 = new JMenuItem("Top 10/ Ranking");
-        itemEliminarJugador = new JMenuItem("Eliminar Jugador");
-
-        menuJuego.add(itemTop10);
-        menuJuego.add(itemEliminarJugador);
-        menuAyuda.add(itemAcercaDe);
-        menuAyuda.add(itemFaq);
-        menuArchivo.add(itemNuevo);
-        menuArchivo.add(itemSalir);
-
-        menuBar.add(menuArchivo);
-        menuBar.add(menuAyuda);
-        menuBar.add(menuJuego);
-
-        JFrame frame = new JFrame("Buscaminas"); //creamos una ventana que se llamara buscaminas
-
-        frame.setJMenuBar(menuBar); //fijamos como barra de menu la barra que hemos creado
-
-        ModeloTablero model;
-
-        //Creamos la lista de jugadores desde el fichero
-        FileReader fr = new FileReader("/home/josu/Documentos/IntelliJ Projects/Buscaminas/src/Usuarios.txt");
-        GestorFicheros.getMiCargarFicheros().cargarFicheroJug(fr); //cargamos la lista de jugadores y partidas
-
-        MenuLogin login = new MenuLogin();
-        frame.setContentPane(login); //Llamamos al menu de logIn
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //fijamos que la operacion por defecto al cerrar es salir
-        frame.pack(); //    hacemos que la ventana se ajuste al tamaño del contenido
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();         //En dim guardamos el tamaño de la pantalla donde se esta ejecutando el programa
-        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);         //Fijamos por defecto que la ventana siempre aparezca en el centro
-        frame.setVisible(true); //hacemos el frame visible
-        frame.setResizable(false); //definimos que no podra modificar el tamaño de la ventana de nuestro programa
-        frame.setAlwaysOnTop(true); //definimos que mientras este ejcutandose se superponga a cualquier otro programa
-
-        do {
-            try {
-                Thread.sleep(100);  //pausamos el hilo 100ms
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } while (login.isShowing()); //mientras la ventana de login siga activa
-        
-        dif = login.getDificultad_juego(); //guardamos en dif el valor de la dificultad
-
-        //fijamos las medidas y el numero de bombas del tablero en base a la dificultad
-        switch (dif.toLowerCase()) {
-            case "facil":
-                x = 7;
-                y = 10;
-                numMinas = y;
-                break;
-            case "medio":
-                x = 10;
-                y = 15;
-                numMinas = y * 2;
-                break;
-            case "dificil":
-                x = 12;
-                y = 25;
-                numMinas = y * 3;
-                break;
-            default:
-                break;
-        }
-
-        model = new ModeloTablero(x, y, numMinas); //creamos un nuevo modelo del tablero con el tamaño y numero de minas seleccionado
-
-        VistaBuscaminas view = new VistaBuscaminas(model); //creamos una vista que contendra el modelo del tablero
-
-        frame.setContentPane(view); //metemos como contenedor la vista
-        view.setVisible(true); //hacemos visible la vistaTablero
-        frame.repaint(); //redibujamos los graficos en la ventana
-
-        frame.pack(); //    hacemos que la ventana se ajuste al tamaño del contenido
-        frame.setLocation(dim.width / 2 - frame.getSize().width / 2, dim.height / 2 - frame.getSize().height / 2);
+        GestorVentanas.getMiGestorVentanas().lanzarVentanaLogin();
+        GestorVentanas.getMiGestorVentanas().lanzarVentanaBuscaminas();
     }
 }

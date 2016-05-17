@@ -84,8 +84,6 @@ public class ModeloTablero extends Observable {
     private void setThread() {
 
         this.thread = new Thread() {
-            @SuppressWarnings("static-access")
-            //if running = true timer increments every second by 1
             @Override
             public void run() {
                 while (enEjecucion) {
@@ -96,7 +94,6 @@ public class ModeloTablero extends Observable {
                         this.sleep(500);
 
                     } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }

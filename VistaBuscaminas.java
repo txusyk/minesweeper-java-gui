@@ -25,7 +25,7 @@ import java.util.Observer;
 public class VistaBuscaminas extends JPanel implements Observer {
 
     private JPanel vista;
-    private JLabel minas, modo, timer;
+    private JLabel minas, timer;
     private VistaCasillas[][] casilla;
     private ModeloTablero ModeloTablero;
     private boolean hasPerdido = false;
@@ -40,13 +40,10 @@ public class VistaBuscaminas extends JPanel implements Observer {
         this.setLayout(new BorderLayout());
         this.vista = new JPanel();
         this.minas = setLabel(this.minas, "Minas:  " + Integer.toString(modeloTablero.minasRestantes()));
-        this.modo = setLabel(this.modo, "Modo:  " + modeloTablero.getModo());
         this.timer = setLabel(this.timer, "Tiempo:  " + modeloTablero.getTimer());
 
         this.add(this.minas, BorderLayout.WEST);
-        this.add(this.modo, BorderLayout.EAST);
         this.add(this.timer, BorderLayout.CENTER);
-        this.add(reiniciarBoton(), BorderLayout.NORTH);
         this.casilla = new VistaCasillas[modeloTablero.getAltura()][modeloTablero.getAncho()];
         this.ModeloTablero.addObserver(this);
 
@@ -67,7 +64,6 @@ public class VistaBuscaminas extends JPanel implements Observer {
             actualizarBotones();
         }
         this.minas = setLabel(this.minas, "Minas:  " + Integer.toString(ModeloTablero.minasRestantes()));
-        this.modo = setLabel(this.modo, "Modo:  " + ModeloTablero.getModo());
         this.timer = setLabel(this.timer, "Tiempo: " + ModeloTablero.getTimer());
 
         if (this.ModeloTablero.getModo().equalsIgnoreCase("has perdido") && !this.hasPerdido) {
@@ -89,20 +85,6 @@ public class VistaBuscaminas extends JPanel implements Observer {
         label.setPreferredSize(new Dimension(100, 40));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         return label;
-
-    }
-
-    /**
-     * boton restart
-     *
-     * @return JButton
-     */
-    public JButton reiniciarBoton() {
-        JButton button = new JButton("Reiniciar Partida");
-        button.setPreferredSize(new Dimension(20, 40));
-        Controlador controller = new Controlador(ModeloTablero);
-        button.addMouseListener(controller);
-        return button;
 
     }
 

@@ -212,10 +212,10 @@ public class MenuLogin extends javax.swing.JPanel implements ActionListener {
                 this.setVisible(false);
                 this.jugActual = nombreUsuario.getText();
             } else {
-                JOptionPane.showMessageDialog(this, "Contraseña erronea");
+                JOptionPane.showMessageDialog(this, "Ha introducido erroneamente la contraseña del usuario","Error de contraseña",JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Usuario inexistente, pruebe de nuevo");
+            JOptionPane.showMessageDialog(this, "El usuario no existe o no esta correctamente escrito", "Error de usuario",JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -226,7 +226,7 @@ public class MenuLogin extends javax.swing.JPanel implements ActionListener {
             this.setVisible(false);
             this.jugActual = nombreUsuario.getText();
         } else {
-            JOptionPane.showMessageDialog(this, "El usuario ya existe. pruebe con otro nombre");
+            JOptionPane.showMessageDialog(this, "El usuario ya existe. Si es usted, pruebe haciendo logIn en caso contrario, pruebe con otro nombre de usuariio","Usuario existente",JOptionPane.ERROR_MESSAGE);
         }
     }
 
