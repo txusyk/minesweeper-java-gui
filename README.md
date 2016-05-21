@@ -390,7 +390,7 @@ El reparto inicial de las tareas se tuvo que ver modificado debido a dudas y a p
 ##Conclusiones
 
 - Josu <jalvarez041@ikasle.ehu.eus> : Ha sido un proyecto que inicialmente parecia sencillo, tanto en su diseño como en su implementacion. El hecho de haber tenido problemas a la hora de gestionar el MVC ha hecho que el proyecto me haya parecido en ocasiones hasta imposible. Tras horas de lectura y de comprension, he llegado a entender como se comportaba y logrado implementar lo que se pedia. Me ha parecido un proyecto increible para aprender, con una curva de aprendizaje elevada pero necesara a estas alturas. Un proyecto divertido, que sin duda continuare desarrollando y liberaremos el codigo en GitHub para que cualquier persona pueda acceder.
-- David<damax001@ikasle.ehu.eus> : Un proyecto muy completo, que ha exigido tanto tiempo como esfuerzo, pero que una vez finalizado ha resultado muy gratificante.
+- David <dmax001@ikasle.ehu.eus> : Un proyecto muy completo, que ha exigido tanto tiempo como esfuerzo, pero que una vez finalizado ha resultado muy gratificante.
 
 * * *
 
